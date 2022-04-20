@@ -21,9 +21,10 @@ public class MainActivity extends AppCompatActivity {
         //Database connection
         // Write a message to the database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("message");
+        DatabaseReference myRef = database.getReference("currentUser");
 
         //myRef.setValue("Hello, World!");
+
 
 
         button = findViewById(R.id.button);
