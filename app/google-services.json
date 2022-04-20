@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "940266535973",
+    "firebase_url": "https://bilstop-168b6-default-rtdb.firebaseio.com",
+    "project_id": "bilstop-168b6",
+    "storage_bucket": "bilstop-168b6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:940266535973:android:b4aa84e9dd6c32af7f53cc",
+        "android_client_info": {
+          "package_name": "com.example.bilstop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "940266535973-u138kgcihrf0rp9e18qila59dlpq5c34.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4O85FvUjTygl7r3U0iF9ESWVohkEQ9ZA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "940266535973-u138kgcihrf0rp9e18qila59dlpq5c34.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
