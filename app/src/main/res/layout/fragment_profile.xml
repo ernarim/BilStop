@@ -21,13 +21,17 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:overScrollMode="ifContentScrolls">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardViewProfile1"
                 android:layout_width="match_parent"
                 android:layout_height="140sp"
-                android:layout_margin="20sp"
+                android:layout_marginStart="20sp"
+                android:layout_marginTop="20sp"
+                android:layout_marginEnd="20sp"
+                android:layout_marginBottom="20sp"
                 app:cardBackgroundColor="@color/orange"
                 app:cardCornerRadius="10sp">
 
@@ -115,7 +119,9 @@
                 android:id="@+id/cardViewProfile2"
                 android:layout_width="match_parent"
                 android:layout_height="140sp"
-                android:layout_margin="20sp"
+                android:layout_marginStart="20sp"
+                android:layout_marginEnd="20sp"
+                android:layout_marginBottom="20sp"
                 app:cardBackgroundColor="@color/orange"
                 app:cardCornerRadius="10sp">
 
@@ -155,7 +161,9 @@
                 android:id="@+id/cardViewProfile3"
                 android:layout_width="match_parent"
                 android:layout_height="140sp"
-                android:layout_margin="20sp"
+                android:layout_marginStart="20sp"
+                android:layout_marginEnd="20sp"
+                android:layout_marginBottom="20sp"
                 app:cardBackgroundColor="@color/orange"
                 app:cardCornerRadius="10sp">
 
@@ -198,7 +206,9 @@
                 android:id="@+id/cardViewProfile4"
                 android:layout_width="match_parent"
                 android:layout_height="140sp"
-                android:layout_margin="20sp"
+                android:layout_marginStart="20sp"
+                android:layout_marginEnd="20sp"
+                android:layout_marginBottom="20sp"
                 app:cardBackgroundColor="@color/orange"
                 app:cardCornerRadius="10sp">
 
