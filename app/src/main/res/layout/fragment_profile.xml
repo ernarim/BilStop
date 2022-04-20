@@ -9,95 +9,235 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardViewProfile1"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="140sp"
-        android:layout_margin="20sp"
-        app:cardBackgroundColor="@color/orange"
-        app:cardCornerRadius="10sp"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/nameSurnameText"
-                android:layout_width="218dp"
-                android:layout_height="38dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginEnd="16dp"
-                android:text="Name Surname"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textSize="28sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageView"
-                app:layout_constraintTop_toTopOf="parent" />
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardViewProfile1"
+                android:layout_width="match_parent"
+                android:layout_height="140sp"
+                android:layout_margin="20sp"
+                app:cardBackgroundColor="@color/orange"
+                app:cardCornerRadius="10sp">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/imageView"
-                android:layout_width="114dp"
-                android:layout_height="110dp"
-                android:layout_marginStart="15dp"
-                android:baselineAlignBottom="false"
-                android:clickable="false"
-                android:src="@drawable/ic_launcher_background"
-                app:civ_border_width="1sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/nameSurnameText"
+                        android:layout_width="218dp"
+                        android:layout_height="38dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginEnd="16dp"
+                        android:text="Name Surname"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textSize="28sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/imageView"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/imageView"
+                        android:layout_width="114dp"
+                        android:layout_height="110dp"
+                        android:layout_marginStart="15dp"
+                        android:baselineAlignBottom="false"
+                        android:clickable="false"
+                        android:src="@drawable/ic_launcher_background"
+                        app:civ_border_width="1sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
 
-            <TextView
-                android:id="@+id/emailProfileText"
-                android:layout_width="218dp"
-                android:layout_height="19dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="15dp"
-                android:text="email"
-                android:textAlignment="center"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/nameSurnameText" />
+                    <TextView
+                        android:id="@+id/emailProfileText"
+                        android:layout_width="218dp"
+                        android:layout_height="19dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="15dp"
+                        android:text="email"
+                        android:textAlignment="center"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/nameSurnameText" />
 
-            <ImageButton
-                android:id="@+id/notificationsImageButton"
-                android:layout_width="35sp"
-                android:layout_height="35sp"
-                android:layout_marginTop="11dp"
-                android:layout_marginEnd="12dp"
-                android:layout_marginBottom="12dp"
-                android:src="@drawable/ic_baseline_notifications_24"
-                android:background="@drawable/roundcorner"
-                android:visibility="visible"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/emailProfileText"
-                tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck"
-                tools:src="@drawable/ic_baseline_notifications_24"
-                tools:visibility="visible" />
+                    <ImageButton
+                        android:id="@+id/notificationsImageButton"
+                        android:layout_width="35sp"
+                        android:layout_height="35sp"
+                        android:layout_marginTop="11dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/roundcorner"
+                        android:src="@drawable/ic_baseline_notifications_24"
+                        android:visibility="visible"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/emailProfileText"
+                        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck"
+                        tools:src="@drawable/ic_baseline_notifications_24"
+                        tools:visibility="visible" />
 
-            <ImageButton
-                android:id="@+id/editImageButton"
-                android:layout_width="35sp"
-                android:layout_height="35sp"
-                android:layout_marginTop="11dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="12dp"
-                android:src="@drawable/ic_baseline_edit_24"
-                android:background="@drawable/roundcorner"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/notificationsImageButton"
-                app:layout_constraintTop_toBottomOf="@+id/emailProfileText"
-                tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck"
-                tools:src="@drawable/ic_baseline_edit_24" />
+                    <ImageButton
+                        android:id="@+id/editImageButton"
+                        android:layout_width="35sp"
+                        android:layout_height="35sp"
+                        android:layout_marginTop="11dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/roundcorner"
+                        android:src="@drawable/ic_baseline_edit_24"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/notificationsImageButton"
+                        app:layout_constraintTop_toBottomOf="@+id/emailProfileText"
+                        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck"
+                        tools:src="@drawable/ic_baseline_edit_24" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardViewProfile2"
+                android:layout_width="match_parent"
+                android:layout_height="140sp"
+                android:layout_margin="20sp"
+                app:cardBackgroundColor="@color/orange"
+                app:cardCornerRadius="10sp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/aboutMyselfText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:text="About MySelf"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="350dp"
+                        android:layout_height="88dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="import from database"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/aboutMyselfText" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardViewProfile3"
+                android:layout_width="match_parent"
+                android:layout_height="140sp"
+                android:layout_margin="20sp"
+                app:cardBackgroundColor="@color/orange"
+                app:cardCornerRadius="10sp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/friendsText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:text="Friends"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageButton
+                        android:id="@+id/notificationsImageButton2"
+                        android:layout_width="35sp"
+                        android:layout_height="35sp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:background="@drawable/roundcorner"
+                        android:src="@drawable/ic_baseline_person_add_24"
+                        android:visibility="visible"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck"
+                        tools:src="@drawable/ic_baseline_person_add_24"
+                        tools:visibility="visible" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardViewProfile4"
+                android:layout_width="match_parent"
+                android:layout_height="140sp"
+                android:layout_margin="20sp"
+                app:cardBackgroundColor="@color/orange"
+                app:cardCornerRadius="10sp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageButton
+                        android:id="@+id/notificationsImageButton3"
+                        android:layout_width="35sp"
+                        android:layout_height="35sp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:background="@drawable/roundcorner"
+                        android:src="@drawable/ic_baseline_add_circle_outline_24"
+                        android:visibility="visible"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck"
+                        tools:src="@drawable/ic_baseline_add_circle_outline_24"
+                        tools:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/carsText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:text="Cars"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+    </ScrollView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
