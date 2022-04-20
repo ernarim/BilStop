@@ -35,7 +35,7 @@
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/mainFragment2"
-        android:name="com.example.bilstop.MainFragment2"
+        android:name="com.example.bilstop.HomeFragment2"
         android:label="fragment_main2"
-        tools:layout="@layout/fragment_main2" />
+        tools:layout="@layout/fragment_home2" />
 </navigation>
