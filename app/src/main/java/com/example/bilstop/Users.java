@@ -8,7 +8,7 @@ public class Users {
     private String user_password;
 
     private String user_about;
-//    private Friends[] user_friends;
+//    private Users[] user_friends;
 //    private Cars[] user_cars;
 
     public Users(){
@@ -61,7 +61,7 @@ public class Users {
         this.user_about = user_about;
     }
 
-//    public Friends[] getUser_friends() {
+//    public Users[] getUser_friends() {
 //        return user_friends;
 //    }
 //
