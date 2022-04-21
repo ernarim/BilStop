@@ -20,11 +20,14 @@ import android.widget.Toast;
 
 import com.example.bilstop.MainActivity;
 import com.example.bilstop.R;
+import com.example.bilstop.Users;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class RegisterFragment extends Fragment {
     private Context context;
@@ -32,7 +35,7 @@ public class RegisterFragment extends Fragment {
     private FirebaseAuth auth;
     private NavController navController;
     private NavOptions navOptions;
-    private EditText email, pass;
+    private EditText email, pass, name, surname;
     private Button register;
     public  int check = -1;
 
@@ -58,6 +61,8 @@ public class RegisterFragment extends Fragment {
     private void init(View view) {
         this.email = view.findViewById(R.id.edtAuthRegisterEmail);
         this.pass = view.findViewById(R.id.edtAuthRegisterPassword);
+        this.name = view.findViewById(R.id.editTextPersonName);
+        this.surname = view.findViewById(R.id.editTextPersonSurname);
         this.register = view.findViewById(R.id.btnAuthRegister);
         this.login = view.findViewById(R.id.txtAuthLogin);
         this.auth = FirebaseAuth.getInstance();
@@ -79,6 +84,15 @@ public class RegisterFragment extends Fragment {
                 String username = RegisterFragment.this.email.getText().toString();
                 String password = RegisterFragment.this.pass.getText().toString();
                 if(register(username,password)){
+
+                    //Register new user also database
+                    FirebaseDatabase database = FirebaseDatabase.getInstance();
+                    DatabaseReference myRef = database.getReference("users");
+                    Users user = new Users(name.getText().toString(),surname.getText().toString(),
+                            email.getText().toString(),pass.getText().toString());
+                    myRef.push().setValue(user);
+
+                    //Login
                     toLogin();
                 }
                 else{
