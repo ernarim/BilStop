@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">BilStop</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="register"><u>Register</u></string>
+    <string name="login"><u>Login</u></string>
+    <string name="reset_password"><u>Reset Password</u></string>
 </resources>

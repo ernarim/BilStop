@@ -21,23 +21,30 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:overScrollMode="ifContentScrolls">
+            android:orientation="vertical">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardViewProfile1"
                 android:layout_width="match_parent"
                 android:layout_height="140sp"
-                android:layout_marginStart="20sp"
-                android:layout_marginTop="20sp"
-                android:layout_marginEnd="20sp"
-                android:layout_marginBottom="20sp"
+                android:layout_margin="20sp"
                 app:cardBackgroundColor="@color/orange"
                 app:cardCornerRadius="10sp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
+
+                    <Button
+                        android:id="@+id/test"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="31dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/editImageButton"
+                        app:layout_constraintStart_toEndOf="@+id/imageView"
+                        app:layout_constraintTop_toTopOf="@+id/emailProfileText"
+                        android:text="TEST"/>
 
                     <TextView
                         android:id="@+id/nameSurnameText"
@@ -118,10 +125,8 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardViewProfile2"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20sp"
-                android:layout_marginEnd="20sp"
-                android:layout_marginBottom="20sp"
+                android:layout_height="140sp"
+                android:layout_margin="20sp"
                 app:cardBackgroundColor="@color/orange"
                 app:cardCornerRadius="10sp">
 
@@ -145,15 +150,15 @@
                     <TextView
                         android:id="@+id/textView2"
                         android:layout_width="350dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="88dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="10dp"
+                        android:text="import from database"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.476"
+                        app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/aboutMyselfText"
-                        app:layout_constraintVertical_bias="0.0" />
+                        app:layout_constraintTop_toBottomOf="@+id/aboutMyselfText" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
@@ -161,9 +166,7 @@
                 android:id="@+id/cardViewProfile3"
                 android:layout_width="match_parent"
                 android:layout_height="140sp"
-                android:layout_marginStart="20sp"
-                android:layout_marginEnd="20sp"
-                android:layout_marginBottom="20sp"
+                android:layout_margin="20sp"
                 app:cardBackgroundColor="@color/orange"
                 app:cardCornerRadius="10sp">
 
@@ -206,9 +209,7 @@
                 android:id="@+id/cardViewProfile4"
                 android:layout_width="match_parent"
                 android:layout_height="140sp"
-                android:layout_marginStart="20sp"
-                android:layout_marginEnd="20sp"
-                android:layout_marginBottom="20sp"
+                android:layout_margin="20sp"
                 app:cardBackgroundColor="@color/orange"
                 app:cardCornerRadius="10sp">
 

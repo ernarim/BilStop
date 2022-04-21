@@ -1,16 +1,16 @@
 package com.example.bilstop.Auth;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.example.bilstop.R;
+
 import android.os.Bundle;
 
-public class AuthenticationActivity extends AppCompatActivity {
+public class PersonalInfoActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_authentication);
+        setContentView(R.layout.activity_personal_info);
     }
 }

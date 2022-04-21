@@ -6,36 +6,49 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
+import com.example.bilstop.Auth.AuthenticationActivity;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
-    private Button button;
+    FirebaseAuth auth;
+    FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //Database connection
-        // Write a message to the database
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("currentUser");
-
-        //myRef.setValue("Hello, World!");
+        auth = FirebaseAuth.getInstance();
+        user = auth.getCurrentUser();
 
 
-
-        button = findViewById(R.id.button);
-
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent loginIntent = new Intent(MainActivity.this,BottomNavActivity.class);
-                startActivity(loginIntent);
-
+        if( user == null ){
+            Intent intent = new Intent(this , AuthenticationActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        else{
+            if( user.isEmailVerified() ){
+                Intent intent = new Intent(this , BottomNavActivity.class);
+                startActivity(intent);
+                finish();
             }
-        });
+            else{
+                Toast.makeText(this, "Email is not verified!", Toast.LENGTH_SHORT).show();
+                user.sendEmailVerification();
+                auth.signOut();
+                Intent intent = new Intent(this , AuthenticationActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        }
+
     }
+
 }
