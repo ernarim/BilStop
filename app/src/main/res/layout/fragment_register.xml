@@ -14,9 +14,10 @@
         android:src="@drawable/ic_launcher_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.512"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.05" />
+        app:layout_constraintVertical_bias="0.074" />
 
     <TextView
         android:id="@+id/textView2"
@@ -25,13 +26,14 @@
         android:text="REGISTER"
         android:textAlignment="center"
         android:textColor="@color/orange"
-        android:textSize="40dp"
+        android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2"
-        app:layout_constraintVertical_bias="0.05" />
+        app:layout_constraintVertical_bias="0.092" />
 
     <EditText
         android:id="@+id/edtAuthRegisterEmail"
@@ -72,7 +74,7 @@
         app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edtAuthRegisterEmail"
-        app:layout_constraintVertical_bias="0.12" />
+        app:layout_constraintVertical_bias="0.118" />
 
     <Button
         android:id="@+id/btnAuthRegister"
