@@ -52,9 +52,10 @@ public class MainActivity extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         for (DataSnapshot d: snapshot.getChildren()){
                             Users user = d.getValue(Users.class);
+                            user.setUser_key(d.getKey());
+
                             myRef2.setValue(user);
                             Log.d("Demo", "Current user is " + user.getUser_name());
-
                         }
                     }
                     @Override

@@ -43,7 +43,6 @@ public class LoginFragment extends Fragment {
     private FirebaseAuth auth;
     static int check = -1;
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

@@ -88,8 +88,9 @@ public class RegisterFragment extends Fragment {
                     //Register new user also database
                     FirebaseDatabase database = FirebaseDatabase.getInstance();
                     DatabaseReference myRef = database.getReference("users");
+
                     Users user = new Users(name.getText().toString(),surname.getText().toString(),
-                            email.getText().toString(),pass.getText().toString());
+                            email.getText().toString(),pass.getText().toString(), "About me","123");
                     myRef.push().setValue(user);
 
                     //Login
@@ -111,6 +112,8 @@ public class RegisterFragment extends Fragment {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Toast.makeText(context, "Succesfully registered. Please verify your account.", Toast.LENGTH_SHORT).show();
+                            FirebaseUser user = auth.getCurrentUser();
+                            user.sendEmailVerification();
                         } else {
                             Toast.makeText(context, "Something went wrong. Please try again.", Toast.LENGTH_SHORT).show();
                         }

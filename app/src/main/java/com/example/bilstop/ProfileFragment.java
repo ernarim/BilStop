@@ -7,22 +7,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 public class ProfileFragment extends Fragment {
-    private TextView nameSurnameText, emailProfileText;
-
+    private TextView nameSurnameText, emailProfileText, aboutMeText;
+    private ImageButton editImageButton;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -30,17 +33,22 @@ public class ProfileFragment extends Fragment {
 
         nameSurnameText = view.findViewById(R.id.nameSurnameText);
         emailProfileText = view.findViewById(R.id.emailProfileText);
+        editImageButton = view.findViewById(R.id.editImageButton);
+        aboutMeText = view.findViewById(R.id.aboutMeText);
 
         //Get data from database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("currentUser");
+
+
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Users currentUser = snapshot.getValue(Users.class);
-                Log.d("demo", "current user is " + currentUser);
+                Log.d("demo", "Current user is " + currentUser);
                 nameSurnameText.setText(currentUser.getUser_name() + " " + currentUser.getUser_surname());
                 emailProfileText.setText(currentUser.getUser_email());
+                aboutMeText.setText(currentUser.getUser_about());
             }
 
             @Override
@@ -49,6 +57,12 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        editImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.action_profileFragment_to_profileEditFragment);
+            }
+        });
 
 
         // Inflate the layout for this fragment

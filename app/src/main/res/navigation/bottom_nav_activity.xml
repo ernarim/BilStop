@@ -32,10 +32,23 @@
         android:id="@+id/profileFragment"
         android:name="com.example.bilstop.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_profileEditFragment"
+            app:destination="@id/profileEditFragment" />
+    </fragment>
     <fragment
         android:id="@+id/mainFragment2"
         android:name="com.example.bilstop.HomeFragment2"
         android:label="fragment_main2"
         tools:layout="@layout/fragment_home2" />
+    <fragment
+        android:id="@+id/profileEditFragment"
+        android:name="com.example.bilstop.ProfileEditFragment"
+        android:label="fragment_profile_edit"
+        tools:layout="@layout/fragment_profile_edit" >
+        <action
+            android:id="@+id/action_profileEditFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
 </navigation>
