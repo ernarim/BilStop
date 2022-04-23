@@ -13,7 +13,6 @@ public class Users {
     private String user_about;
 //    private List<Users> user_friends;
 //    private List<Cars> user_cars;
-    private int deneme2;
 
     public Users(){
 
