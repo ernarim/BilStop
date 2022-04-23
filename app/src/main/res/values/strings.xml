@@ -5,4 +5,5 @@
     <string name="register"><u>Register</u></string>
     <string name="login"><u>Login</u></string>
     <string name="reset_password"><u>Reset Password</u></string>
+    <string name="api_key">AIzaSyBJfW0T6RwjB1KsMjyLSTibv_Z58TaWLeE</string>
 </resources>
