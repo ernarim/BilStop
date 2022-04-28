@@ -1,6 +1,7 @@
 package com.example.bilstop;
 
 import com.example.bilstop.Models.PolylineData;
+import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.MapsInitializer.Renderer;
 import com.google.android.gms.maps.OnMapsSdkInitializedCallback;
@@ -36,16 +37,18 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnPolylineClickListener {
+public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitializedCallback,  OnMapReadyCallback, GoogleMap.OnPolylineClickListener {
 
     private GeoApiContext mGeoApiContext =null;
     private GoogleMap googleMap;
     private ArrayList<PolylineData> mPolyLinesData = new ArrayList<>();
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        MapsInitializer.initialize(getApplicationContext(), Renderer.LATEST, this);
 
         // Retrieve the content view that renders the map.
         setContentView(R.layout.activity_maps);
@@ -55,8 +58,20 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+
         if(mGeoApiContext == null){
             mGeoApiContext= new GeoApiContext.Builder().apiKey(getString(R.string.api_key)).build();
+        }
+    }
+    @Override
+    public void onMapsSdkInitialized(MapsInitializer.Renderer renderer) {
+        switch (renderer) {
+            case LATEST:
+                Log.d("MapsDemo", "The latest version of the renderer is used.");
+                break;
+            case LEGACY:
+                    Log.d("MapsDemo", "The legacy version of the renderer is used.");
+                break;
         }
     }
 
