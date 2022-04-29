@@ -17,9 +17,10 @@ import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
 
+import java.io.Serializable;
 import java.util.Arrays;
 
-public class PlacesActivity extends AppCompatActivity {
+public class PlacesActivity extends AppCompatActivity implements Serializable {
 
     private PlacesClient placesClient;
     private Button goToMapButton;
@@ -61,6 +62,12 @@ public class PlacesActivity extends AppCompatActivity {
             public void onPlaceSelected(@NonNull Place place) {
                 // TODO: Get info about the selected place.
                 Log.i("demo", "Place: " + place.getName() + ", " + place.getId() + ", " + place.getLatLng());
+
+                //Location data to send Maps Activity
+                /*Location location = new Location(place.getName(), place.getId(), String.valueOf(place.getLatLng().latitude),String.valueOf(place.getLatLng().longitude) );
+                Intent intent = new Intent(PlacesActivity.this, MapsActivity.class);
+                intent.putExtra("object",location);
+                startActivity(intent);*/
             }
 
 

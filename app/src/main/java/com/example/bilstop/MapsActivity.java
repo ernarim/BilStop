@@ -43,13 +43,17 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
     private GeoApiContext mGeoApiContext =null;
     private GoogleMap googleMap;
     private ArrayList<PolylineData> mPolyLinesData = new ArrayList<>();
-
+    private Location locationData;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         MapsInitializer.initialize(getApplicationContext(), Renderer.LATEST, this);
+
+        //Location data coming from Autocomplete Places Fragment
+        //locationData = (Location) getIntent().getSerializableExtra("object");
+        //Log.d("location", locationData.getLocationName() + " " +  locationData.getLocationLatitude() + " " + locationData.getLocationLongitude());
 
         // Retrieve the content view that renders the map.
         setContentView(R.layout.activity_maps);
@@ -83,11 +87,16 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
 
         googleMap=gMap;
 
-        LatLng ankara = new LatLng(39.87143940863815, 32.754316941660086);
-        MarkerOptions marker = new MarkerOptions().position(ankara).title("Bilkent");
-        googleMap.addMarker(marker);
+        //Creating destination point according to data coming from Autocomplete Fragment
+        /*LatLng destination = new LatLng(Double.valueOf(locationData.getLocationLatitude()) , Double.valueOf(locationData.getLocationLongitude()));
+        MarkerOptions marker = new MarkerOptions().position(destination).title("Bilkent");
+        googleMap.addMarker(marker);*/
 
-        calculateDirections(marker);
+        LatLng ankara = new LatLng(39.91331640578498, 32.85483867821641);
+        MarkerOptions marker2= new MarkerOptions().position(ankara).title("Bilkent");
+        googleMap.addMarker(marker2);
+
+        calculateDirections(marker2);
 
         GoogleMapOptions options = new GoogleMapOptions();
 
@@ -143,7 +152,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
 
         directions.alternatives(true);
         directions.origin(
-                new com.google.maps.model.LatLng(39.92072971801894, 32.854265323610015)
+                new com.google.maps.model.LatLng(39.87143940863815, 32.754316941660086)
         );
 
         Log.d("demo", "calculateDirections: destination: " + destination.toString());

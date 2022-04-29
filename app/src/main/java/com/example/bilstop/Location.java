@@ -2,15 +2,19 @@ package com.example.bilstop;
 
 import com.google.android.gms.maps.model.LatLng;
 
-public class Location {
+import java.io.Serializable;
+
+public class Location implements Serializable {
     private String locationName;
     private String locationID;
-    private LatLng locationLatLng;
+    private String locationLatitude;
+    private String locationLongitude;
 
-    public Location(String locationName, String locationID, LatLng locationLatLng){
+    public Location(String locationName, String locationID, String locationLatitude, String locationLongitude){
         this.locationName=locationName;
         this.locationID=locationID;
-        this.locationLatLng=locationLatLng;
+        this.locationLatitude=locationLatitude;
+        this.locationLongitude=locationLongitude;
     }
 
     public void setLocationName(String locationName) {
@@ -21,20 +25,28 @@ public class Location {
         this.locationID = locationID;
     }
 
-    public void setLocationLatLng(LatLng locationLatLng) {
-        this.locationLatLng = locationLatLng;
+    public void setLocationLatitude(String locationLatitude) {
+        this.locationLatitude = locationLatitude;
+    }
+
+    public void setLocationLongitude(String locationLongitude) {
+        this.locationLongitude = locationLongitude;
     }
 
     public String getLocationName() {
         return locationName;
     }
 
-    public LatLng getLocationLatLng() {
-        return locationLatLng;
-    }
-
     public String getLocationID() {
         return locationID;
+    }
+
+    public String getLocationLatitude() {
+        return locationLatitude;
+    }
+
+    public String getLocationLongitude() {
+        return locationLongitude;
     }
 }
 
