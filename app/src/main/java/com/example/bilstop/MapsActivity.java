@@ -27,6 +27,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.maps.DirectionsApiRequest;
 import com.google.maps.GeoApiContext;
 import com.google.maps.PendingResult;
@@ -99,10 +100,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
         googleMap.addMarker(marker2);
 
         calculateDirections(marker2);
-        LatLng ankara = new LatLng(39.92072971801894, 32.854265323610015);
-        MarkerOptions marker = new MarkerOptions().position(ankara).title("Bilkent");
-        googleMap.addMarker(marker);
-        calculateDirections(marker);
 
         GoogleMapOptions options = new GoogleMapOptions();
 
