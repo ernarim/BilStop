@@ -44,6 +44,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
     private GoogleMap googleMap;
     private ArrayList<PolylineData> mPolyLinesData = new ArrayList<>();
     private Location locationData;
+    private FloatingActionButton fab;
 
 
     @Override
@@ -63,6 +64,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        fab = (FloatingActionButton) findViewById(R.id.fab);
 
         if(mGeoApiContext == null){
             mGeoApiContext= new GeoApiContext.Builder().apiKey(getString(R.string.api_key)).build();
@@ -97,6 +99,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
         googleMap.addMarker(marker2);
 
         calculateDirections(marker2);
+        LatLng ankara = new LatLng(39.92072971801894, 32.854265323610015);
+        MarkerOptions marker = new MarkerOptions().position(ankara).title("Bilkent");
+        googleMap.addMarker(marker);
+        calculateDirections(marker);
 
         GoogleMapOptions options = new GoogleMapOptions();
 
@@ -105,7 +111,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
                 .rotateGesturesEnabled(false)
                 .tiltGesturesEnabled(false);
 
-        googleMap.getUiSettings().setZoomControlsEnabled(true);
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(ankara));
 
         googleMap.setOnPolylineClickListener(this);
@@ -150,11 +155,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
 
         DirectionsApiRequest directions = new DirectionsApiRequest(mGeoApiContext);
 
-        directions.alternatives(true);
-        directions.origin(
-                new com.google.maps.model.LatLng(39.87143940863815, 32.754316941660086)
-        );
+        com.google.maps.model.LatLng ankara = new com.google.maps.model.LatLng(39.87498706924094, 32.747574449779364);
 
+        directions.alternatives(true);
+        directions.origin(ankara);
         Log.d("demo", "calculateDirections: destination: " + destination.toString());
         directions.destination(destination).setCallback(new PendingResult.Callback<DirectionsResult>() {
             @Override
@@ -189,7 +193,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
                     mPolyLinesData.clear();
                     mPolyLinesData = new ArrayList<>();
                 }
-
+                double duration = 999999999;
                 for(DirectionsRoute route: result.routes){
                     Log.d("demo", "run: leg: " + route.legs[0].toString());
                     List<com.google.maps.model.LatLng> decodedPath = PolylineEncoding.decode(route.overviewPolyline.getEncodedPath());
@@ -210,9 +214,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
                     Polyline polyline = googleMap.addPolyline(new PolylineOptions().addAll(newDecodedPath));
                     polyline.setColor(ContextCompat.getColor(getApplicationContext(), R.color.grew));
                     polyline.setClickable(true);
+                    polyline.setWidth(17);
                     mPolyLinesData.add(new PolylineData(polyline,route.legs[0]));
 
-                    double duration = 999999999;
                     // highlight the fastest route and adjust camera
                     double tempDuration = route.legs[0].duration.inSeconds;
                     if(tempDuration < duration){
@@ -255,12 +259,26 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
                 polylineData.getPolyline().setColor(ContextCompat.getColor(getApplicationContext(), R.color.orange));
                 polylineData.getPolyline().setZIndex(1);
 
-                LatLng endLocation = new LatLng(39.92072971801894, 32.854265323610015);
+                LatLng startLocation = new LatLng(
+                        polylineData.getLeg().startLocation.lat,
+                        polylineData.getLeg().startLocation.lng
+                );
+
+                Marker marker1 = googleMap.addMarker(new MarkerOptions()
+                        .position(startLocation).title("Bilkent")
+                );
+
+                LatLng endLocation = new LatLng(
+                        polylineData.getLeg().endLocation.lat,
+                        polylineData.getLeg().endLocation.lng
+                );
 
                 Marker marker2 = googleMap.addMarker(new MarkerOptions()
                         .position(endLocation).title("Ankara")
                         .snippet("Duration: " + polylineData.getLeg().duration)
                 );
+
+                marker1.showInfoWindow();
                 marker2.showInfoWindow();
             }
             else{
