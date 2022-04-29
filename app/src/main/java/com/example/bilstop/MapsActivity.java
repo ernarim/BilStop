@@ -99,6 +99,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
         MarkerOptions marker2= new MarkerOptions().position(ankara).title("Bilkent");
         googleMap.addMarker(marker2);
 
+        //calculateDirections(marker);
         calculateDirections(marker2);
 
         GoogleMapOptions options = new GoogleMapOptions();
