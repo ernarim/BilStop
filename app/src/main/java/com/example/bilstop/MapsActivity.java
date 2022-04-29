@@ -137,6 +137,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
                 marker.getPosition().latitude,
                 marker.getPosition().longitude
         );
+
         DirectionsApiRequest directions = new DirectionsApiRequest(mGeoApiContext);
 
         directions.alternatives(true);
@@ -155,6 +156,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
 
                 Log.d("demo", "onResult: successfully retrieved directions.");
                 addPolylinesToMap(result);
+
             }
 
             @Override
@@ -170,7 +172,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
             @Override
             public void run() {
                 Log.d("demo", "run: result routes: " + result.routes.length);
-                if(mPolyLinesData.size()>0){
+                if(mPolyLinesData.size() > 0){
                     for(PolylineData polylineData: mPolyLinesData){
                         polylineData.getPolyline().remove();
                     }
@@ -200,6 +202,14 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
                     polyline.setClickable(true);
                     mPolyLinesData.add(new PolylineData(polyline,route.legs[0]));
 
+                    double duration = 999999999;
+                    // highlight the fastest route and adjust camera
+                    double tempDuration = route.legs[0].duration.inSeconds;
+                    if(tempDuration < duration){
+                        duration = tempDuration;
+                        onPolylineClick(polyline);
+                    }
+
                 }
             }
         });
@@ -208,11 +218,21 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
     @Override
     public void onPolylineClick(Polyline polyline) {
 
+        int index = 0;
         for(PolylineData polylineData: mPolyLinesData){
+            index++;
             Log.d("demo", "onPolylineClick: toString: " + polylineData.toString());
             if(polyline.getId().equals(polylineData.getPolyline().getId())){
                 polylineData.getPolyline().setColor(ContextCompat.getColor(getApplicationContext(), R.color.orange));
                 polylineData.getPolyline().setZIndex(1);
+
+                LatLng endLocation = new LatLng(39.92072971801894, 32.854265323610015);
+
+                Marker marker2 = googleMap.addMarker(new MarkerOptions()
+                        .position(endLocation).title("Ankara")
+                        .snippet("Duration: " + polylineData.getLeg().duration)
+                );
+                marker2.showInfoWindow();
             }
             else{
                 polylineData.getPolyline().setColor(ContextCompat.getColor(getApplicationContext(), R.color.grew));
