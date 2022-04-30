@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -44,8 +45,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
     private GeoApiContext mGeoApiContext =null;
     private GoogleMap googleMap;
     private ArrayList<PolylineData> mPolyLinesData = new ArrayList<>();
-    private Location locationData;
+    private Location locationData=null;
     private FloatingActionButton fab;
+    private MarkerOptions destinationMarker;
 
 
     @Override
@@ -53,9 +55,12 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
         super.onCreate(savedInstanceState);
         MapsInitializer.initialize(getApplicationContext(), Renderer.LATEST, this);
 
-        //Location data coming from Autocomplete Places Fragment
-        //locationData = (Location) getIntent().getSerializableExtra("object");
-        //Log.d("location", locationData.getLocationName() + " " +  locationData.getLocationLatitude() + " " + locationData.getLocationLongitude());
+
+        if((Location) getIntent().getSerializableExtra("object")!=null){
+            //Location data coming from Autocomplete Places Fragment
+            locationData = (Location) getIntent().getSerializableExtra("object");
+            Log.d("location", locationData.getLocationName() + " " +  locationData.getLocationLatitude() + " " + locationData.getLocationLongitude());
+        }
 
         // Retrieve the content view that renders the map.
         setContentView(R.layout.activity_maps);
@@ -66,6 +71,13 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
         mapFragment.getMapAsync(this);
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                calculateDirections(destinationMarker);
+            }
+        });
+
 
         if(mGeoApiContext == null){
             mGeoApiContext= new GeoApiContext.Builder().apiKey(getString(R.string.api_key)).build();
@@ -90,55 +102,39 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
 
         googleMap=gMap;
 
-        //Creating destination point according to data coming from Autocomplete Fragment
-        /*LatLng destination = new LatLng(Double.valueOf(locationData.getLocationLatitude()) , Double.valueOf(locationData.getLocationLongitude()));
-        MarkerOptions marker = new MarkerOptions().position(destination).title("Bilkent");
-        googleMap.addMarker(marker);*/
+        if(locationData!=null){
+            //Creating destination point according to data coming from Autocomplete Fragment
+            LatLng destination = new LatLng(Double.valueOf(locationData.getLocationLatitude()) , Double.valueOf(locationData.getLocationLongitude()));
+            destinationMarker = new MarkerOptions().position(destination).title("Bilkent");
+            googleMap.addMarker(destinationMarker);
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(destination,15));
+        }
+        else{
+            LatLng ankara = new LatLng(39.91331640578498, 32.85483867821641);
+            MarkerOptions marker2= new MarkerOptions().position(ankara).title("Bilkent");
+            googleMap.addMarker(marker2);
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ankara,15));
+        }
 
-        LatLng ankara = new LatLng(39.91331640578498, 32.85483867821641);
-        MarkerOptions marker2= new MarkerOptions().position(ankara).title("Bilkent");
-        googleMap.addMarker(marker2);
 
         //calculateDirections(marker);
-        calculateDirections(marker2);
+        //calculateDirections(marker2);
 
         GoogleMapOptions options = new GoogleMapOptions();
 
         options.mapType(GoogleMap.MAP_TYPE_HYBRID)
                 .compassEnabled(false)
                 .rotateGesturesEnabled(false)
-                .tiltGesturesEnabled(false);
+                .tiltGesturesEnabled(false)
+                .zoomControlsEnabled(true);
 
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(ankara));
+        googleMap.getUiSettings().setZoomControlsEnabled(true);
+
 
         googleMap.setOnPolylineClickListener(this);
 
         // add marker on the screen when touch somewhere on the map
-        googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-
-            @Override
-            public void onMapClick(LatLng latLng) {
-
-                // Creating a marker
-                MarkerOptions markerOptions = new MarkerOptions();
-
-                // Setting the position for the marker
-                markerOptions.position(latLng);
-
-                // Setting the title for the marker.
-                // This will be displayed on taping the marker
-                markerOptions.title(latLng.latitude + " : " + latLng.longitude);
-
-                // Clears the previously touched position
-                googleMap.clear();
-
-                // Animating to the touched position
-                googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
-
-                // Placing a marker on the touched position
-                googleMap.addMarker(markerOptions);
-            }
-        });
+        googleMap.setOnMapClickListener(this::onMapClick);
 
 
     }
@@ -284,6 +280,27 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
                 polylineData.getPolyline().setZIndex(0);
             }
         }
+    }
+
+
+    public void onMapClick(LatLng latLng){
+        // Creating a marker
+
+        // Setting the position for the marker
+        destinationMarker.position(latLng);
+
+        // Setting the title for the marker.
+        // This will be displayed on taping the marker
+        destinationMarker.title(latLng.latitude + " : " + latLng.longitude);
+
+        // Clears the previously touched position
+        googleMap.clear();
+
+        // Animating to the touched position
+        googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+
+        // Placing a marker on the touched position
+        googleMap.addMarker(destinationMarker);
     }
 
 

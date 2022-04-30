@@ -24,6 +24,7 @@ public class PlacesActivity extends AppCompatActivity implements Serializable {
 
     private PlacesClient placesClient;
     private Button goToMapButton;
+    private Location location=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,7 @@ public class PlacesActivity extends AppCompatActivity implements Serializable {
             @Override
             public void onClick(View view) {
                 Intent gecis = new Intent(getApplicationContext(), MapsActivity.class);
+                gecis.putExtra("object",location);
                 startActivity(gecis);
             }
         });
@@ -64,10 +66,10 @@ public class PlacesActivity extends AppCompatActivity implements Serializable {
                 Log.i("demo", "Place: " + place.getName() + ", " + place.getId() + ", " + place.getLatLng());
 
                 //Location data to send Maps Activity
-                /*Location location = new Location(place.getName(), place.getId(), String.valueOf(place.getLatLng().latitude),String.valueOf(place.getLatLng().longitude) );
+                location = new Location(place.getName(), place.getId(), String.valueOf(place.getLatLng().latitude),String.valueOf(place.getLatLng().longitude) );
                 Intent intent = new Intent(PlacesActivity.this, MapsActivity.class);
                 intent.putExtra("object",location);
-                startActivity(intent);*/
+                startActivity(intent);
             }
 
 
