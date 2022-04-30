@@ -111,8 +111,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
         }
         else{
             LatLng ankara = new LatLng(39.91331640578498, 32.85483867821641);
-            MarkerOptions marker2= new MarkerOptions().position(ankara).title("Bilkent");
-            googleMap.addMarker(marker2);
+            destinationMarker= new MarkerOptions().position(ankara).title("Bilkent");
+            googleMap.addMarker(destinationMarker);
             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ankara,15));
         }
 
