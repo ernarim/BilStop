@@ -98,6 +98,13 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
             }
         });
 
+        fab2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MapsActivity.this, FinalizeRideActivity.class);
+                startActivity(intent);
+            }
+        });
 
         if(mGeoApiContext == null){
             mGeoApiContext= new GeoApiContext.Builder().apiKey(getString(R.string.api_key)).build();
@@ -110,7 +117,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
                 Log.d("MapsDemo", "The latest version of the renderer is used.");
                 break;
             case LEGACY:
-                    Log.d("MapsDemo", "The legacy version of the renderer is used.");
+                Log.d("MapsDemo", "The legacy version of the renderer is used.");
                 break;
         }
     }
@@ -282,19 +289,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
                         .position(startLocation).title("Bilkent")
                 );
 
-                LatLng endLocation = new LatLng(
-                        polylineData.getLeg().endLocation.lat,
-                        polylineData.getLeg().endLocation.lng
-                );
 
-                Marker marker2 = googleMap.addMarker(new MarkerOptions()
-                        .position(endLocation).title("Ankara")
-                        .snippet("Duration: " + polylineData.getLeg().duration)
-                );
                 durationTextView.setText("Duration: " + polylineData.getLeg().duration );
 
                 marker1.showInfoWindow();
-                marker2.showInfoWindow();
             }
             else{
                 polylineData.getPolyline().setColor(ContextCompat.getColor(getApplicationContext(), R.color.grew));
@@ -326,4 +324,3 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
 
 
 }
-

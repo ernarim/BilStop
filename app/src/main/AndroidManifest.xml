@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
@@ -15,6 +15,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BilStop">
+        <activity
+            android:name=".FinalizeRideActivity"
+            android:exported="false" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -37,8 +40,7 @@
             android:exported="false" />
         <activity
             android:name=".MapsActivity"
-            android:exported="true"/>
-        
+            android:exported="true" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
