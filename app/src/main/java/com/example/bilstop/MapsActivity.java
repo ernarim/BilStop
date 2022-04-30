@@ -7,12 +7,14 @@ import com.google.android.gms.maps.MapsInitializer.Renderer;
 import com.google.android.gms.maps.OnMapsSdkInitializedCallback;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -36,6 +38,8 @@ import com.google.maps.internal.PolylineEncoding;
 import com.google.maps.model.DirectionsResult;
 import com.google.maps.model.DirectionsRoute;
 
+import org.w3c.dom.Text;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,8 +50,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
     private GoogleMap googleMap;
     private ArrayList<PolylineData> mPolyLinesData = new ArrayList<>();
     private Location locationData=null;
-    private FloatingActionButton fab;
     private MarkerOptions destinationMarker;
+    private FloatingActionButton fab;
+    private FloatingActionButton fab2;
+    private TextView titleTextView;
+    private TextView durationTextView;
 
 
     @Override
@@ -71,10 +78,23 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
         mapFragment.getMapAsync(this);
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab2 = (FloatingActionButton) findViewById(R.id.fab2);
+        fab2.setVisibility(View.INVISIBLE);
+
+        titleTextView = (TextView) findViewById(R.id.titleTextView);
+        durationTextView = (TextView) findViewById(R.id.durationTextView);
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                titleTextView.setText("Choose the appropriate route");
+                durationTextView.setTextColor(Color.WHITE);
                 calculateDirections(destinationMarker);
+                googleMap.setOnMapClickListener(null);
+                fab.setVisibility(View.INVISIBLE);
+                fab2.setVisibility(View.VISIBLE);
+
             }
         });
 
@@ -271,6 +291,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
                         .position(endLocation).title("Ankara")
                         .snippet("Duration: " + polylineData.getLeg().duration)
                 );
+                durationTextView.setText("Duration: " + polylineData.getLeg().duration );
 
                 marker1.showInfoWindow();
                 marker2.showInfoWindow();
