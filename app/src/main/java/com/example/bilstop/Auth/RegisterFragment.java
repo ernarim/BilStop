@@ -18,9 +18,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.bilstop.MainActivity;
 import com.example.bilstop.R;
-import com.example.bilstop.Users;
+import com.example.bilstop.Classes.Users;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;

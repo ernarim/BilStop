@@ -1,17 +1,20 @@
 package com.example.bilstop;
 
+import com.example.bilstop.Classes.Location;
+import com.example.bilstop.Classes.Ride;
 import com.example.bilstop.Models.PolylineData;
-import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.MapsInitializer.Renderer;
 import com.google.android.gms.maps.OnMapsSdkInitializedCallback;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.Parcelable;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -31,6 +34,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.maps.DirectionsApiRequest;
 import com.google.maps.GeoApiContext;
 import com.google.maps.PendingResult;
@@ -38,9 +43,11 @@ import com.google.maps.internal.PolylineEncoding;
 import com.google.maps.model.DirectionsResult;
 import com.google.maps.model.DirectionsRoute;
 
-import org.w3c.dom.Text;
-
-import java.lang.reflect.Array;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,6 +62,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
     private FloatingActionButton fab2;
     private TextView titleTextView;
     private TextView durationTextView;
+    private PolylineData selectedPolyline;
+    private Ride ride = new Ride();
 
 
     @Override
@@ -102,7 +111,13 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MapsActivity.this, FinalizeRideActivity.class);
+                Location origin = new Location(String.valueOf(selectedPolyline.getPolyline().getPoints().get(0).latitude),String.valueOf(selectedPolyline.getPolyline().getPoints().get(0).longitude));
+                Location destination = new Location(String.valueOf(selectedPolyline.getPolyline().getPoints().get(1).latitude),String.valueOf(selectedPolyline.getPolyline().getPoints().get(1).longitude));
+                ride.setOrigin(origin); ride.setDestination(destination);
+                Log.d("polyline" , String.valueOf(selectedPolyline.getPolyline().getPoints().get(0).latitude) );
+                intent.putExtra("ride",ride);
                 startActivity(intent);
+
             }
         });
 
@@ -235,7 +250,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
                     Polyline polyline = googleMap.addPolyline(new PolylineOptions().addAll(newDecodedPath));
                     polyline.setColor(ContextCompat.getColor(getApplicationContext(), R.color.grew));
                     polyline.setClickable(true);
-                    polyline.setWidth(17);
+                    polyline.setWidth(18);
                     mPolyLinesData.add(new PolylineData(polyline,route.legs[0]));
 
                     // highlight the fastest route and adjust camera
@@ -291,7 +306,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
 
 
                 durationTextView.setText("Duration: " + polylineData.getLeg().duration );
-
+                selectedPolyline = polylineData;
+                Log.d("Polyline", selectedPolyline.toString());
                 marker1.showInfoWindow();
             }
             else{

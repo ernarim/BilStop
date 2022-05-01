@@ -1,4 +1,4 @@
-package com.example.bilstop;
+package com.example.bilstop.Classes;
 
 import com.google.android.gms.maps.model.LatLng;
 
@@ -13,6 +13,11 @@ public class Location implements Serializable {
     public Location(String locationName, String locationID, String locationLatitude, String locationLongitude){
         this.locationName=locationName;
         this.locationID=locationID;
+        this.locationLatitude=locationLatitude;
+        this.locationLongitude=locationLongitude;
+    }
+
+    public Location(String locationLatitude, String locationLongitude){
         this.locationLatitude=locationLatitude;
         this.locationLongitude=locationLongitude;
     }
@@ -47,6 +52,16 @@ public class Location implements Serializable {
 
     public String getLocationLongitude() {
         return locationLongitude;
+    }
+
+    @Override
+    public String toString() {
+        return "Location{" +
+                "locationName='" + locationName + '\'' +
+                ", locationID='" + locationID + '\'' +
+                ", locationLatitude='" + locationLatitude + '\'' +
+                ", locationLongitude='" + locationLongitude + '\'' +
+                '}';
     }
 }
 

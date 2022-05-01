@@ -5,6 +5,7 @@ import androidx.cardview.widget.CardView;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -15,10 +16,15 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import com.example.bilstop.Classes.Ride;
+import com.example.bilstop.Models.PolylineData;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.time.Clock;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.TimeZone;
 
 public class FinalizeRideActivity extends AppCompatActivity {
@@ -39,6 +45,9 @@ public class FinalizeRideActivity extends AppCompatActivity {
     boolean timeSelected = false;
     int passengers = 3;
 
+    private Calendar rideDate= Calendar.getInstance();
+    private int numberOfPassengers;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +60,7 @@ public class FinalizeRideActivity extends AppCompatActivity {
         createRide = (Button) findViewById(R.id.createButton);
         fabDecrease = (FloatingActionButton) findViewById(R.id.fabDec);
         fabIncrease = (FloatingActionButton) findViewById(R.id.fabInc);
+
 
         dateCardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,6 +79,10 @@ public class FinalizeRideActivity extends AppCompatActivity {
                         dateSelected = true;
                         if(timeSelected) createRide.setVisibility(View.VISIBLE);
                         mDisplayDate.setVisibility(View.VISIBLE);
+
+                        rideDate.set(Calendar.DAY_OF_MONTH, day);
+                        rideDate.set(Calendar.MONTH, month);
+                        rideDate.set(Calendar.YEAR, year + 1990);
                     }
                 };
 
@@ -77,8 +91,10 @@ public class FinalizeRideActivity extends AppCompatActivity {
                         android.R.style.Theme_Holo_Light_Dialog_MinWidth,
                         mDateSetListener,
                         year, month, day);
+
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.show();
+
             }
         });
 
@@ -97,12 +113,14 @@ public class FinalizeRideActivity extends AppCompatActivity {
                         mDisplayTime.setText(timeString);
                         timeSelected = true;
                         if(dateSelected) createRide.setVisibility(View.VISIBLE);
+
+                        rideDate.set(Calendar.HOUR_OF_DAY, hour);
+                        rideDate.set(Calendar.MINUTE, minute);
                     }
                 };
 
                 TimePickerDialog timePickerDialog = new TimePickerDialog(FinalizeRideActivity.this, mTimeSetListener,
                         HOUR, MINUTE, true);
-
                 timePickerDialog.show();
             }
         });
@@ -114,6 +132,7 @@ public class FinalizeRideActivity extends AppCompatActivity {
                 if (passengers > MIN_NO_PASSENGERS) {
                     passengers--;
                     passengerNoText.setText("" + passengers);
+                    numberOfPassengers=passengers;
                 }
             }
         });
@@ -124,7 +143,28 @@ public class FinalizeRideActivity extends AppCompatActivity {
                 if (passengers < MAX_NO_PASSENGERS) {
                     passengers++;
                     passengerNoText.setText("" + passengers);
+                    numberOfPassengers=passengers;
                 }
+            }
+        });
+
+        createRide.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Ride ride = (Ride) getIntent().getSerializableExtra("ride");
+                ride.setRideDate(rideDate);
+                ride.setNumberOfPassenger(numberOfPassengers);
+                Log.d("ride", ride.toString());
+
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference myRef = database.getReference("rides");
+
+                myRef.push().setValue(ride);
+
+                Intent intent = new Intent(FinalizeRideActivity.this, BottomNavActivity.class);
+                startActivity(intent);
+
             }
         });
     }

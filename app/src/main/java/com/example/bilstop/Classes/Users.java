@@ -1,4 +1,4 @@
-package com.example.bilstop;
+package com.example.bilstop.Classes;
 
 import java.util.List;
 
