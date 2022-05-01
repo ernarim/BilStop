@@ -1,6 +1,7 @@
 package com.example.bilstop.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bilstop.Classes.Ride;
 import com.example.bilstop.R;
+import com.example.bilstop.RideInfoActivity;
 
 import java.util.List;
 
@@ -24,8 +26,6 @@ public class RidesRVAdapter extends RecyclerView.Adapter<RidesRVAdapter.ObjectsH
         this.mContex=mContex;
         this.rides=rides;
     }
-
-
 
     @Override
     public int getItemCount() {
@@ -62,6 +62,14 @@ public class RidesRVAdapter extends RecyclerView.Adapter<RidesRVAdapter.ObjectsH
         holder.textViewNumOfPas.setText("Number of Passengers: " + ride.getNumberOfPassenger());
         holder.textViewDate.setText("Date: " + ride.getRideDate());
         holder.textViewTime.setText("Hour: " + ride.getRideHour());
+
+        holder.cardViewRow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContex.getApplicationContext(), RideInfoActivity.class);
+                mContex.startActivity(intent);
+            }
+        });
 
     }
 

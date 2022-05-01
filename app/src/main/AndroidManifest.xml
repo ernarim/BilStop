@@ -15,6 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BilStop">
         <activity
+            android:name=".RideInfoActivity"
+            android:exported="false" />
+        <activity
             android:name=".RidesActivity"
             android:exported="false" />
         <activity

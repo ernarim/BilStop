@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context=".RideInfoActivity"
+    tools:layout_editor_absoluteX="0dp"
+    tools:layout_editor_absoluteY="93dp">
+
+    <View
+        android:id="@+id/divider5"
+        android:layout_width="409dp"
+        android:layout_height="3sp"
+        android:background="@color/grew"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="219dp" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hour: "
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        tools:layout_editor_absoluteX="325dp"
+        tools:layout_editor_absoluteY="183dp" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Number of Passengers: "
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        tools:layout_editor_absoluteX="124dp"
+        tools:layout_editor_absoluteY="161dp" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Date: "
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        tools:layout_editor_absoluteX="51dp"
+        tools:layout_editor_absoluteY="183dp" />
+
+    <View
+        android:id="@+id/divider4"
+        android:layout_width="409dp"
+        android:layout_height="3sp"
+        android:background="@color/grew"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="312dp" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Driver Name: "
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="39dp" />
+
+    <View
+        android:id="@+id/divider3"
+        android:layout_width="409dp"
+        android:layout_height="3sp"
+        android:background="@color/grew"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="103dp" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="273dp"
+        android:layout_height="33dp"
+        android:gravity="center"
+        android:text=" Route: "
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        tools:layout_editor_absoluteX="65dp"
+        tools:layout_editor_absoluteY="116dp" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="200dp"
+        android:layout_height="29dp"
+        android:text="Car:"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="51dp"
+        tools:layout_editor_absoluteY="253dp" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="92dp"
+        android:layout_height="65dp"
+        android:background="@color/white"
+        tools:layout_editor_absoluteX="288dp"
+        tools:layout_editor_absoluteY="234dp"
+        tools:srcCompat="@drawable/ic_baseline_directions_car_24" />
+
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/mapView"
+        android:layout_width="324dp"
+        android:layout_height="295dp"
+        tools:layout_editor_absoluteX="43dp"
+        tools:layout_editor_absoluteY="338dp" />
+
+    <Button
+        android:id="@+id/requestButton"
+        android:layout_width="316dp"
+        android:layout_height="52dp"
+        android:backgroundTint="@color/orange"
+        android:text="Request to join ride"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="51dp"
+        tools:layout_editor_absoluteY="652dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
