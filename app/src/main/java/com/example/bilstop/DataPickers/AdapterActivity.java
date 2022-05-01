@@ -22,7 +22,7 @@ import java.util.ArrayList;
 public class AdapterActivity extends AppCompatActivity {
     private RecyclerView rv;
     private ArrayList<Ride> ulkelerList;
-    private BasitRVAdapter adapter;
+
     private final ArrayList<Ride> rideData=new ArrayList<>();
 
     @Override
