@@ -20,6 +20,8 @@ import com.example.bilstop.Classes.Location;
 import com.example.bilstop.Classes.Ride;
 import com.example.bilstop.Models.PolylineData;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -48,7 +50,10 @@ public class FinalizeRideActivity extends AppCompatActivity {
     int passengers = 3;
 
     private Calendar rideDate= Calendar.getInstance();
-    private int numberOfPassengers;
+    private int numberOfPassengers=3;
+
+    private FirebaseAuth auth  = FirebaseAuth.getInstance();
+    private FirebaseUser user = auth.getCurrentUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -156,15 +161,27 @@ public class FinalizeRideActivity extends AppCompatActivity {
 
                 Ride ride = (Ride) getIntent().getSerializableExtra("ride");
 
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm");
-                String  dateTime = simpleDateFormat.format(rideDate.getTime()).toString();
+                SimpleDateFormat simpleDateFormatDate = new SimpleDateFormat("dd.MM.yyyy");
+                SimpleDateFormat simpleDateFormatHour = new SimpleDateFormat("HH:mm");
+
+                String dateTime = simpleDateFormatDate.format(rideDate.getTime()).toString();
+                String hourTime = simpleDateFormatHour.format(rideDate.getTime()).toString();
+
                 Log.d("date",dateTime);
+                Log.d("hour",hourTime);
+
                 ride.setRideDate(dateTime);
+                ride.setRideHour(hourTime);
+
                 ride.setNumberOfPassenger(numberOfPassengers);
+
+                ride.setDriverName(user.getDisplayName());
+
                 Log.d("ride", ride.toString());
 
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference myRef = database.getReference("rides");
+                DatabaseReference myRef = database.getReference("ridesFromBilkent");
+
 
                 myRef.push().setValue(ride);
 

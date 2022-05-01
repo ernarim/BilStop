@@ -58,10 +58,10 @@ public class RidesRVAdapter extends RecyclerView.Adapter<RidesRVAdapter.ObjectsH
     public void onBindViewHolder(@NonNull ObjectsHolder holder, int position) {
         final Ride ride = rides.get(position);
 
-        holder.textViewName.setText("User Name");
-        holder.textViewNumOfPas.setText("User Name");
-        holder.textViewDate.setText("User Name");
-        holder.textViewTime.setText("User Name");
+        holder.textViewName.setText("Driver Name: " + ride.getDriverName());
+        holder.textViewNumOfPas.setText("Number of Passengers: " + ride.getNumberOfPassenger());
+        holder.textViewDate.setText("Date: " + ride.getRideDate());
+        holder.textViewTime.setText("Hour: " + ride.getRideHour());
 
     }
 

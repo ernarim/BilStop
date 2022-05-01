@@ -9,8 +9,7 @@
         android:id="@+id/cardViewRow"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="5sp"
-        app:cardCornerRadius="10sp">
+        android:layout_margin="5sp">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,11 +17,25 @@
             android:layout_height="match_parent"
             android:background="@color/black">
 
+            <View
+                android:id="@+id/divider2"
+                android:layout_width="match_parent"
+                android:layout_height="3sp"
+                android:background="@color/grew"
+                android:backgroundTintMode="add"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewRides" />
+
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardViewImage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
                 android:layout_marginEnd="300dp"
+                android:layout_marginBottom="15dp"
                 app:cardCornerRadius="10sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -43,7 +56,7 @@
                 android:layout_width="120sp"
                 android:layout_height="19dp"
                 android:layout_marginStart="9dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="3dp"
                 android:layout_marginEnd="85dp"
                 android:text="Date: "
                 android:textColor="@color/white"
@@ -58,7 +71,7 @@
                 android:layout_width="180dp"
                 android:layout_height="19dp"
                 android:layout_marginStart="9dp"
-                android:text="Name: "
+                android:text="Driver Name: "
                 android:textColor="@color/white"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/textViewNumOfPas"
@@ -72,7 +85,7 @@
                 android:layout_width="180dp"
                 android:layout_height="19dp"
                 android:layout_marginStart="9dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="15dp"
                 android:text="Number of Passengers: "
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"

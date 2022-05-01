@@ -35,14 +35,45 @@ public class PlacesActivity extends AppCompatActivity implements Serializable {
 
         goToMapButton=findViewById(R.id.goToMapButtpn);
 
-        goToMapButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent gecis = new Intent(getApplicationContext(), MapsActivity.class);
-                gecis.putExtra("object",location);
-                startActivity(gecis);
+
+        if(getIntent().getSerializableExtra("intentPage").equals("home")){
+            goToMapButton.setText("List all rides");
+            if(getIntent().getSerializableExtra("buttonType").equals("from")){
+                goToMapButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(getApplicationContext(), AdapterActivity.class);
+                        intent.putExtra("buttonType", getIntent().getSerializableExtra("buttonType"));
+                        intent.putExtra("object",location);
+                        intent.putExtra("allList","true");
+                        startActivity(intent);
+                    }
+                });
             }
-        });
+            else if(getIntent().getSerializableExtra("buttonType").equals("to")){
+                goToMapButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(getApplicationContext(), AdapterActivity.class);
+                        intent.putExtra("buttonType", getIntent().getSerializableExtra("buttonType"));
+                        intent.putExtra("object",location);
+                        intent.putExtra("allList","true");
+                        startActivity(intent);
+                    }
+                });
+            }
+        }
+        else{
+            goToMapButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(getApplicationContext(), MapsActivity.class);
+                    intent.putExtra("object",location);
+                    startActivity(intent);
+                }
+            });
+        }
+
 
         if(!Places.isInitialized()){
             // Initialize the SDK
@@ -72,11 +103,13 @@ public class PlacesActivity extends AppCompatActivity implements Serializable {
 
                 if(getIntent().getSerializableExtra("intentPage").equals("create")){
                     Intent intent = new Intent(PlacesActivity.this, MapsActivity.class);
+                    intent.putExtra("buttonType", getIntent().getSerializableExtra("buttonType"));
                     intent.putExtra("object",location);
                     startActivity(intent);
                 }
                 else if(getIntent().getSerializableExtra("intentPage").equals("home")){
                     Intent intent = new Intent(PlacesActivity.this, AdapterActivity.class);
+                    intent.putExtra("buttonType", getIntent().getSerializableExtra("buttonType"));
                     intent.putExtra("object",location);
                     startActivity(intent);
                 }

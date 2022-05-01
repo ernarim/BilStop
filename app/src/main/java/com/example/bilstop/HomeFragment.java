@@ -40,6 +40,17 @@ public class HomeFragment extends Fragment {
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), PlacesActivity.class);
                 intent.putExtra("intentPage","home");
+                intent.putExtra("buttonType","from");
+                startActivity(intent);
+            }
+        });
+
+        toButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), PlacesActivity.class);
+                intent.putExtra("intentPage","home");
+                intent.putExtra("buttonType","to");
                 startActivity(intent);
             }
         });

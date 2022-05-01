@@ -3,6 +3,7 @@ package com.example.bilstop.DataPickers;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.bilstop.Classes.Location;
 import com.example.bilstop.Classes.Ride;
 import com.example.bilstop.R;
 import com.example.bilstop.RidesActivity;
@@ -20,8 +21,7 @@ import android.util.Log;
 import java.util.ArrayList;
 
 public class AdapterActivity extends AppCompatActivity {
-    private RecyclerView rv;
-    private ArrayList<Ride> ulkelerList;
+    private Location locationData;
 
     private final ArrayList<Ride> rideData=new ArrayList<>();
 
@@ -30,8 +30,14 @@ public class AdapterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_rides);
 
+        if(getIntent().getSerializableExtra("object")!=null){
+            locationData = (Location) getIntent().getSerializableExtra("object");
+            Log.d("location", locationData.getLocationName() + " " +  locationData.getLocationLatitude() + " " + locationData.getLocationLongitude());
+        }
+
+
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference().child("rides");
+        DatabaseReference myRef = database.getReference().child("ridesFromBilkent");
 
         myRef.addValueEventListener(new ValueEventListener() {
 
@@ -43,9 +49,12 @@ public class AdapterActivity extends AppCompatActivity {
                     rideData.add(dataRide);
                 }
                 Log.d("rideData", rideData.toString());
-                RideDataPicker.setRides(rideData);
+                RideDataPicker.setRidesFromBilkent(rideData);
 
                 Intent intent = new Intent(AdapterActivity.this, RidesActivity.class);
+                intent.putExtra("object", locationData);
+                intent.putExtra("buttonType", getIntent().getSerializableExtra("buttonType"));
+                intent.putExtra("allList", getIntent().getSerializableExtra("allList"));
                 startActivity(intent);
                 finish();
 

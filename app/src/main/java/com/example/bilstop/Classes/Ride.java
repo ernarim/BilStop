@@ -9,23 +9,31 @@ public class Ride implements Serializable {
     private Location origin;
     private Location destination;
     private String rideDate;
+    private String rideHour;
     private int numberOfPassenger;
     private String rideId;
+    private String driverName;
 
     public Ride(){
 
     }
 
-    public Ride(String rideId, Location origin, Location destination, String rideDate, int numberOfPassenger){
+    public Ride(String rideId, String driverName , Location origin, Location destination, String rideDate, String rideHour ,int numberOfPassenger){
         this.rideId=rideId;
+        this.driverName=driverName;
         this.origin=origin;
         this.destination=destination;
         this.rideDate=rideDate;
+        this.rideHour=rideHour;
         this.numberOfPassenger=numberOfPassenger;
     }
 
     public void setRideId(String rideId) {
         this.rideId = rideId;
+    }
+
+    public void setDriverName(String driverName) {
+        this.driverName = driverName;
     }
 
     public void setOrigin(Location origin) {
@@ -40,12 +48,20 @@ public class Ride implements Serializable {
         this.rideDate = rideDate;
     }
 
+    public void setRideHour(String rideHour) {
+        this.rideHour = rideHour;
+    }
+
     public void setNumberOfPassenger(int numberOfPassenger) {
         this.numberOfPassenger = numberOfPassenger;
     }
 
     public String getRideId() {
         return rideId;
+    }
+
+    public String getDriverName() {
+        return driverName;
     }
 
     public Location getOrigin() {
@@ -60,6 +76,10 @@ public class Ride implements Serializable {
         return rideDate;
     }
 
+    public String getRideHour() {
+        return rideHour;
+    }
+
     public int getNumberOfPassenger() {
         return numberOfPassenger;
     }
@@ -69,8 +89,10 @@ public class Ride implements Serializable {
         return "Ride{" +
                 "origin=" + origin +
                 ", destination=" + destination +
-                ", rideDate=" + rideDate +
+                ", rideDate='" + rideDate + '\'' +
                 ", numberOfPassenger=" + numberOfPassenger +
+                ", rideId='" + rideId + '\'' +
+                ", driverName='" + driverName + '\'' +
                 '}';
     }
 }

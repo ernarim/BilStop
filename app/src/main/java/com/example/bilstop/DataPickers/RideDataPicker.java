@@ -6,22 +6,27 @@ import java.util.ArrayList;
 
 public class RideDataPicker {
 
-    private static ArrayList<Ride> rides;
+    private static ArrayList<Ride> ridesFromBilkent;
+    private static ArrayList<Ride> ridestoBilkent;
 
     public RideDataPicker(){
-        rides = new ArrayList<>();
+        ridesFromBilkent = new ArrayList<>();
+        ridestoBilkent = new ArrayList<>();
     }
 
-    public static void setRides(ArrayList<Ride> rides) {
-        RideDataPicker.rides = rides;
+    public static void setRidesFromBilkent(ArrayList<Ride> ridesFromBilkent) {
+        RideDataPicker.ridesFromBilkent = ridesFromBilkent;
     }
 
-    public static void add(Ride r){
-        rides.add(r);
+    public static void setRidestoBilkent(ArrayList<Ride> ridestoBilkent) {
+        RideDataPicker.ridestoBilkent = ridestoBilkent;
     }
 
-    public static ArrayList<Ride> getRides() {
-        return rides;
+    public static ArrayList<Ride> getRidesFromBilkent() {
+        return ridesFromBilkent;
     }
 
+    public static ArrayList<Ride> getRidestoBilkent() {
+        return ridestoBilkent;
+    }
 }
