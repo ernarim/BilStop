@@ -16,9 +16,9 @@
         tools:layout="@layout/fragment_create" />
     <fragment
         android:id="@+id/rideFragment"
-        android:name="com.example.bilstop.RideFragment"
+        android:name="com.example.bilstop.RidesFragment"
         android:label="fragment_ride"
-        tools:layout="@layout/fragment_ride" />
+        tools:layout="@layout/fragment_rides" />
     <fragment
         android:id="@+id/messagesFragment"
         android:name="com.example.bilstop.MessagesFragment"

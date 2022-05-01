@@ -8,7 +8,7 @@ import java.util.Calendar;
 public class Ride implements Serializable {
     private Location origin;
     private Location destination;
-    private Calendar rideDate;
+    private String rideDate;
     private int numberOfPassenger;
     private String rideId;
 
@@ -16,7 +16,7 @@ public class Ride implements Serializable {
 
     }
 
-    public Ride(String rideId, Location origin, Location destination, Calendar rideDate, int numberOfPassenger){
+    public Ride(String rideId, Location origin, Location destination, String rideDate, int numberOfPassenger){
         this.rideId=rideId;
         this.origin=origin;
         this.destination=destination;
@@ -36,7 +36,7 @@ public class Ride implements Serializable {
         this.destination = destination;
     }
 
-    public void setRideDate(Calendar rideDate) {
+    public void setRideDate(String rideDate) {
         this.rideDate = rideDate;
     }
 
@@ -56,7 +56,7 @@ public class Ride implements Serializable {
         return destination;
     }
 
-    public Calendar getRideDate() {
+    public String getRideDate() {
         return rideDate;
     }
 
@@ -71,7 +71,6 @@ public class Ride implements Serializable {
                 ", destination=" + destination +
                 ", rideDate=" + rideDate +
                 ", numberOfPassenger=" + numberOfPassenger +
-                ", rideId='" + rideId + '\'' +
                 '}';
     }
 }

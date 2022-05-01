@@ -139,8 +139,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
 
     @Override
     public void onMapReady(GoogleMap gMap) {
-        // Add a marker in Sydney, Australia,
-        // and move the map's camera to the same location.
 
         googleMap=gMap;
 

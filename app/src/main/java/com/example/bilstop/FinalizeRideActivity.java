@@ -16,12 +16,14 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import com.example.bilstop.Classes.Location;
 import com.example.bilstop.Classes.Ride;
 import com.example.bilstop.Models.PolylineData;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
 import java.time.Clock;
 import java.util.Calendar;
 import java.util.Date;
@@ -153,7 +155,11 @@ public class FinalizeRideActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 Ride ride = (Ride) getIntent().getSerializableExtra("ride");
-                ride.setRideDate(rideDate);
+
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+                String  dateTime = simpleDateFormat.format(rideDate.getTime()).toString();
+                Log.d("date",dateTime);
+                ride.setRideDate(dateTime);
                 ride.setNumberOfPassenger(numberOfPassengers);
                 Log.d("ride", ride.toString());
 

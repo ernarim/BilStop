@@ -22,8 +22,9 @@ public class CreateFragment extends Fragment {
         fromButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent gecis = new Intent(getActivity(), PlacesActivity.class);
-                startActivity(gecis);
+                Intent intent = new Intent(getActivity(), PlacesActivity.class);
+                intent.putExtra("intentPage","create");
+                startActivity(intent);
 
             }
         });

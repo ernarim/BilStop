@@ -3,7 +3,6 @@
     package="com.example.bilstop">
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -15,6 +14,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BilStop">
+        <activity
+            android:name=".RidesActivity"
+            android:exported="false" />
         <activity
             android:name=".FinalizeRideActivity"
             android:exported="false" />
@@ -40,6 +42,9 @@
             android:exported="false" />
         <activity
             android:name=".MapsActivity"
+            android:exported="true" />
+        <activity
+            android:name=".DataPickers.AdapterActivity"
             android:exported="true" />
         <activity
             android:name=".MainActivity"

@@ -3,6 +3,7 @@ package com.example.bilstop.Classes;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 public class Location implements Serializable {
     private String locationName;
@@ -21,6 +22,7 @@ public class Location implements Serializable {
         this.locationLatitude=locationLatitude;
         this.locationLongitude=locationLongitude;
     }
+    public Location(){}
 
     public void setLocationName(String locationName) {
         this.locationName = locationName;

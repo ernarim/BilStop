@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.bilstop.Classes.Location;
+import com.example.bilstop.DataPickers.AdapterActivity;
 import com.google.android.gms.common.api.Status;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
@@ -68,9 +69,18 @@ public class PlacesActivity extends AppCompatActivity implements Serializable {
 
                 //Location data to send Maps Activity
                 location = new Location(place.getName(), place.getId(), String.valueOf(place.getLatLng().latitude),String.valueOf(place.getLatLng().longitude) );
-                Intent intent = new Intent(PlacesActivity.this, MapsActivity.class);
-                intent.putExtra("object",location);
-                startActivity(intent);
+
+                if(getIntent().getSerializableExtra("intentPage").equals("create")){
+                    Intent intent = new Intent(PlacesActivity.this, MapsActivity.class);
+                    intent.putExtra("object",location);
+                    startActivity(intent);
+                }
+                else if(getIntent().getSerializableExtra("intentPage").equals("home")){
+                    Intent intent = new Intent(PlacesActivity.this, AdapterActivity.class);
+                    intent.putExtra("object",location);
+                    startActivity(intent);
+                }
+
             }
 
 
