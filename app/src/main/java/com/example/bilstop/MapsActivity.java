@@ -96,9 +96,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
 
             }
         }
-        else{
 
-        }
 
         // Retrieve the content view that renders the map.
 
