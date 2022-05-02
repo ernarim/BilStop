@@ -39,7 +39,7 @@ public class RidesActivity extends AppCompatActivity {
         Serializable buttonType = getIntent().getSerializableExtra("buttonType");
         Serializable allList = getIntent().getSerializableExtra("allList");
 
-        if(buttonType!=null){
+        if(buttonType != null) {// !!!!!!!!!!!!!!!!!!!!! && allList != null
             if(allList.equals("true")){
                 textViewRides.setText("All Rides:");
             }

@@ -57,7 +57,6 @@ public class AdapterActivity extends AppCompatActivity {
                 intent.putExtra("allList", getIntent().getSerializableExtra("allList"));
                 startActivity(intent);
                 finish();
-
             }
 
             @Override

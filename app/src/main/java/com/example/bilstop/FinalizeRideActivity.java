@@ -45,9 +45,9 @@ public class FinalizeRideActivity extends AppCompatActivity {
     private Button createRide;
     private FloatingActionButton fabDecrease;
     private FloatingActionButton fabIncrease;
-    boolean dateSelected = false;
-    boolean timeSelected = false;
-    int passengers = 3;
+    private boolean dateSelected = false;
+    private boolean timeSelected = false;
+    private int passengers = 3;
 
     private Calendar rideDate= Calendar.getInstance();
     private int numberOfPassengers=3;
@@ -180,7 +180,11 @@ public class FinalizeRideActivity extends AppCompatActivity {
                 Log.d("ride", ride.toString());
 
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference myRef = database.getReference("ridesFromBilkent");
+                DatabaseReference myRef;
+                if (getIntent().getSerializableExtra("buttonType").equals("from"))
+                    myRef = database.getReference("ridesFromBilkent");
+                else
+                    myRef = database.getReference("ridesToBilkent");
 
 
                 myRef.push().setValue(ride);

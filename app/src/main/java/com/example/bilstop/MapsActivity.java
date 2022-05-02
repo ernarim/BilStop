@@ -27,6 +27,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMapOptions;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
@@ -53,33 +54,54 @@ import java.util.List;
 
 public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitializedCallback,  OnMapReadyCallback, GoogleMap.OnPolylineClickListener {
 
-    private GeoApiContext mGeoApiContext =null;
+    private GeoApiContext mGeoApiContext = null;
     private GoogleMap googleMap;
     private ArrayList<PolylineData> mPolyLinesData = new ArrayList<>();
-    private Location locationData=null;
-    private MarkerOptions destinationMarker;
+    private Location startLocationData = null;
+    private Location finalLocationData = null;
     private FloatingActionButton fab;
     private FloatingActionButton fab2;
     private TextView titleTextView;
     private TextView durationTextView;
     private PolylineData selectedPolyline;
     private Ride ride = new Ride();
-
+    private String buttonType;
+    private MarkerOptions marker1;
+    private MarkerOptions marker2;
+    private LatLng startLocation;
+    private LatLng finalLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_maps);
         MapsInitializer.initialize(getApplicationContext(), Renderer.LATEST, this);
 
-
-        if((Location) getIntent().getSerializableExtra("object")!=null){
+        buttonType = (String) getIntent().getSerializableExtra("buttonType");
+        if((Location) getIntent().getSerializableExtra("object") != null){
             //Location data coming from Autocomplete Places Fragment
-            locationData = (Location) getIntent().getSerializableExtra("object");
-            Log.d("location", locationData.getLocationName() + " " +  locationData.getLocationLatitude() + " " + locationData.getLocationLongitude());
+            if(buttonType.equals("from")){
+                finalLocationData = (Location) getIntent().getSerializableExtra("object");
+                finalLocation = new LatLng(Double.valueOf(finalLocationData.getLocationLatitude()),
+                        Double.valueOf(finalLocationData.getLocationLongitude()));
+                marker1 = new MarkerOptions().position(finalLocation).title("from: " + finalLocationData.getLocationName());
+                Log.d("location", finalLocationData.getLocationName() + " " +  finalLocationData.getLocationLatitude() + " " + finalLocationData.getLocationLongitude());
+            }
+            else{
+                startLocationData = (Location) getIntent().getSerializableExtra("object");
+                startLocation = new LatLng(Double.valueOf(startLocationData.getLocationLatitude()),
+                        Double.valueOf(startLocationData.getLocationLongitude()));
+                marker1 = new MarkerOptions().position(startLocation).title("to: " + startLocationData.getLocationName());
+                Log.d("location", startLocationData.getLocationName() + " " +  startLocationData.getLocationLatitude() + " " + startLocationData.getLocationLongitude());
+
+            }
+        }
+        else{
+
         }
 
         // Retrieve the content view that renders the map.
-        setContentView(R.layout.activity_maps);
+
 
         // Get the SupportMapFragment and request notification when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -99,8 +121,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
 
                 titleTextView.setText("Choose the appropriate route");
                 durationTextView.setTextColor(Color.WHITE);
-                calculateDirections(destinationMarker);
+                calculateDirections();
                 googleMap.setOnMapClickListener(null);
+                if(buttonType.equals("from")){ marker2 = new MarkerOptions().position(startLocation);}
+                else{ marker2 = new MarkerOptions().position(finalLocation);}
+                googleMap.addMarker(marker2);
                 fab.setVisibility(View.INVISIBLE);
                 fab2.setVisibility(View.VISIBLE);
 
@@ -115,9 +140,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
                 Location destination = new Location(String.valueOf(selectedPolyline.getPolyline().getPoints().get(1).latitude),String.valueOf(selectedPolyline.getPolyline().getPoints().get(1).longitude));
                 ride.setOrigin(origin); ride.setDestination(destination);
                 Log.d("polyline" , String.valueOf(selectedPolyline.getPolyline().getPoints().get(0).latitude) );
-                intent.putExtra("ride",ride);
+                intent.putExtras(getIntent().getExtras());
+                intent.putExtra("ride", ride);
                 startActivity(intent);
-
             }
         });
 
@@ -142,23 +167,27 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
 
         googleMap=gMap;
 
-        if(locationData!=null){
+        Location bilkent = new Location("Bilkent University", "id", "39.874721719233264", "32.74754255382555");
+        Location locationData = (Location) getIntent().getSerializableExtra("object");
+        if(locationData != null){
             //Creating destination point according to data coming from Autocomplete Fragment
-            LatLng destination = new LatLng(Double.valueOf(locationData.getLocationLatitude()) , Double.valueOf(locationData.getLocationLongitude()));
-            destinationMarker = new MarkerOptions().position(destination).title("Bilkent");
-            googleMap.addMarker(destinationMarker);
-            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(destination,15));
+            if(buttonType.equals("from")){
+                startLocationData = bilkent;
+                startLocation = new LatLng(Double.valueOf(startLocationData.getLocationLatitude()), Double.valueOf(startLocationData.getLocationLongitude()));
+                finalLocationData = locationData;
+                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(finalLocation,15));
+            }
+            else{
+                startLocationData = locationData;
+                finalLocationData = bilkent;
+                finalLocation = new LatLng(Double.valueOf(finalLocationData.getLocationLatitude()), Double.valueOf(finalLocationData.getLocationLongitude()));
+                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(startLocation,15));
+            }
         }
         else{
             LatLng ankara = new LatLng(39.91331640578498, 32.85483867821641);
-            destinationMarker= new MarkerOptions().position(ankara).title("Bilkent");
-            googleMap.addMarker(destinationMarker);
-            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ankara,15));
+            //!!!!!!!!!!!!! add zoom 15
         }
-
-
-        //calculateDirections(marker);
-        //calculateDirections(marker2);
 
         GoogleMapOptions options = new GoogleMapOptions();
 
@@ -166,33 +195,34 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
                 .compassEnabled(false)
                 .rotateGesturesEnabled(false)
                 .tiltGesturesEnabled(false)
-                .zoomControlsEnabled(true);
+                .zoomControlsEnabled(true)
+                .mapToolbarEnabled(false);
+
+        googleMap.addMarker(marker1);
 
         googleMap.getUiSettings().setZoomControlsEnabled(true);
-
-
         googleMap.setOnPolylineClickListener(this);
 
         // add marker on the screen when touch somewhere on the map
         googleMap.setOnMapClickListener(this::onMapClick);
 
-
     }
 
-    private void calculateDirections(MarkerOptions marker){
+    private void calculateDirections(){
         Log.d("demo", "calculateDirections: calculating directions.");
 
+        com.google.maps.model.LatLng origin = new com.google.maps.model.LatLng(
+                Double.valueOf(startLocationData.getLocationLatitude()),
+                Double.valueOf(startLocationData.getLocationLongitude()));
+
         com.google.maps.model.LatLng destination = new com.google.maps.model.LatLng(
-                marker.getPosition().latitude,
-                marker.getPosition().longitude
+                Double.valueOf(finalLocationData.getLocationLatitude()),
+                Double.valueOf(finalLocationData.getLocationLongitude())
         );
 
         DirectionsApiRequest directions = new DirectionsApiRequest(mGeoApiContext);
-
-        com.google.maps.model.LatLng ankara = new com.google.maps.model.LatLng(39.87498706924094, 32.747574449779364);
-
         directions.alternatives(true);
-        directions.origin(ankara);
+        directions.origin(origin);
         Log.d("demo", "calculateDirections: destination: " + destination.toString());
         directions.destination(destination).setCallback(new PendingResult.Callback<DirectionsResult>() {
             @Override
@@ -272,7 +302,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
         for (LatLng latLngPoint : lstLatLngRoute)
             boundsBuilder.include(latLngPoint);
 
-        int routePadding = 50;
+        int routePadding = 200;
         LatLngBounds latLngBounds = boundsBuilder.build();
 
         googleMap.animateCamera(
@@ -293,20 +323,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
                 polylineData.getPolyline().setColor(ContextCompat.getColor(getApplicationContext(), R.color.orange));
                 polylineData.getPolyline().setZIndex(1);
 
-                LatLng startLocation = new LatLng(
-                        polylineData.getLeg().startLocation.lat,
-                        polylineData.getLeg().startLocation.lng
-                );
-
-                Marker marker1 = googleMap.addMarker(new MarkerOptions()
-                        .position(startLocation).title("Bilkent")
-                );
-
-
-                durationTextView.setText("Duration: " + polylineData.getLeg().duration );
+                durationTextView.setText("Duration: " + polylineData.getLeg().duration);
                 selectedPolyline = polylineData;
+
                 Log.d("Polyline", selectedPolyline.toString());
-                marker1.showInfoWindow();
+
             }
             else{
                 polylineData.getPolyline().setColor(ContextCompat.getColor(getApplicationContext(), R.color.grew));
@@ -320,11 +341,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
         // Creating a marker
 
         // Setting the position for the marker
-        destinationMarker.position(latLng);
+        marker1.position(latLng);
 
         // Setting the title for the marker.
         // This will be displayed on taping the marker
-        destinationMarker.title(latLng.latitude + " : " + latLng.longitude);
+        marker1.title(latLng.latitude + " : " + latLng.longitude);
 
         // Clears the previously touched position
         googleMap.clear();
@@ -333,7 +354,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
         googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
 
         // Placing a marker on the touched position
-        googleMap.addMarker(destinationMarker);
+        googleMap.addMarker(marker1);
     }
 
 

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.bilstop.Classes.Location;
 import com.example.bilstop.DataPickers.AdapterActivity;
@@ -25,7 +26,6 @@ import java.util.Arrays;
 public class PlacesActivity extends AppCompatActivity implements Serializable {
 
     private PlacesClient placesClient;
-    private Button goToMapButton;
     private Location location=null;
 
     @Override
@@ -33,47 +33,13 @@ public class PlacesActivity extends AppCompatActivity implements Serializable {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_places);
 
-        goToMapButton=findViewById(R.id.goToMapButtpn);
 
-
-        if(getIntent().getSerializableExtra("intentPage").equals("home")){
-            goToMapButton.setText("List all rides");
-            if(getIntent().getSerializableExtra("buttonType").equals("from")){
-                goToMapButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent intent = new Intent(getApplicationContext(), AdapterActivity.class);
-                        intent.putExtra("buttonType", getIntent().getSerializableExtra("buttonType"));
-                        intent.putExtra("object",location);
-                        intent.putExtra("allList","true");
-                        startActivity(intent);
-                    }
-                });
-            }
-            else if(getIntent().getSerializableExtra("buttonType").equals("to")){
-                goToMapButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent intent = new Intent(getApplicationContext(), AdapterActivity.class);
-                        intent.putExtra("buttonType", getIntent().getSerializableExtra("buttonType"));
-                        intent.putExtra("object",location);
-                        intent.putExtra("allList","true");
-                        startActivity(intent);
-                    }
-                });
-            }
+        String buttonType = (String) getIntent().getSerializableExtra("buttonType");
+        if(buttonType.equals("to")){
+            String toQuestion = "What is your starting location?";
+            TextView question = (TextView) findViewById(R.id.question);
+            question.setText(toQuestion);
         }
-        else{
-            goToMapButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(getApplicationContext(), MapsActivity.class);
-                    intent.putExtra("object",location);
-                    startActivity(intent);
-                }
-            });
-        }
-
 
         if(!Places.isInitialized()){
             // Initialize the SDK
@@ -101,19 +67,16 @@ public class PlacesActivity extends AppCompatActivity implements Serializable {
                 //Location data to send Maps Activity
                 location = new Location(place.getName(), place.getId(), String.valueOf(place.getLatLng().latitude),String.valueOf(place.getLatLng().longitude) );
 
-                if(getIntent().getSerializableExtra("intentPage").equals("create")){
-                    Intent intent = new Intent(PlacesActivity.this, MapsActivity.class);
-                    intent.putExtra("buttonType", getIntent().getSerializableExtra("buttonType"));
-                    intent.putExtra("object",location);
-                    startActivity(intent);
+                Intent intent;
+                if(getIntent().getSerializableExtra("intentPage").equals("home")){
+                    intent = new Intent(PlacesActivity.this, AdapterActivity.class);
                 }
-                else if(getIntent().getSerializableExtra("intentPage").equals("home")){
-                    Intent intent = new Intent(PlacesActivity.this, AdapterActivity.class);
-                    intent.putExtra("buttonType", getIntent().getSerializableExtra("buttonType"));
-                    intent.putExtra("object",location);
-                    startActivity(intent);
+                else{
+                    intent = new Intent(PlacesActivity.this, MapsActivity.class);
                 }
-
+                intent.putExtras(getIntent().getExtras());
+                intent.putExtra("object", location);
+                startActivity(intent);
             }
 
 
