@@ -19,7 +19,9 @@ import java.util.ArrayList;
 public class RidesActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    private ArrayList<Ride> rides;
+    private ArrayList<Ride> ridesFromBilkent;
+    private ArrayList<Ride> ridestoBilkent;
+
     private RidesRVAdapter adapter;
     private Location locationData;
 
@@ -31,37 +33,51 @@ public class RidesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rides);
 
-        locationData = (Location) getIntent().getSerializableExtra("object");
+        if(getIntent().getSerializableExtra("object")!=null){
+            locationData = (Location) getIntent().getSerializableExtra("object");
+        }
 
         Log.d("from", String.valueOf(getIntent().getSerializableExtra("buttonType")));
 
         textViewRides = findViewById(R.id.textViewRides);
+        Log.d("datapicker", RideDataPicker.getRidesFromBilkent().toString());
+        Log.d("datapicker", RideDataPicker.getRidestoBilkent().toString());
 
-        Serializable buttonType = getIntent().getSerializableExtra("buttonType");
-        Serializable allList = getIntent().getSerializableExtra("allList");
+        ridesFromBilkent = new ArrayList<Ride>(RideDataPicker.getRidesFromBilkent());
+        ridestoBilkent = new ArrayList<Ride>(RideDataPicker.getRidestoBilkent());
 
-        if(buttonType != null && allList!=null) {// !!!!!!!!!!!!!!!!!!!!! && allList != null
-            if(allList.equals("true")){
-                textViewRides.setText("All Rides:");
+        if(getIntent().getSerializableExtra("allList").equals("true")){
+            if(getIntent().getSerializableExtra("buttonType").equals("from")){
+                textViewRides.setText("All Rides From Bilkent");
+                adapter = new RidesRVAdapter(this, ridesFromBilkent);
             }
-            else{
-                if(buttonType.equals("from")){
-                    textViewRides.setText("Bilkent - " + locationData.getLocationName() + " Rides");
-                }
-                else if(buttonType.equals("to")){
-                    textViewRides.setText(locationData.getLocationName() + " - Bilkent Rides");
-                }
+            else if(getIntent().getSerializableExtra("buttonType").equals("to")){
+                textViewRides.setText("All Rides To Bilkent");
+                adapter = new RidesRVAdapter(this, ridestoBilkent);
+            }
+        }
+        else{
+            if(getIntent().getSerializableExtra("buttonType").equals("from")){
+                textViewRides.setText("Bilkent - " + locationData.getLocationName() + " Rides");
+                adapter = new RidesRVAdapter(this, ridesFromBilkent);
+            }
+            else if(getIntent().getSerializableExtra("buttonType").equals("to")){
+                textViewRides.setText(locationData.getLocationName() + " - Bilkent Rides");
+                adapter = new RidesRVAdapter(this, ridestoBilkent);
             }
         }
 
-        rides =new ArrayList<Ride>(RideDataPicker.getRidesFromBilkent());
 
-        Log.d("ridesActivity", rides.toString());
+
+
+
+
+
+        Log.d("ridesActivity", ridesFromBilkent.toString());
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new RidesRVAdapter(this, rides);
         recyclerView.setAdapter(adapter);
 
     }

@@ -29,4 +29,5 @@ public class RideDataPicker {
     public static ArrayList<Ride> getRidestoBilkent() {
         return ridestoBilkent;
     }
+
 }

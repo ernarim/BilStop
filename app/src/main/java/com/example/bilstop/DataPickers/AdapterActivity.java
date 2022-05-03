@@ -1,5 +1,6 @@
 package com.example.bilstop.DataPickers;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,7 +24,8 @@ import java.util.ArrayList;
 public class AdapterActivity extends AppCompatActivity {
     private Location locationData;
 
-    private final ArrayList<Ride> rideData=new ArrayList<>();
+    private final ArrayList<Ride> rideDataFrom=new ArrayList<>();
+    private final ArrayList<Ride> rideDataTo=new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,7 @@ public class AdapterActivity extends AppCompatActivity {
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference().child("ridesFromBilkent");
+        DatabaseReference myRef2 = database.getReference().child("ridesToBilkent");
 
         myRef.addValueEventListener(new ValueEventListener() {
 
@@ -45,11 +48,15 @@ public class AdapterActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                     Ride dataRide =postSnapshot.getValue(Ride.class);
+                    String key= postSnapshot.getKey();
+                    dataRide.setRideId(key);
                     Log.d("ride",dataRide.toString());
-                    rideData.add(dataRide);
+                    rideDataFrom.add(dataRide);
+
+                    Log.d("kisikey", dataRide.getRideId());
                 }
-                Log.d("rideData", rideData.toString());
-                RideDataPicker.setRidesFromBilkent(rideData);
+                Log.d("rideDataFrom", rideDataFrom.toString());
+                RideDataPicker.setRidesFromBilkent(rideDataFrom);
 
                 Intent intent = new Intent(AdapterActivity.this, RidesActivity.class);
                 intent.putExtra("object", locationData);
@@ -64,6 +71,36 @@ public class AdapterActivity extends AppCompatActivity {
                 // Getting Post failed, log a message
                 Log.w("Database Error", "loadPost:onCancelled", databaseError.toException());
                 // ...
+            }
+        });
+
+
+        myRef2.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+                    Ride dataRide =postSnapshot.getValue(Ride.class);
+                    String key= postSnapshot.getKey();
+                    dataRide.setRideId(key);
+                    Log.d("ride",dataRide.toString());
+                    rideDataTo.add(dataRide);
+
+                    Log.d("kisikey", dataRide.getRideId());
+                }
+                Log.d("rideDataTo", rideDataTo.toString());
+                RideDataPicker.setRidestoBilkent(rideDataTo);
+
+                Intent intent = new Intent(AdapterActivity.this, RidesActivity.class);
+                intent.putExtra("object", locationData);
+                intent.putExtra("buttonType", getIntent().getSerializableExtra("buttonType"));
+                intent.putExtra("allList", getIntent().getSerializableExtra("allList"));
+                startActivity(intent);
+                finish();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
     }

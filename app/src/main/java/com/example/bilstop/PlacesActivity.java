@@ -28,21 +28,42 @@ public class PlacesActivity extends AppCompatActivity implements Serializable {
     private PlacesClient placesClient;
     private Button goToMapButton;
     private Location location=null;
+    private Button allRidesButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_places);
 
+        allRidesButton = findViewById(R.id.allRidesButton);
+        allRidesButton.setVisibility(View.INVISIBLE);
 
+        if(getIntent().getSerializableExtra("intentPage").equals("home")){
+            allRidesButton.setVisibility(View.VISIBLE);
+        }
 
         String buttonType = (String) getIntent().getSerializableExtra("buttonType");
+
+        allRidesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(PlacesActivity.this, AdapterActivity.class);
+                intent.putExtra("allList","true");
+                intent.putExtra("buttonType",buttonType);
+                startActivity(intent);
+            }
+        });
+
+
+
+
         if(buttonType.equals("to")){
+
+            allRidesButton.setText("Show All Rides To Bilkent");
             String toQuestion = "What is your starting location?";
             TextView question = (TextView) findViewById(R.id.question);
             question.setText(toQuestion);
         }
-
 
         if(!Places.isInitialized()){
             // Initialize the SDK
@@ -78,6 +99,8 @@ public class PlacesActivity extends AppCompatActivity implements Serializable {
                     intent = new Intent(PlacesActivity.this, MapsActivity.class);
                 }
                 intent.putExtras(getIntent().getExtras());
+                intent.putExtra("allList","false");
+                intent.putExtra("buttonType",buttonType);
                 intent.putExtra("object", location);
                 startActivity(intent);
             }
@@ -88,5 +111,7 @@ public class PlacesActivity extends AppCompatActivity implements Serializable {
                 Log.i("demo", "An error occurred: " + status);
             }
         });
+
+
     }
 }
