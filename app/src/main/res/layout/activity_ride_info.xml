@@ -13,10 +13,9 @@
         android:id="@+id/divider5"
         android:layout_width="409dp"
         android:layout_height="3sp"
-        android:layout_marginTop="127dp"
+        android:layout_marginTop="112dp"
         android:background="@color/grew"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider3" />
 
@@ -134,17 +133,6 @@
         app:layout_constraintVertical_bias="0.55"
         tools:srcCompat="@drawable/ic_baseline_directions_car_24" />
 
-    <com.google.android.gms.maps.MapView
-        android:id="@+id/mapView"
-        android:layout_width="364dp"
-        android:layout_height="350dp"
-        android:layout_marginTop="10dp"
-        android:apiKey="@string/api_key"
-        app:layout_constraintBottom_toTopOf="@+id/requestButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider4" />
-
     <Button
         android:id="@+id/requestButton"
         android:layout_width="316dp"
@@ -158,6 +146,24 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mapView" />
+        app:layout_constraintTop_toBottomOf="@+id/cardView5" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:cardCornerRadius="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider4">
+
+        <com.google.android.gms.maps.MapView
+            android:id="@+id/mapView"
+            android:layout_width="364dp"
+            android:layout_height="350dp"
+            android:apiKey="@string/api_key" />
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

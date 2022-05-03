@@ -41,14 +41,6 @@ public class RidesFragment extends Fragment{
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_rides, container, false);
 
-        rides.add(new Ride());
-
-        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        adapter = new RidesRVAdapter(view.getContext(), rides);
-        recyclerView.setAdapter(adapter);
-
 
         return view;
     }

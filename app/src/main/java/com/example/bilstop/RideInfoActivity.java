@@ -162,12 +162,8 @@ public class RideInfoActivity extends AppCompatActivity implements OnMapReadyCal
             return;
         }
 
-        map.getUiSettings().setZoomControlsEnabled(true);
-        map.setMyLocationEnabled(true);
-
-        /*com.google.android.gms.maps.model.LatLng origin = new com.google.android.gms.maps.model.LatLng
-                (Double.valueOf(ride.getOrigin().getLocationLatitude()),Double.valueOf(ride.getOrigin().getLocationLongitude()));*/
-
+        googleMap.getUiSettings().setZoomControlsEnabled(true);
+        googleMap.setMyLocationEnabled(true);
 
 
     }

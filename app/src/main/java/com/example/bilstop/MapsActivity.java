@@ -190,7 +190,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
         GoogleMapOptions options = new GoogleMapOptions();
 
         options.mapType(GoogleMap.MAP_TYPE_HYBRID)
-                .compassEnabled(false)
+                .compassEnabled(true)
                 .rotateGesturesEnabled(false)
                 .tiltGesturesEnabled(false)
                 .zoomControlsEnabled(true)
