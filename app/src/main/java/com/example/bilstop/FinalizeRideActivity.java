@@ -2,6 +2,8 @@ package com.example.bilstop;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
@@ -39,6 +41,8 @@ public class FinalizeRideActivity extends AppCompatActivity {
 
     private TextView mDisplayDate;
     private TextView mDisplayTime;
+    private TextView mDisplayDate2;
+    private TextView mDisplayTime2;
     private TextView passengerNoText;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     private TimePickerDialog.OnTimeSetListener mTimeSetListener;
@@ -63,11 +67,12 @@ public class FinalizeRideActivity extends AppCompatActivity {
         CardView timeCardView = (CardView) findViewById(R.id.time_card);
         mDisplayDate = (TextView) findViewById(R.id.date_textview);
         mDisplayTime = (TextView) findViewById(R.id.time_textview);
+        mDisplayDate2 = (TextView) findViewById(R.id.date_textview2);
+        mDisplayTime2 = (TextView) findViewById(R.id.time_textview2);
         passengerNoText = (TextView) findViewById(R.id.textView3);
         createRide = (Button) findViewById(R.id.createButton);
         fabDecrease = (FloatingActionButton) findViewById(R.id.fabDec);
         fabIncrease = (FloatingActionButton) findViewById(R.id.fabInc);
-
 
         dateCardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,10 +87,10 @@ public class FinalizeRideActivity extends AppCompatActivity {
                     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                         month = month + 1;
                         String date = day + "/" + month + "/" + year;
-                        mDisplayDate.setText(date);
+                        mDisplayDate.setVisibility(View.INVISIBLE);
+                        mDisplayDate2.setText(date);
                         dateSelected = true;
                         if(timeSelected) createRide.setVisibility(View.VISIBLE);
-                        mDisplayDate.setVisibility(View.VISIBLE);
 
                         rideDate.set(Calendar.DAY_OF_MONTH, day);
                         rideDate.set(Calendar.MONTH, month);
@@ -116,8 +121,9 @@ public class FinalizeRideActivity extends AppCompatActivity {
                 mTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int hour, int minute) {
-                        String timeString = hour + ":" + minute;
-                        mDisplayTime.setText(timeString);
+                        String timeString = hour + ":" + (minute < 10 ? "0" : "") + minute;
+                        mDisplayTime.setVisibility(View.INVISIBLE);
+                        mDisplayTime2.setText(timeString);
                         timeSelected = true;
                         if(dateSelected) createRide.setVisibility(View.VISIBLE);
 
