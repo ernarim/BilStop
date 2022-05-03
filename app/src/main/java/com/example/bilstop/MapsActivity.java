@@ -182,10 +182,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
                 googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(startLocation,15));
             }
         }
-        else{
-            LatLng ankara = new LatLng(39.91331640578498, 32.85483867821641);
-            //!!!!!!!!!!!!! add zoom 15
-        }
 
         GoogleMapOptions options = new GoogleMapOptions();
 
@@ -353,6 +349,15 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
 
         // Placing a marker on the touched position
         googleMap.addMarker(marker1);
+
+        if(buttonType.equals("from")){
+            finalLocationData = new Location("Name ?????????????", "?", String.valueOf(latLng.latitude), String.valueOf(latLng.longitude));
+            finalLocation = latLng;
+        }
+        else{
+            startLocationData = new Location("Name ?????????????", "?", String.valueOf(latLng.latitude), String.valueOf(latLng.longitude));
+            startLocation = latLng;
+        }
     }
 
 
