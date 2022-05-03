@@ -13,12 +13,13 @@ public class Ride implements Serializable {
     private int numberOfPassenger;
     private String rideId;
     private String driverName;
+    private int polylineIndex;
 
     public Ride(){
 
     }
 
-    public Ride(String rideId, String driverName , Location origin, Location destination, String rideDate, String rideHour ,int numberOfPassenger){
+    public Ride(String rideId, String driverName , Location origin, Location destination, String rideDate, String rideHour ,int numberOfPassenger, int polylineIndex){
         this.rideId=rideId;
         this.driverName=driverName;
         this.origin=origin;
@@ -26,6 +27,7 @@ public class Ride implements Serializable {
         this.rideDate=rideDate;
         this.rideHour=rideHour;
         this.numberOfPassenger=numberOfPassenger;
+        this.polylineIndex= polylineIndex;
     }
 
     public void setRideId(String rideId) {
@@ -56,6 +58,10 @@ public class Ride implements Serializable {
         this.numberOfPassenger = numberOfPassenger;
     }
 
+    public void setPolylineIndex(int polylineIndex) {
+        this.polylineIndex = polylineIndex;
+    }
+
     public String getRideId() {
         return rideId;
     }
@@ -84,15 +90,21 @@ public class Ride implements Serializable {
         return numberOfPassenger;
     }
 
+    public int getPolylineIndex() {
+        return polylineIndex;
+    }
+
     @Override
     public String toString() {
         return "Ride{" +
                 "origin=" + origin +
                 ", destination=" + destination +
                 ", rideDate='" + rideDate + '\'' +
+                ", rideHour='" + rideHour + '\'' +
                 ", numberOfPassenger=" + numberOfPassenger +
                 ", rideId='" + rideId + '\'' +
                 ", driverName='" + driverName + '\'' +
+                ", polylineIndex=" + polylineIndex +
                 '}';
     }
 }

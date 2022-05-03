@@ -32,6 +32,7 @@ public class RidesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_rides);
 
         locationData = (Location) getIntent().getSerializableExtra("object");
+
         Log.d("from", String.valueOf(getIntent().getSerializableExtra("buttonType")));
 
         textViewRides = findViewById(R.id.textViewRides);

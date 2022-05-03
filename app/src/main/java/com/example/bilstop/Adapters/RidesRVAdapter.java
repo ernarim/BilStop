@@ -67,6 +67,7 @@ public class RidesRVAdapter extends RecyclerView.Adapter<RidesRVAdapter.ObjectsH
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(mContex.getApplicationContext(), RideInfoActivity.class);
+                intent.putExtra("ride", ride);
                 mContex.startActivity(intent);
             }
         });

@@ -63,7 +63,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
     private FloatingActionButton fab2;
     private TextView titleTextView;
     private TextView durationTextView;
+
     private PolylineData selectedPolyline;
+    private int selectedPolylineIndex;
+
     private Ride ride = new Ride();
     private String buttonType;
     private MarkerOptions marker1;
@@ -134,8 +137,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MapsActivity.this, FinalizeRideActivity.class);
+                int polylinePointsLength = selectedPolyline.getPolyline().getPoints().size();
                 Location origin = new Location(String.valueOf(selectedPolyline.getPolyline().getPoints().get(0).latitude),String.valueOf(selectedPolyline.getPolyline().getPoints().get(0).longitude));
-                Location destination = new Location(String.valueOf(selectedPolyline.getPolyline().getPoints().get(1).latitude),String.valueOf(selectedPolyline.getPolyline().getPoints().get(1).longitude));
+                Location destination = new Location(String.valueOf(selectedPolyline.getPolyline().getPoints().get(polylinePointsLength-1).latitude),String.valueOf(selectedPolyline.getPolyline().getPoints().get(polylinePointsLength-1).longitude));
                 ride.setOrigin(origin); ride.setDestination(destination);
                 Log.d("polyline" , String.valueOf(selectedPolyline.getPolyline().getPoints().get(0).latitude) );
                 intent.putExtras(getIntent().getExtras());
@@ -275,6 +279,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
                     polyline.setWidth(18);
                     mPolyLinesData.add(new PolylineData(polyline,route.legs[0]));
 
+
                     // highlight the fastest route and adjust camera
                     double tempDuration = route.legs[0].duration.inSeconds;
                     if(tempDuration < duration){
@@ -308,7 +313,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
 
     @Override
     public void onPolylineClick(Polyline polyline) {
-
         int index = 0;
         for(PolylineData polylineData: mPolyLinesData){
             index++;
@@ -319,6 +323,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
 
                 durationTextView.setText("Duration: " + polylineData.getLeg().duration);
                 selectedPolyline = polylineData;
+                selectedPolylineIndex=index;
+                ride.setPolylineIndex(selectedPolylineIndex);
+                Log.d("polylineindex", String.valueOf(ride.getPolylineIndex()));
 
                 Log.d("Polyline", selectedPolyline.toString());
 

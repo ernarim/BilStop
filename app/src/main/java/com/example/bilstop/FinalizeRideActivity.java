@@ -94,7 +94,7 @@ public class FinalizeRideActivity extends AppCompatActivity {
 
                         rideDate.set(Calendar.DAY_OF_MONTH, day);
                         rideDate.set(Calendar.MONTH, month);
-                        rideDate.set(Calendar.YEAR, year + 1990);
+                        rideDate.set(Calendar.YEAR, year);
                     }
                 };
 

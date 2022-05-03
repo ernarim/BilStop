@@ -26,6 +26,7 @@ import java.util.Arrays;
 public class PlacesActivity extends AppCompatActivity implements Serializable {
 
     private PlacesClient placesClient;
+    private Button goToMapButton;
     private Location location=null;
 
     @Override
@@ -34,12 +35,14 @@ public class PlacesActivity extends AppCompatActivity implements Serializable {
         setContentView(R.layout.activity_places);
 
 
+
         String buttonType = (String) getIntent().getSerializableExtra("buttonType");
         if(buttonType.equals("to")){
             String toQuestion = "What is your starting location?";
             TextView question = (TextView) findViewById(R.id.question);
             question.setText(toQuestion);
         }
+
 
         if(!Places.isInitialized()){
             // Initialize the SDK
@@ -78,7 +81,6 @@ public class PlacesActivity extends AppCompatActivity implements Serializable {
                 intent.putExtra("object", location);
                 startActivity(intent);
             }
-
 
             @Override
             public void onError(@NonNull Status status) {

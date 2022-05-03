@@ -32,7 +32,7 @@ public class AdapterActivity extends AppCompatActivity {
 
         if(getIntent().getSerializableExtra("object")!=null){
             locationData = (Location) getIntent().getSerializableExtra("object");
-            Log.d("location", locationData.getLocationName() + " " +  locationData.getLocationLatitude() + " " + locationData.getLocationLongitude());
+            Log.d("demo", locationData.toString());
         }
 
 
