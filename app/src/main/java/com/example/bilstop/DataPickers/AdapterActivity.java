@@ -99,7 +99,10 @@ public class AdapterActivity extends AppCompatActivity {
                     }
 
                     Log.d("ride",dataRide.toString());
-                    rideDataTo.add(dataRide);
+
+                    if(dataRide.getDistanceFromLocation()<0.007013218885794777){
+                        rideDataTo.add(dataRide);
+                    }
 
                     Log.d("kisikey", dataRide.getRideId());
                 }

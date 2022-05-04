@@ -63,6 +63,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
     private FloatingActionButton fab2;
     private TextView titleTextView;
     private TextView durationTextView;
+    private TextView distanceTextView;
 
     private PolylineData selectedPolyline;
     private int selectedPolylineIndex;
@@ -87,14 +88,14 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
                 finalLocationData = (Location) getIntent().getSerializableExtra("object");
                 finalLocation = new LatLng(Double.valueOf(finalLocationData.getLocationLatitude()),
                         Double.valueOf(finalLocationData.getLocationLongitude()));
-                marker1 = new MarkerOptions().position(finalLocation).title("from: " + finalLocationData.getLocationName());
+                marker1 = new MarkerOptions().position(finalLocation).title("from: " + finalLocationData.getLocationName()).icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_image2));
                 Log.d("location", finalLocationData.getLocationName() + " " +  finalLocationData.getLocationLatitude() + " " + finalLocationData.getLocationLongitude());
             }
             else{
                 startLocationData = (Location) getIntent().getSerializableExtra("object");
                 startLocation = new LatLng(Double.valueOf(startLocationData.getLocationLatitude()),
                         Double.valueOf(startLocationData.getLocationLongitude()));
-                marker1 = new MarkerOptions().position(startLocation).title("to: " + startLocationData.getLocationName());
+                marker1 = new MarkerOptions().position(startLocation).title("to: " + startLocationData.getLocationName()).icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_image2));
                 Log.d("location", startLocationData.getLocationName() + " " +  startLocationData.getLocationLatitude() + " " + startLocationData.getLocationLongitude());
 
             }
@@ -115,6 +116,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
 
         titleTextView = (TextView) findViewById(R.id.titleTextView);
         durationTextView = (TextView) findViewById(R.id.durationTextView);
+        distanceTextView = (TextView) findViewById(R.id.distanceTextView);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,10 +124,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
 
                 titleTextView.setText("Choose the appropriate route");
                 durationTextView.setTextColor(Color.WHITE);
+                distanceTextView.setTextColor(Color.WHITE);
                 calculateDirections();
                 googleMap.setOnMapClickListener(null);
-                if(buttonType.equals("from")){ marker2 = new MarkerOptions().position(startLocation);}
-                else{ marker2 = new MarkerOptions().position(finalLocation);}
+                if(buttonType.equals("from")){ marker2 = new MarkerOptions().position(startLocation).icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_image));}
+                else{ marker2 = new MarkerOptions().position(finalLocation).icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_image));}
                 googleMap.addMarker(marker2);
                 fab.setVisibility(View.INVISIBLE);
                 fab2.setVisibility(View.VISIBLE);
@@ -322,6 +325,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
                 polylineData.getPolyline().setZIndex(1);
 
                 durationTextView.setText("Duration: " + polylineData.getLeg().duration);
+                distanceTextView.setText("Distance: " + polylineData.getLeg().distance);
                 selectedPolyline = polylineData;
                 selectedPolylineIndex=index;
                 ride.setPolylineIndex(selectedPolylineIndex);

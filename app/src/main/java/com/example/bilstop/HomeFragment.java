@@ -13,7 +13,6 @@ import com.example.bilstop.DataPickers.AdapterActivity;
 
 public class HomeFragment extends Fragment {
 
-    private Button adapterbutton;
     private Button fromButton;
     private Button toButton;
 
@@ -23,17 +22,8 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        adapterbutton = view.findViewById(R.id.adapterbutton);
         fromButton = view.findViewById(R.id.fromButton);
         toButton = view.findViewById(R.id.toButton);
-
-        adapterbutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), AdapterActivity.class);
-                startActivity(intent);
-            }
-        });
 
         fromButton.setOnClickListener(new View.OnClickListener() {
             @Override

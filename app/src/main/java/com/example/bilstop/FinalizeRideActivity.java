@@ -192,7 +192,6 @@ public class FinalizeRideActivity extends AppCompatActivity {
                 else
                     myRef = database.getReference("ridesToBilkent");
 
-
                 myRef.push().setValue(ride);
 
                 Intent intent = new Intent(FinalizeRideActivity.this, BottomNavActivity.class);
