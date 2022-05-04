@@ -12,6 +12,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 
@@ -50,8 +51,17 @@ public class AdapterActivity extends AppCompatActivity {
                     Ride dataRide =postSnapshot.getValue(Ride.class);
                     String key= postSnapshot.getKey();
                     dataRide.setRideId(key);
+
+                    if(locationData!=null){
+                        dataRide.setDistanceFromLocation(calculateDistance(locationData,dataRide.getDestination()));
+                        Log.d("distance", String.valueOf(dataRide.getDistanceFromLocation())) ;
+                    }
+
                     Log.d("ride",dataRide.toString());
-                    rideDataFrom.add(dataRide);
+
+                    if(dataRide.getDistanceFromLocation()<0.007013218885794777){
+                        rideDataFrom.add(dataRide);
+                    }
 
                     Log.d("kisikey", dataRide.getRideId());
                 }
@@ -74,7 +84,7 @@ public class AdapterActivity extends AppCompatActivity {
             }
         });
 
-
+        Query orderByDistance2 = myRef2.orderByChild("distanceFromLocation");
         myRef2.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -82,6 +92,12 @@ public class AdapterActivity extends AppCompatActivity {
                     Ride dataRide =postSnapshot.getValue(Ride.class);
                     String key= postSnapshot.getKey();
                     dataRide.setRideId(key);
+
+                    if(locationData!=null){
+                        dataRide.setDistanceFromLocation(calculateDistance(locationData,dataRide.getOrigin()));
+                        Log.d("distance", String.valueOf(dataRide.getDistanceFromLocation())) ;
+                    }
+
                     Log.d("ride",dataRide.toString());
                     rideDataTo.add(dataRide);
 
@@ -103,6 +119,17 @@ public class AdapterActivity extends AppCompatActivity {
 
             }
         });
+
+    }
+
+
+
+    private double calculateDistance(Location firstLocation, Location secondLocation){
+        double distance = 0;
+        distance =Math.sqrt(Math.pow( Double.valueOf(firstLocation.getLocationLatitude()) - Double.valueOf(secondLocation.getLocationLatitude()),2)
+                + Math.pow( Double.valueOf(firstLocation.getLocationLongitude()) - Double.valueOf(secondLocation.getLocationLongitude()),2));
+
+        return distance;
     }
 
 }

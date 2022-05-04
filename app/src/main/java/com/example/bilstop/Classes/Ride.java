@@ -5,7 +5,7 @@ import com.example.bilstop.Models.PolylineData;
 import java.io.Serializable;
 import java.util.Calendar;
 
-public class Ride implements Serializable {
+public class Ride implements Serializable, Comparable<Ride> {
     private Location origin;
     private Location destination;
     private String rideDate;
@@ -14,6 +14,7 @@ public class Ride implements Serializable {
     private String rideId;
     private String driverName;
     private int polylineIndex;
+    private double distanceFromLocation;
 
     public Ride(){
 
@@ -30,6 +31,19 @@ public class Ride implements Serializable {
         this.polylineIndex= polylineIndex;
     }
 
+    @Override
+    public int compareTo(Ride ride) {
+        if(this.distanceFromLocation > ride.distanceFromLocation){
+            return 1;
+        }
+        else if(this.distanceFromLocation < ride.distanceFromLocation){
+            return -1;
+        }
+        else{
+            return 0;
+        }
+
+    }
     public void setRideId(String rideId) {
         this.rideId = rideId;
     }
@@ -62,6 +76,10 @@ public class Ride implements Serializable {
         this.polylineIndex = polylineIndex;
     }
 
+    public void setDistanceFromLocation(double distanceFromLocation) {
+        this.distanceFromLocation = distanceFromLocation;
+    }
+
     public String getRideId() {
         return rideId;
     }
@@ -92,6 +110,10 @@ public class Ride implements Serializable {
 
     public int getPolylineIndex() {
         return polylineIndex;
+    }
+
+    public double getDistanceFromLocation() {
+        return distanceFromLocation;
     }
 
     @Override

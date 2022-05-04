@@ -23,7 +23,6 @@ public class Location implements Serializable {
         this.locationLongitude=locationLongitude;
     }
 
-
     public Location(String locationLatitude, String locationLongitude){
         this.locationLatitude=locationLatitude;
         this.locationLongitude=locationLongitude;
