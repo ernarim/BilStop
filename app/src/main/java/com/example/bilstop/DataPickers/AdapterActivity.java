@@ -58,10 +58,15 @@ public class AdapterActivity extends AppCompatActivity {
                     }
 
                     Log.d("ride",dataRide.toString());
-
-                    if(dataRide.getDistanceFromLocation()<0.007013218885794777){
+                    if(locationData!=null){
+                        if(dataRide.getDistanceFromLocation()<0.007013218885794777){
+                            rideDataFrom.add(dataRide);
+                        }
+                    }
+                    else{
                         rideDataFrom.add(dataRide);
                     }
+
 
                     Log.d("kisikey", dataRide.getRideId());
                 }
@@ -100,7 +105,12 @@ public class AdapterActivity extends AppCompatActivity {
 
                     Log.d("ride",dataRide.toString());
 
-                    if(dataRide.getDistanceFromLocation()<0.007013218885794777){
+                    if(locationData!=null){
+                        if(dataRide.getDistanceFromLocation()<0.007013218885794777){
+                            rideDataTo.add(dataRide);
+                        }
+                    }
+                    else{
                         rideDataTo.add(dataRide);
                     }
 

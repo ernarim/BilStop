@@ -40,8 +40,6 @@ public class RidesActivity extends AppCompatActivity {
         Log.d("from", String.valueOf(getIntent().getSerializableExtra("buttonType")));
 
         textViewRides = findViewById(R.id.textViewRides);
-        Log.d("datapicker", RideDataPicker.getRidesFromBilkent().toString());
-        Log.d("datapicker", RideDataPicker.getRidestoBilkent().toString());
 
         ridesFromBilkent = new ArrayList<Ride>(RideDataPicker.getRidesFromBilkent());
         ridestoBilkent = new ArrayList<Ride>(RideDataPicker.getRidestoBilkent());

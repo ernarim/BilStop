@@ -9,6 +9,7 @@ public class Users {
     private String user_email;
     private String user_password;
     private String user_key;
+    private Ride my_rides;
 
     private String user_about;
 //    private List<Users> user_friends;
@@ -58,6 +59,10 @@ public class Users {
         this.user_email = user_email;
     }
 
+    public void setMy_rides(Ride my_rides) {
+        this.my_rides = my_rides;
+    }
+
     public String getUser_password() {
         return user_password;
     }
@@ -74,7 +79,11 @@ public class Users {
         this.user_about = user_about;
     }
 
-/*
+    public Ride getMy_rides() {
+        return my_rides;
+    }
+
+    /*
     public List<Users> getUser_friends() {
         return user_friends;
     }

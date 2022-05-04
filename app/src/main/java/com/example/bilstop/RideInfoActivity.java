@@ -1,24 +1,15 @@
 package com.example.bilstop;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
-import android.Manifest;
 import android.annotation.SuppressLint;
-import android.content.Context;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.example.bilstop.Classes.Location;
 import com.example.bilstop.Classes.Ride;
@@ -27,12 +18,12 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
-
 import com.google.maps.DirectionsApiRequest;
 import com.google.maps.GeoApiContext;
 import com.google.maps.PendingResult;
@@ -65,7 +56,6 @@ public class RideInfoActivity extends AppCompatActivity implements OnMapReadyCal
     private Ride ride;
     private Location startLocationData;
     private Location finalLocationData;
-
     private com.google.android.gms.maps.model.LatLng startLocation;
     private com.google.android.gms.maps.model.LatLng finalLocation;
 
@@ -117,8 +107,11 @@ public class RideInfoActivity extends AppCompatActivity implements OnMapReadyCal
         startLocationData = ride.getOrigin();
         finalLocationData = ride.getDestination();
 
-        startLocation = new com.google.android.gms.maps.model.LatLng(Double.valueOf(startLocationData.getLocationLatitude()),Double.valueOf(startLocationData.getLocationLongitude()));
-        originMarker = new MarkerOptions().position(startLocation).title("Bilkent");
+        startLocation = new com.google.android.gms.maps.model.LatLng(Double.valueOf(startLocationData.getLocationLatitude())
+                ,Double.valueOf(startLocationData.getLocationLongitude()));
+
+        finalLocation = new com.google.android.gms.maps.model.LatLng(Double.valueOf(finalLocationData.getLocationLatitude())
+                ,Double.valueOf(finalLocationData.getLocationLongitude()));
 
         calculateDirections();
     }
@@ -149,21 +142,21 @@ public class RideInfoActivity extends AppCompatActivity implements OnMapReadyCal
         mMapView.onStop();
     }
 
-
-    @SuppressLint("MissingPermission")
     public void onMapReady(GoogleMap map) {
 
         googleMap=map;
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(startLocation,10));
 
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-            return;
-        }
+        originMarker = new MarkerOptions().position(startLocation)
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_image));
+
+        destinationMarker = new MarkerOptions().position(finalLocation)
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_image2));
+        googleMap.addMarker(originMarker);
+        googleMap.addMarker(destinationMarker);
+
 
         googleMap.getUiSettings().setZoomControlsEnabled(true);
-        googleMap.setMyLocationEnabled(true);
 
 
     }
@@ -198,6 +191,7 @@ public class RideInfoActivity extends AppCompatActivity implements OnMapReadyCal
                 Double.valueOf(finalLocationData.getLocationLatitude()),
                 Double.valueOf(finalLocationData.getLocationLongitude())
         );
+
 
         DirectionsApiRequest directions = new DirectionsApiRequest(mGeoApiContext);
         directions.alternatives(true);
@@ -291,7 +285,8 @@ public class RideInfoActivity extends AppCompatActivity implements OnMapReadyCal
         );
     }
 
-    /*public void onPolylineClick(Polyline polyline) {
+    public void onPolylineClick(Polyline polyline) {
+
 
         int index = 0;
         for(PolylineData polylineData: mPolyLinesData){
@@ -317,7 +312,9 @@ public class RideInfoActivity extends AppCompatActivity implements OnMapReadyCal
                 polylineData.getPolyline().setZIndex(0);
             }
         }
-    }*/
+    }
+
+
 
 
 }
