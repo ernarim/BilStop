@@ -28,15 +28,16 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.HashMap;
+
 public class RegisterFragment extends Fragment {
+    private Button register;
     private Context context;
-    private TextView login;
+    private EditText email, pass, name, surname;
     private FirebaseAuth auth;
+    private TextView login;
     private NavController navController;
     private NavOptions navOptions;
-    private EditText email, pass, name, surname;
-    private Button register;
-    public  int check = -1;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -57,6 +58,7 @@ public class RegisterFragment extends Fragment {
         this.context = context;
     }
 
+    //Initializes all private variables
     private void init(View view) {
         this.email = view.findViewById(R.id.edtAuthRegisterEmail);
         this.pass = view.findViewById(R.id.edtAuthRegisterPassword);
@@ -69,7 +71,7 @@ public class RegisterFragment extends Fragment {
         this.navOptions = new NavOptions.Builder().setPopUpTo(R.id.loginFragment, true).build();
     }
 
-    private void action(){
+    private void action() {
         this.login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -80,22 +82,13 @@ public class RegisterFragment extends Fragment {
         this.register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String username = RegisterFragment.this.email.getText().toString();
+                String email = RegisterFragment.this.email.getText().toString();
                 String password = RegisterFragment.this.pass.getText().toString();
-                if(register(username,password)){
-
-                    //Register new user also database
-                    FirebaseDatabase database = FirebaseDatabase.getInstance();
-                    DatabaseReference myRef = database.getReference("users");
-
-                    Users user = new Users(name.getText().toString(),surname.getText().toString(),
-                            email.getText().toString(),pass.getText().toString(), "About me","123");
-                    myRef.push().setValue(user);
-
-                    //Login
+                String name = RegisterFragment.this.name.getText().toString();
+                String surname = RegisterFragment.this.surname.getText().toString();
+                if (register(email, password, name, surname)) {
                     toLogin();
-                }
-                else{
+                } else {
                     RegisterFragment.this.email.setText("");
                     RegisterFragment.this.pass.setText("");
                 }
@@ -103,24 +96,44 @@ public class RegisterFragment extends Fragment {
         });
     }
 
-    private boolean register(String username, String password) {
-        if (!username.equals("") && !password.equals("")) {
+    private void registerToDatabase(String name, String surname, String email) {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference reference = database.getReference().child("users").child(auth.getUid());
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("name", name);
+        map.put("surname", surname);
+        map.put("email", email);
+        map.put("profilePicture", "null");
+        map.put("about", "null");
+        map.put("friends", "null");
+        map.put("cars", "null");
+        map.put("createdRides", "null");
+        map.put("rides", "null");
+        map.put("activeRide", "null");
+        map.put("chats", "null");
+        map.put("notifications", "null");
+        map.put("driverRating", "null");
+        reference.setValue(map);
+    }
+
+    private boolean register(String email, String password, String name, String surname) {
+        if (!email.equals("") && !password.equals("")) {
             if (password.length() > 6 && password.length() < 17) {
-                auth.createUserWithEmailAndPassword(username, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Toast.makeText(context, "Succesfully registered. Please verify your account.", Toast.LENGTH_SHORT).show();
                             FirebaseUser user = auth.getCurrentUser();
                             user.sendEmailVerification();
+                            registerToDatabase(name, surname, email);
                         } else {
                             Toast.makeText(context, "Something went wrong. Please try again.", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
 
-            }
-            else {
+            } else {
                 Toast.makeText(context, "Password is either too short or too long!", Toast.LENGTH_SHORT).show();
                 return false;
             }
@@ -131,7 +144,7 @@ public class RegisterFragment extends Fragment {
         return true;
     }
 
-    private void toLogin(){
+    private void toLogin() {
         navController.navigate(R.id.action_registerFragment_to_loginFragment, null, navOptions);
     }
 }

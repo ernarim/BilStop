@@ -3,104 +3,57 @@ package com.example.bilstop.Classes;
 import java.util.List;
 
 public class Users {
-
-    private String user_name;
-    private String user_surname;
-    private String user_email;
-    private String user_password;
-    private String user_key;
-    private Ride my_rides;
-
-    private String user_about;
-//    private List<Users> user_friends;
-//    private List<Cars> user_cars;
+    private String about, email, name, profilePicture, surname;
 
     public Users(){
 
     }
-    public Users(String user_name, String user_surname, String user_email, String user_password, String user_about, String user_key){
-        this.user_name = user_name;
-        this.user_surname = user_surname;
-        this.user_email = user_email;
-        this.user_password  = user_password;
-        this.user_about = user_about;
-        this.user_key = user_key;
+
+    public Users(String about, String email, String name, String profilePicture, String surname) {
+        this.about = about;
+        this.email = email;
+        this.name = name;
+        this.profilePicture = profilePicture;
+        this.surname = surname;
     }
 
-    public void setUser_key(String user_key) {
-        this.user_key =     user_key;
+    public String getAbout() {
+        return about;
     }
 
-    public String getUser_key() {
-        return user_key;
+    public void setAbout(String about) {
+        this.about = about;
     }
 
-    public String getUser_name() {
-        return user_name;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUser_name(String user_name) {
-        this.user_name = user_name;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getUser_surname() {
-        return user_surname;
+    public String getName() {
+        return name;
     }
 
-    public void setUser_surname(String user_surname) {
-        this.user_surname = user_surname;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getUser_email() {
-        return user_email;
+    public String getProfilePicture() {
+        return profilePicture;
     }
 
-    public void setUser_email(String user_email) {
-        this.user_email = user_email;
+    public void setProfilePicture(String profilePicture) {
+        this.profilePicture = profilePicture;
     }
 
-    public void setMy_rides(Ride my_rides) {
-        this.my_rides = my_rides;
+    public String getSurname() {
+        return surname;
     }
 
-    public String getUser_password() {
-        return user_password;
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
-
-    public void setUser_password(String user_password) {
-        this.user_password = user_password;
-    }
-
-    public String getUser_about() {
-        return user_about;
-    }
-
-    public void setUser_about(String user_about) {
-        this.user_about = user_about;
-    }
-
-    public Ride getMy_rides() {
-        return my_rides;
-    }
-
-    /*
-    public List<Users> getUser_friends() {
-        return user_friends;
-    }
-*/
-
-/*    public void setUser_friends(List<Users> user_friends) {
-        this.user_friends = user_friends;
-    }*/
-//
-//    public Cars[] getUser_cars() {
-//        return user_cars;
-//    }
-//
-//    public void setUser_cars(Cars[] user_cars) {
-//        this.user_cars = user_cars;
-//    }
-
-
-
 }

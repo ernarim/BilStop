@@ -33,7 +33,6 @@ public class LoginFragment extends Fragment {
     private Button login;
     private EditText email, pass;
     private FirebaseAuth auth;
-    static int check = -1;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -77,21 +76,19 @@ public class LoginFragment extends Fragment {
             public void onClick(View view) {
                 String username = LoginFragment.this.email.getText().toString();
                 String password = LoginFragment.this.pass.getText().toString();
-                if(login(username,password)){
+                login(username,password);
+            }
+        });
 
-                    Intent intent = new Intent(context , MainActivity.class);
-                    startActivity(intent);
-                    getActivity().finish();
-                }
-                else{
-                    LoginFragment.this.email.setText("");
-                    LoginFragment.this.pass.setText("");
-                }
+        this.reset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                toReset();
             }
         });
     }
 
-    private boolean login(String username , String password){
+    private void login(String username , String password){
         if( !username.equals("") && !password.equals("") ){
             this.auth.signInWithEmailAndPassword(username,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
@@ -100,22 +97,26 @@ public class LoginFragment extends Fragment {
                         Intent intent = new Intent(context , MainActivity.class);
                         startActivity(intent);
                         getActivity().finish();
-                        check = 0;
                     }
                     else{
                         Toast.makeText(context, "Invalid username or password!", Toast.LENGTH_SHORT).show();
+                        LoginFragment.this.email.setText("");
+                        LoginFragment.this.pass.setText("");
                     }
                 }
             });
-            return (check != -1);
         }
         else{
             Toast.makeText(context, "Invalid username or password!", Toast.LENGTH_SHORT).show();
-            return false;
         }
     }
 
     private void toRegister() {
         navController.navigate(R.id.action_loginFragment_to_registerFragment);
+    }
+
+    private void toReset(){
+        Intent intent = new Intent(context, ResetPasswordActivity.class);
+        startActivity(intent);
     }
 }

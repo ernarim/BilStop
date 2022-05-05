@@ -7,7 +7,7 @@
     android:background="@color/black"
     tools:context=".Auth.RegisterFragment">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imageView2"
         android:layout_width="128dp"
         android:layout_height="128dp"
