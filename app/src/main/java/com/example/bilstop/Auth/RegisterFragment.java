@@ -103,6 +103,7 @@ public class RegisterFragment extends Fragment {
         map.put("name", name);
         map.put("surname", surname);
         map.put("email", email);
+        map.put("id",auth.getUid());
         map.put("profilePicture", "null");
         map.put("about", "null");
         map.put("friends", "null");

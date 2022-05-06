@@ -15,6 +15,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BilStop">
         <activity
+            android:name=".ChatActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TargetProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".Auth.ResetPasswordActivity"
             android:exported="false" />
         <activity
@@ -36,9 +42,6 @@
 
         <activity
             android:name=".PlacesActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Auth.PersonalInfoActivity"
             android:exported="false" />
         <activity
             android:name=".BottomNavActivity"

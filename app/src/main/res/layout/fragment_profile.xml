@@ -7,11 +7,10 @@
     android:backgroundTint="@color/black"
     tools:context=".ProfileFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -45,14 +44,14 @@
                         android:layout_marginBottom="6dp"
                         android:text="TEST"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/editImageButton"
+                        app:layout_constraintEnd_toStartOf="@+id/imbCurrentEdit"
                         app:layout_constraintHorizontal_bias="0.718"
-                        app:layout_constraintStart_toEndOf="@+id/imageView"
-                        app:layout_constraintTop_toBottomOf="@+id/emailProfileText"
+                        app:layout_constraintStart_toEndOf="@+id/civCurrentPP"
+                        app:layout_constraintTop_toBottomOf="@+id/txtCurrentEmail"
                         app:layout_constraintVertical_bias="0.0" />
 
                     <TextView
-                        android:id="@+id/nameSurnameText"
+                        android:id="@+id/txtCurrentName"
                         android:layout_width="218dp"
                         android:layout_height="38dp"
                         android:layout_marginStart="8dp"
@@ -63,17 +62,17 @@
                         android:textSize="28sp"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/imageView"
+                        app:layout_constraintStart_toEndOf="@+id/civCurrentPP"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/imageView"
+                        android:id="@+id/civCurrentPP"
                         android:layout_width="114dp"
                         android:layout_height="110dp"
                         android:layout_marginStart="15dp"
                         android:baselineAlignBottom="false"
                         android:clickable="false"
-                        android:src="@drawable/ic_launcher_background"
+                        android:src="@drawable/default_profile_black"
                         app:civ_border_width="1sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -81,7 +80,7 @@
 
 
                     <TextView
-                        android:id="@+id/emailProfileText"
+                        android:id="@+id/txtCurrentEmail"
                         android:layout_width="218dp"
                         android:layout_height="19dp"
                         android:layout_marginTop="8dp"
@@ -89,7 +88,7 @@
                         android:text="email"
                         android:textAlignment="center"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/nameSurnameText" />
+                        app:layout_constraintTop_toBottomOf="@+id/txtCurrentName" />
 
                     <ImageButton
                         android:id="@+id/notificationsImageButton"
@@ -103,13 +102,13 @@
                         android:visibility="visible"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/emailProfileText"
+                        app:layout_constraintTop_toBottomOf="@+id/txtCurrentEmail"
                         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck"
                         tools:src="@drawable/ic_baseline_notifications_24"
                         tools:visibility="visible" />
 
                     <ImageButton
-                        android:id="@+id/editImageButton"
+                        android:id="@+id/imbCurrentEdit"
                         android:layout_width="35sp"
                         android:layout_height="35sp"
                         android:layout_marginTop="11dp"
@@ -119,7 +118,7 @@
                         android:src="@drawable/ic_baseline_edit_24"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/notificationsImageButton"
-                        app:layout_constraintTop_toBottomOf="@+id/emailProfileText"
+                        app:layout_constraintTop_toBottomOf="@+id/txtCurrentEmail"
                         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck"
                         tools:src="@drawable/ic_baseline_edit_24" />
 
@@ -154,7 +153,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/aboutMeText"
+                        android:id="@+id/txtCurrentAbout"
                         android:layout_width="350dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
@@ -172,7 +171,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardViewProfile3"
                 android:layout_width="match_parent"
-                android:layout_height="140sp"
+                android:layout_height="250dp"
                 android:layout_marginStart="20sp"
                 android:layout_marginTop="20sp"
                 android:layout_marginEnd="20sp"
@@ -197,7 +196,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <ImageButton
-                        android:id="@+id/notificationsImageButton2"
+                        android:id="@+id/imbCurrentFriendsAdd"
                         android:layout_width="35sp"
                         android:layout_height="35sp"
                         android:layout_marginTop="10dp"
@@ -213,6 +212,18 @@
                         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck"
                         tools:src="@drawable/ic_baseline_person_add_24"
                         tools:visibility="visible" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rcvFriends"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginTop="10dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/imbCurrentFriendsAdd" />
+
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.cardview.widget.CardView>
@@ -220,7 +231,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardViewProfile4"
                 android:layout_width="match_parent"
-                android:layout_height="140sp"
+                android:layout_height="200dp"
                 android:layout_marginStart="20sp"
                 android:layout_marginTop="20sp"
                 android:layout_marginEnd="20sp"
@@ -264,6 +275,12 @@
                         app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
+
+            <Button
+                android:id="@+id/test2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Test2" />
 
         </LinearLayout>
     </ScrollView>
