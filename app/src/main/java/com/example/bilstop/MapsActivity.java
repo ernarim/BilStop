@@ -97,7 +97,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
                         Double.valueOf(startLocationData.getLocationLongitude()));
                 marker1 = new MarkerOptions().position(startLocation).title("to: " + startLocationData.getLocationName()).icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_image2));
                 Log.d("location", startLocationData.getLocationName() + " " +  startLocationData.getLocationLatitude() + " " + startLocationData.getLocationLongitude());
-
             }
         }
 
