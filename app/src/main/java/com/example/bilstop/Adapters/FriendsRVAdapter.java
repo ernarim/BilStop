@@ -19,11 +19,12 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class FriendsRVAdapter extends RecyclerView.Adapter<FriendsRVAdapter.ViewHolder> {
     public ArrayList<Users> list;
+    public Context context;
 
-    public FriendsRVAdapter(){
-
+    public FriendsRVAdapter(ArrayList<Users> list, Context context) {
+        this.list = list;
+        this.context = context;
     }
-
 
     @NonNull
     @Override

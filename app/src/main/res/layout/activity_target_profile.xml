@@ -140,7 +140,7 @@
                     app:layout_constraintHorizontal_bias="0.155"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/cardView7"
-                    tools:src="@drawable/ic_baseline_person_add_24" />
+                    android:src="@drawable/ic_baseline_person_add_24" />
 
                 <ImageButton
                     android:id="@+id/btnTargetSendMessage"
@@ -153,7 +153,7 @@
                     app:layout_constraintHorizontal_bias="0.844"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/cardView7"
-                    tools:src="@drawable/ic_send_message" />
+                    android:src="@drawable/ic_send_message" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

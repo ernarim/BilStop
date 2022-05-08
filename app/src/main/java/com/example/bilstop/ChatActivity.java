@@ -96,6 +96,13 @@ public class ChatActivity extends AppCompatActivity {
                 }
             }
         });
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
     private void sendMessage(String text, String currentUid, String targetUid, String type ){
