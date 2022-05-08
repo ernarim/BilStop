@@ -11,6 +11,7 @@
         <entry key="..\:/Users/burak/AndroidStudioProjects/BilStop/app/src/main/res/drawable/ic_baseline_calendar_today_24.xml" value="0.1895" />
         <entry key="..\:/Users/burak/AndroidStudioProjects/BilStop/app/src/main/res/drawable/ic_baseline_person_add_24.xml" value="0.1895" />
         <entry key="..\:/Users/burak/AndroidStudioProjects/BilStop/app/src/main/res/layout/activity_chat.xml" value="0.264" />
+        <entry key="..\:/Users/burak/AndroidStudioProjects/BilStop/app/src/main/res/layout/activity_finalize_ride.xml" value="0.2552083333333333" />
         <entry key="..\:/Users/burak/AndroidStudioProjects/BilStop/app/src/main/res/layout/activity_personal_info.xml" value="0.14351851851851852" />
         <entry key="..\:/Users/burak/AndroidStudioProjects/BilStop/app/src/main/res/layout/activity_places.xml" value="0.2552083333333333" />
         <entry key="..\:/Users/burak/AndroidStudioProjects/BilStop/app/src/main/res/layout/activity_reset_password.xml" value="0.264" />
@@ -20,7 +21,7 @@
         <entry key="..\:/Users/burak/AndroidStudioProjects/BilStop/app/src/main/res/layout/chat_list_item.xml" value="0.2552083333333333" />
         <entry key="..\:/Users/burak/AndroidStudioProjects/BilStop/app/src/main/res/layout/fragment_login.xml" value="0.264" />
         <entry key="..\:/Users/burak/AndroidStudioProjects/BilStop/app/src/main/res/layout/fragment_messages.xml" value="0.2552083333333333" />
-        <entry key="..\:/Users/burak/AndroidStudioProjects/BilStop/app/src/main/res/layout/fragment_profile.xml" value="0.4298245614035088" />
+        <entry key="..\:/Users/burak/AndroidStudioProjects/BilStop/app/src/main/res/layout/fragment_profile.xml" value="0.264" />
         <entry key="..\:/Users/burak/AndroidStudioProjects/BilStop/app/src/main/res/layout/fragment_profile_edit.xml" value="0.264" />
         <entry key="..\:/Users/burak/AndroidStudioProjects/BilStop/app/src/main/res/layout/fragment_register.xml" value="0.264" />
         <entry key="..\:/Users/burak/AndroidStudioProjects/BilStop/app/src/main/res/layout/fragment_rides.xml" value="0.2552083333333333" />
@@ -60,13 +61,8 @@
         <entry key="..\:/Users/erena/AndroidStudioProjects/BilStop/app/src/main/res/layout/rides_cardview.xml" value="0.67" />
         <entry key="..\:/Users/erena/AndroidStudioProjects/BilStop/app/src/main/res/menu/bottom_bar.xml" value="0.2734375" />
         <entry key="..\:/Users/erena/AndroidStudioProjects/BilStop/app/src/main/res/menu/bottom_bar_menu.xml" value="0.1" />
-        <entry key="..\:/Users/mehme/AndroidStudioProjects/BilStop/app/src/main/res/layout/activity_bottom_nav.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/mehme/AndroidStudioProjects/BilStop/app/src/main/res/layout/activity_finalize_ride.xml" value="0.12360688956433637" />
-        <entry key="..\:/Users/mehme/AndroidStudioProjects/BilStop/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/mehme/AndroidStudioProjects/BilStop/app/src/main/res/layout/activity_maps.xml" value="0.2" />
-        <entry key="..\:/Users/mehme/AndroidStudioProjects/BilStop/app/src/main/res/layout/activity_places.xml" value="0.12360688956433637" />
         <entry key="..\:/Users/mehme/AndroidStudioProjects/BilStop/app/src/main/res/layout/fragment_create.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/mehme/AndroidStudioProjects/BilStop/app/src/main/res/layout/rides_cardview.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/mehme/AndroidStudioProjects/BilStop2/app/src/main/res/layout/activity_authentication.xml" value="0.11302083333333333" />
         <entry key="..\:/Users/mehme/AndroidStudioProjects/BilStop2/app/src/main/res/layout/activity_personal_info.xml" value="0.1" />
         <entry key="..\:/Users/mehme/AndroidStudioProjects/BilStop2/app/src/main/res/layout/fragment_create.xml" value="0.25416666666666665" />

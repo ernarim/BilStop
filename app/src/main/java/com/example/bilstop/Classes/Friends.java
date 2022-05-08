@@ -1,17 +1,17 @@
 package com.example.bilstop.Classes;
 
 public class Friends {
-    private String uid;
+    private String id;
 
     public Friends(){
 
     }
 
-    public Friends( String uid ){
-        this.uid = uid;
+    public Friends( String id ){
+        this.id = id;
     }
 
-    public String getUid() {
-        return uid;
+    public String getId() {
+        return id;
     }
 }
