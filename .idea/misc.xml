@@ -3,7 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/burak/AndroidStudioProjects/BilStop/app/src/main/res/drawable-anydpi/ic_look.xml" value="0.1915" />
         <entry key="..\:/Users/burak/AndroidStudioProjects/BilStop/app/src/main/res/drawable-anydpi/ic_send_message.xml" value="0.1895" />
+        <entry key="..\:/Users/burak/AndroidStudioProjects/BilStop/app/src/main/res/drawable-anydpi/ic_sign_out.xml" value="0.1915" />
         <entry key="..\:/Users/burak/AndroidStudioProjects/BilStop/app/src/main/res/drawable-v24/ic_baseline_chat_24.xml" value="0.1895" />
         <entry key="..\:/Users/burak/AndroidStudioProjects/BilStop/app/src/main/res/drawable-v24/roundcorner.xml" value="0.1895" />
         <entry key="..\:/Users/burak/AndroidStudioProjects/BilStop/app/src/main/res/drawable/custom_edit_text.xml" value="0.1885" />
