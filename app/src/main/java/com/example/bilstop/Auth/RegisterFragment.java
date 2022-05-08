@@ -28,6 +28,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class RegisterFragment extends Fragment {
@@ -99,22 +100,8 @@ public class RegisterFragment extends Fragment {
     private void registerToDatabase(String name, String surname, String email) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference reference = database.getReference().child("users").child(auth.getUid());
-        HashMap<String, Object> map = new HashMap<>();
-        map.put("name", name);
-        map.put("surname", surname);
-        map.put("email", email);
-        map.put("id",auth.getUid());
-        map.put("profilePicture", "null");
-        map.put("about", "null");
-        map.put("friends", "null");
-        map.put("cars", "null");
-        map.put("createdRides", "null");
-        map.put("rides", "null");
-        map.put("activeRide", "null");
-        map.put("chats", "null");
-        map.put("notifications", "null");
-        map.put("driverRating", "null");
-        reference.setValue(map);
+        Users user = new Users("null", 0, email, new ArrayList<>(), auth.getUid(), name, "null", surname);
+        reference.setValue(user);
     }
 
     private boolean register(String email, String password, String name, String surname) {
