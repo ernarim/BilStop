@@ -21,6 +21,8 @@ import android.widget.Toast;
 import com.example.bilstop.R;
 import com.example.bilstop.Classes.Users;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -28,9 +30,16 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Scanner;
 
 public class RegisterFragment extends Fragment {
     private Button register;
@@ -40,6 +49,7 @@ public class RegisterFragment extends Fragment {
     private TextView login;
     private NavController navController;
     private NavOptions navOptions;
+    private ArrayList<String> mails;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -62,6 +72,9 @@ public class RegisterFragment extends Fragment {
 
     //Initializes all private variables
     private void init(View view) {
+        mails = new ArrayList<>();
+        mails.add("@ug.bilkent.edu.tr");
+        mails.add("@bilkent.edu.tr");
         this.email = view.findViewById(R.id.edtAuthRegisterEmail);
         this.pass = view.findViewById(R.id.edtAuthRegisterPassword);
         this.name = view.findViewById(R.id.editTextPersonName);
@@ -107,7 +120,8 @@ public class RegisterFragment extends Fragment {
 
     private boolean register(String email, String password, String name, String surname) {
         if (!email.equals("") && !password.equals("")) {
-            if (password.length() > 6 && password.length() < 17) {
+            boolean isBilkent = mails.contains(email.substring(email.indexOf("@")));
+            if (password.length() > 6 && password.length() < 17 && isBilkent) {
                 auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -137,4 +151,5 @@ public class RegisterFragment extends Fragment {
     private void toLogin() {
         navController.navigate(R.id.action_registerFragment_to_loginFragment, null, navOptions);
     }
+
 }

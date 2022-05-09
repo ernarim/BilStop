@@ -16,11 +16,13 @@ public class Ride implements Serializable, Comparable<Ride> {
     private int polylineIndex;
     private double distanceFromLocation;
 
+    private String driverUid;
+
     public Ride(){
 
     }
 
-    public Ride(String rideId, String driverName , Location origin, Location destination, String rideDate, String rideHour ,int numberOfPassenger, int polylineIndex){
+    public Ride(String rideId, String driverName , Location origin, Location destination, String rideDate, String rideHour ,int numberOfPassenger, int polylineIndex, String driverUid){
         this.rideId=rideId;
         this.driverName=driverName;
         this.origin=origin;
@@ -29,6 +31,8 @@ public class Ride implements Serializable, Comparable<Ride> {
         this.rideHour=rideHour;
         this.numberOfPassenger=numberOfPassenger;
         this.polylineIndex= polylineIndex;
+
+        this.driverUid = driverUid;
     }
 
     @Override
@@ -114,6 +118,14 @@ public class Ride implements Serializable, Comparable<Ride> {
 
     public double getDistanceFromLocation() {
         return distanceFromLocation;
+    }
+
+    public String getDriverUid() {
+        return driverUid;
+    }
+
+    public void setDriverUid(String driverUid) {
+        this.driverUid = driverUid;
     }
 
     @Override
