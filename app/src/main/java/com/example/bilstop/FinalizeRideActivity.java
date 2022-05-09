@@ -192,7 +192,7 @@ public class FinalizeRideActivity extends AppCompatActivity {
                 ride.setNumberOfPassenger(numberOfPassengers);
 
                 ride.setDriverName(user.getDisplayName());
-
+                ride.setDriverUid(user.getUid());
 
 
                 Log.d("ride", ride.toString());

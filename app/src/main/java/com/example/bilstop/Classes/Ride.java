@@ -15,15 +15,15 @@ public class Ride implements Serializable, Comparable<Ride> {
     private String driverName;
     private int polylineIndex;
     private double distanceFromLocation;
-
     private String driverUid;
 
     public Ride(){
 
     }
 
-    public Ride(String rideId, String driverName , Location origin, Location destination, String rideDate, String rideHour ,int numberOfPassenger, int polylineIndex, String driverUid){
+    public Ride(String rideId, String driverUid , String driverName , Location origin, Location destination, String rideDate, String rideHour ,int numberOfPassenger, int polylineIndex){
         this.rideId=rideId;
+        this.driverUid=driverUid;
         this.driverName=driverName;
         this.origin=origin;
         this.destination=destination;
@@ -31,8 +31,6 @@ public class Ride implements Serializable, Comparable<Ride> {
         this.rideHour=rideHour;
         this.numberOfPassenger=numberOfPassenger;
         this.polylineIndex= polylineIndex;
-
-        this.driverUid = driverUid;
     }
 
     @Override
@@ -50,6 +48,10 @@ public class Ride implements Serializable, Comparable<Ride> {
     }
     public void setRideId(String rideId) {
         this.rideId = rideId;
+    }
+
+    public void setDriverUid(String driverUid) {
+        this.driverUid = driverUid;
     }
 
     public void setDriverName(String driverName) {
@@ -88,6 +90,10 @@ public class Ride implements Serializable, Comparable<Ride> {
         return rideId;
     }
 
+    public String getDriverUid() {
+        return driverUid;
+    }
+
     public String getDriverName() {
         return driverName;
     }
@@ -120,14 +126,6 @@ public class Ride implements Serializable, Comparable<Ride> {
         return distanceFromLocation;
     }
 
-    public String getDriverUid() {
-        return driverUid;
-    }
-
-    public void setDriverUid(String driverUid) {
-        this.driverUid = driverUid;
-    }
-
     @Override
     public String toString() {
         return "Ride{" +
@@ -139,6 +137,8 @@ public class Ride implements Serializable, Comparable<Ride> {
                 ", rideId='" + rideId + '\'' +
                 ", driverName='" + driverName + '\'' +
                 ", polylineIndex=" + polylineIndex +
+                ", distanceFromLocation=" + distanceFromLocation +
+                ", driverUid='" + driverUid + '\'' +
                 '}';
     }
 }
