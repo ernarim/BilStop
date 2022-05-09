@@ -149,8 +149,7 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 //TEST
-                reference.child("friends").push().child("id").setValue("mK0hIFaN7pWvvNH2T3fTM8BNLOs1");
-                reference.child("friends").push().child("id").setValue("r0eRpd3A5YMb3F2MkffIxfXUen83");
+
             }
         });
 

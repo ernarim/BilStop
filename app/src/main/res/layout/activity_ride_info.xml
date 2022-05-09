@@ -136,17 +136,29 @@
 
     <Button
         android:id="@+id/requestButton"
-        android:layout_width="316dp"
+        android:layout_width="250dp"
         android:layout_height="52dp"
         android:backgroundTint="@color/orange"
         android:text="Request to join ride"
         android:textAllCaps="false"
         android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.149"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView5"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <ImageButton
+        android:id="@+id/imbRideInfoSeeProfile"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:background="@color/orange"
+        android:src="@drawable/ic_look"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/requestButton"
         app:layout_constraintTop_toBottomOf="@+id/cardView5" />
 
     <androidx.cardview.widget.CardView

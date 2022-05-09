@@ -1,11 +1,14 @@
 package com.example.bilstop;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -46,6 +49,7 @@ public class RideInfoActivity extends AppCompatActivity implements OnMapReadyCal
     private TextView textViewHourInfo;
     private TextView textViewCarInfo;
     private ImageView imageViewCarInfo;
+    private ImageButton imageButtonSeeProfile;
 
     private GeoApiContext mGeoApiContext =null;
     private GoogleMap googleMap;
@@ -81,6 +85,7 @@ public class RideInfoActivity extends AppCompatActivity implements OnMapReadyCal
         imageViewCarInfo = findViewById(R.id.imageViewCarInfo);
         textViewDuration2 = findViewById(R.id.textViewDuration2);
         textViewDistance2 = findViewById(R.id.textViewDistance2);
+        imageButtonSeeProfile = findViewById(R.id.imbRideInfoSeeProfile);
 
         ride = (Ride) getIntent().getSerializableExtra("ride");
         textViewDriverNameInfo.setText("Driver Name: " + ride.getDriverName());
@@ -93,7 +98,15 @@ public class RideInfoActivity extends AppCompatActivity implements OnMapReadyCal
         mMapView = findViewById(R.id.mapView);
         initGoogleMap(savedInstanceState);
 
-
+        imageButtonSeeProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String uid = getIntent().getExtras().getString("uid");
+                Intent intent = new Intent(getApplicationContext(),TargetProfileActivity.class);
+                intent.putExtra("uid",uid);
+                startActivity(intent);
+            }
+        });
     }
 
 
