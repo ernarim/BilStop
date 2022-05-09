@@ -28,6 +28,8 @@ public class AdapterActivity extends AppCompatActivity {
     private final ArrayList<Ride> rideDataFrom=new ArrayList<>();
     private final ArrayList<Ride> rideDataTo=new ArrayList<>();
 
+    private Intent intent;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,12 +74,6 @@ public class AdapterActivity extends AppCompatActivity {
                 Log.d("rideDataFrom", rideDataFrom.toString());
                 RideDataPicker.setRidesFromBilkent(rideDataFrom);
 
-                Intent intent = new Intent(AdapterActivity.this, RidesActivity.class);
-                intent.putExtra("object", locationData);
-                intent.putExtra("buttonType", getIntent().getSerializableExtra("buttonType"));
-                intent.putExtra("allList", getIntent().getSerializableExtra("allList"));
-                startActivity(intent);
-                finish();
             }
 
             @Override

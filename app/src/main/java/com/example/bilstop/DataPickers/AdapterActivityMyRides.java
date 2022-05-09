@@ -44,9 +44,7 @@ public class AdapterActivityMyRides extends AppCompatActivity {
                     rideDataMy.add(dataRide);
                 }
                 RideDataPicker.setMyRides(rideDataMy);
-                Intent intent = new Intent(AdapterActivityMyRides.this, BottomNavActivity.class);
-                startActivity(intent);
-                finish();
+
             }
 
             @Override
@@ -54,6 +52,10 @@ public class AdapterActivityMyRides extends AppCompatActivity {
 
             }
         });
+
+        Intent intent = new Intent(AdapterActivityMyRides.this, BottomNavActivity.class);
+        startActivity(intent);
+        finish();
 
     }
 }
