@@ -2,6 +2,7 @@ package com.example.bilstop;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bilstop.Adapters.RidesRVAdapter;
 import com.example.bilstop.Classes.Ride;
+import com.example.bilstop.DataPickers.AdapterActivityMyRides;
+import com.example.bilstop.DataPickers.RideDataPicker;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -32,7 +35,7 @@ public class RidesFragment extends Fragment{
 
 
     private RecyclerView recyclerView;
-    private ArrayList<Ride> rides = new ArrayList<Ride>();
+    private ArrayList<Ride> myRides = new ArrayList<Ride>();
     private RidesRVAdapter adapter;
 
     @Override
@@ -41,6 +44,19 @@ public class RidesFragment extends Fragment{
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_rides, container, false);
 
+        if(myRides!=null){
+            myRides = new ArrayList<Ride>(RideDataPicker.getMyRides());
+        }
+        adapter = new RidesRVAdapter(getContext(), myRides);
+
+        Log.d("ridesActivity", myRides.toString());
+
+        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView2);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setAdapter(adapter);
+
+        Intent intent = new Intent(getActivity(), AdapterActivityMyRides.class);
 
         return view;
     }

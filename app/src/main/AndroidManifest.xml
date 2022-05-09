@@ -61,6 +61,9 @@
             android:name=".DataPickers.AdapterActivity"
             android:exported="true" />
         <activity
+            android:name=".DataPickers.AdapterActivityMyRides"
+            android:exported="true" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

@@ -25,6 +25,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -114,6 +115,7 @@ public class RegisterFragment extends Fragment {
                             Toast.makeText(context, "Succesfully registered. Please verify your account.", Toast.LENGTH_SHORT).show();
                             FirebaseUser user = auth.getCurrentUser();
                             user.sendEmailVerification();
+                            user.updateProfile( new UserProfileChangeRequest.Builder().setDisplayName(name + " " + surname).build());
                             registerToDatabase(name, surname, email);
                         } else {
                             Toast.makeText(context, "Something went wrong. Please try again.", Toast.LENGTH_SHORT).show();

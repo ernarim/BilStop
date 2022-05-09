@@ -20,17 +20,24 @@ import android.widget.TimePicker;
 
 import com.example.bilstop.Classes.Location;
 import com.example.bilstop.Classes.Ride;
+import com.example.bilstop.Classes.Users;
+import com.example.bilstop.DataPickers.AdapterActivityMyRides;
 import com.example.bilstop.Models.PolylineData;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.time.Clock;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.TimeZone;
 
 public class FinalizeRideActivity extends AppCompatActivity {
@@ -73,6 +80,8 @@ public class FinalizeRideActivity extends AppCompatActivity {
         createRide = (Button) findViewById(R.id.createButton);
         fabDecrease = (FloatingActionButton) findViewById(R.id.fabDec);
         fabIncrease = (FloatingActionButton) findViewById(R.id.fabInc);
+
+        Log.d("currentuser",user.getDisplayName());
 
         dateCardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -164,6 +173,7 @@ public class FinalizeRideActivity extends AppCompatActivity {
         createRide.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
 
                 Ride ride = (Ride) getIntent().getSerializableExtra("ride");
 
@@ -183,9 +193,11 @@ public class FinalizeRideActivity extends AppCompatActivity {
 
                 ride.setDriverName(user.getDisplayName());
 
+
+
                 Log.d("ride", ride.toString());
 
-                FirebaseDatabase database = FirebaseDatabase.getInstance();
+
                 DatabaseReference myRef;
                 if (getIntent().getSerializableExtra("buttonType").equals("from"))
                     myRef = database.getReference("ridesFromBilkent");
@@ -194,7 +206,12 @@ public class FinalizeRideActivity extends AppCompatActivity {
 
                 myRef.push().setValue(ride);
 
-                Intent intent = new Intent(FinalizeRideActivity.this, BottomNavActivity.class);
+                DatabaseReference myRef2 = database.getReference("myRides").child(user.getUid());
+                //Map<String,Object> info = new HashMap<>();
+                // info.put("rides",ride);
+                myRef2.push().setValue(ride);
+
+                Intent intent = new Intent(FinalizeRideActivity.this, AdapterActivityMyRides.class);
                 startActivity(intent);
 
             }

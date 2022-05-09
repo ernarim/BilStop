@@ -9,8 +9,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.bilstop.Classes.Location;
 import com.example.bilstop.Classes.Ride;
+import com.example.bilstop.Classes.Users;
 import com.example.bilstop.R;
 import com.example.bilstop.RidesActivity;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,6 +28,7 @@ public class AdapterActivity extends AppCompatActivity {
     private final ArrayList<Ride> rideDataFrom=new ArrayList<>();
     private final ArrayList<Ride> rideDataTo=new ArrayList<>();
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,10 +39,10 @@ public class AdapterActivity extends AppCompatActivity {
             Log.d("demo", locationData.toString());
         }
 
-
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference().child("ridesFromBilkent");
         DatabaseReference myRef2 = database.getReference().child("ridesToBilkent");
+
 
         myRef.addValueEventListener(new ValueEventListener() {
 
@@ -64,8 +67,6 @@ public class AdapterActivity extends AppCompatActivity {
                     else{
                         rideDataFrom.add(dataRide);
                     }
-
-
                     Log.d("kisikey", dataRide.getRideId());
                 }
                 Log.d("rideDataFrom", rideDataFrom.toString());
@@ -132,8 +133,6 @@ public class AdapterActivity extends AppCompatActivity {
         });
 
     }
-
-
 
     private double calculateDistance(Location firstLocation, Location secondLocation){
         double distance = 0;

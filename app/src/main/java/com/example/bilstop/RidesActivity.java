@@ -65,12 +65,6 @@ public class RidesActivity extends AppCompatActivity {
             }
         }
 
-
-
-
-
-
-
         Log.d("ridesActivity", ridesFromBilkent.toString());
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);

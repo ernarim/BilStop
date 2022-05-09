@@ -61,7 +61,7 @@ public class RidesRVAdapter extends RecyclerView.Adapter<RidesRVAdapter.ObjectsH
         holder.textViewName.setText("Driver Name: " + ride.getDriverName());
         holder.textViewNumOfPas.setText("Number of Passengers: " + ride.getNumberOfPassenger());
         holder.textViewDate.setText("Date: " + ride.getRideDate());
-        holder.textViewTime.setText("Hour: " + ride.getRideHour());
+        holder.textViewTime.setText("Time: " + ride.getRideHour());
 
         holder.cardViewRow.setOnClickListener(new View.OnClickListener() {
             @Override
