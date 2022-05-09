@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.example.bilstop.Auth.AuthenticationActivity;
 import com.example.bilstop.Classes.Users;
+import com.example.bilstop.DataPickers.AdapterActivityMyRides;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         }
         else{
             if( user.isEmailVerified() ){
-                Intent intent = new Intent(this , BottomNavActivity.class);
+                Intent intent = new Intent(this , AdapterActivityMyRides.class);
                 startActivity(intent);
                 finish();
             }

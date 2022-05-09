@@ -52,7 +52,7 @@ public class PlacesActivity extends AppCompatActivity implements Serializable {
 
 
     private PlacesClient placesClient;
-    private Location location=null;
+    private Location location;
     private Button allRidesButton;
     private Intent intent;
     private String buttonType;
@@ -123,6 +123,8 @@ public class PlacesActivity extends AppCompatActivity implements Serializable {
 
                 //Location data to send Maps Activity
                 location = new Location(place.getName(), place.getId(), String.valueOf(place.getLatLng().latitude),String.valueOf(place.getLatLng().longitude) );
+
+                Log.i("demo", "Location: " + location.getLocationName());
 
                 if(getIntent().getSerializableExtra("intentPage").equals("home")){
                     intent = new Intent(PlacesActivity.this, AdapterActivity.class);

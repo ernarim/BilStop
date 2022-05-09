@@ -1,6 +1,7 @@
 package com.example.bilstop;
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -59,6 +60,9 @@ public class RideInfoActivity extends AppCompatActivity implements OnMapReadyCal
     private com.google.android.gms.maps.model.LatLng startLocation;
     private com.google.android.gms.maps.model.LatLng finalLocation;
 
+    private TextView textViewDuration2;
+    private TextView textViewDistance2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,13 +79,15 @@ public class RideInfoActivity extends AppCompatActivity implements OnMapReadyCal
         textViewHourInfo = findViewById(R.id.textViewHourInfo);
         textViewCarInfo = findViewById(R.id.textViewCarInfo);
         imageViewCarInfo = findViewById(R.id.imageViewCarInfo);
+        textViewDuration2 = findViewById(R.id.textViewDuration2);
+        textViewDistance2 = findViewById(R.id.textViewDistance2);
 
         ride = (Ride) getIntent().getSerializableExtra("ride");
-        textViewDriverNameInfo.setText(ride.getDriverName());
+        textViewDriverNameInfo.setText("Driver Name: " + ride.getDriverName());
         textViewRouteInfo.setText(ride.getOrigin().getLocationName() + " - " + ride.getDestination().getLocationName());
-        textViewNoOfPasInfo.setText(String.valueOf(ride.getNumberOfPassenger()));
-        textViewDateInfo.setText(ride.getRideDate());
-        textViewHourInfo.setText(ride.getRideHour());
+        textViewNoOfPasInfo.setText(String.valueOf("Number of passengers: " + ride.getNumberOfPassenger()));
+        textViewDateInfo.setText("Date: " + ride.getRideDate());
+        textViewHourInfo.setText("Time: " + ride.getRideHour());
         //textViewCarInfo.setText(ride.get());
 
         mMapView = findViewById(R.id.mapView);
@@ -151,7 +157,7 @@ public class RideInfoActivity extends AppCompatActivity implements OnMapReadyCal
                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_image));
 
         destinationMarker = new MarkerOptions().position(finalLocation)
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_image2));
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
         googleMap.addMarker(originMarker);
         googleMap.addMarker(destinationMarker);
 
@@ -253,7 +259,12 @@ public class RideInfoActivity extends AppCompatActivity implements OnMapReadyCal
                 polyline.setColor(ContextCompat.getColor(getApplicationContext(), R.color.orange));
                 polyline.setClickable(true);
                 polyline.setWidth(18);
-                mPolyLinesData.add(new PolylineData(polyline,route.legs[0]));
+                PolylineData polylineData = new PolylineData(polyline,route.legs[0]);
+
+                textViewDuration2.setTextColor(Color.WHITE);
+                textViewDistance2.setTextColor(Color.WHITE);
+                textViewDuration2.setText("Duration: " + polylineData.getLeg().duration);
+                textViewDistance2.setText("Distance: " + polylineData.getLeg().distance);
 
                 // highlight the fastest route and adjust camera
                 double tempDuration = route.legs[0].duration.inSeconds;
@@ -283,35 +294,6 @@ public class RideInfoActivity extends AppCompatActivity implements OnMapReadyCal
                 600,
                 null
         );
-    }
-
-    public void onPolylineClick(Polyline polyline) {
-
-
-        int index = 0;
-        for(PolylineData polylineData: mPolyLinesData){
-            index++;
-            Log.d("demo", "onPolylineClick: toString: " + polylineData.toString());
-            if(polyline.getId().equals(polylineData.getPolyline().getId())){
-                polylineData.getPolyline().setColor(ContextCompat.getColor(getApplicationContext(), R.color.orange));
-                polylineData.getPolyline().setZIndex(1);
-
-                com.google.android.gms.maps.model.LatLng startLocation = new com.google.android.gms.maps.model.LatLng(
-                        polylineData.getLeg().startLocation.lat,
-                        polylineData.getLeg().startLocation.lng
-                );
-
-                Marker marker1 = googleMap.addMarker(new MarkerOptions()
-                        .position(startLocation).title("Bilkent")
-                );
-
-                marker1.showInfoWindow();
-            }
-            else{
-                polylineData.getPolyline().setColor(ContextCompat.getColor(getApplicationContext(), R.color.grew));
-                polylineData.getPolyline().setZIndex(0);
-            }
-        }
     }
 
 

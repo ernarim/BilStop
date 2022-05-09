@@ -126,6 +126,18 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
                 int polylinePointsLength = selectedPolyline.getPolyline().getPoints().size();
                 Location origin = new Location(String.valueOf(selectedPolyline.getPolyline().getPoints().get(0).latitude),String.valueOf(selectedPolyline.getPolyline().getPoints().get(0).longitude));
                 Location destination = new Location(String.valueOf(selectedPolyline.getPolyline().getPoints().get(polylinePointsLength-1).latitude),String.valueOf(selectedPolyline.getPolyline().getPoints().get(polylinePointsLength-1).longitude));
+                if(buttonType.equals("from")){
+                   origin.setLocationName("Bilkent");
+                   destination.setLocationName(finalLocationData.getLocationName());
+                   Log.d("finallocation", finalLocationData.getLocationName() + " " +  finalLocationData.getLocationLatitude() + " " + finalLocationData.getLocationLongitude());
+                }
+
+                else{
+                    origin.setLocationName(startLocationData.getLocationName());
+                    destination.setLocationName("Bilkent");
+                    Log.d("startlocation", startLocationData.getLocationName() + " " +  startLocationData.getLocationLatitude() + " " + startLocationData.getLocationLongitude());
+                }
+
                 ride.setOrigin(origin); ride.setDestination(destination);
                 Log.d("polyline" , String.valueOf(selectedPolyline.getPolyline().getPoints().get(0).latitude) );
                 intent.putExtras(getIntent().getExtras());
