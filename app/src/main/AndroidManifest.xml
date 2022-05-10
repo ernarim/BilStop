@@ -19,6 +19,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BilStop">
         <activity
+            android:name=".NotificationsActivity"
+            android:exported="false" />
+        <activity
             android:name=".ChatActivity"
             android:exported="false" />
         <activity
@@ -40,7 +43,6 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/api_key" />
-
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
