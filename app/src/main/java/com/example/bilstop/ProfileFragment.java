@@ -67,6 +67,7 @@ public class ProfileFragment extends Fragment {
         name = view.findViewById(R.id.txtCurrentName);
         email = view.findViewById(R.id.txtCurrentEmail);
         about = view.findViewById(R.id.txtCurrentAbout);
+        notifications = view.findViewById(R.id.notificationsImageButton);
 
         //Firebase
         auth = FirebaseAuth.getInstance();
@@ -167,6 +168,13 @@ public class ProfileFragment extends Fragment {
                 Intent intent = new Intent(getContext(), MainActivity.class);
                 startActivity(intent);
                 getActivity().finish();
+            }
+        });
+
+        notifications.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Navigation.findNavController(view).navigate(R.id.action_profileFragment_to_profileEditFragment);
             }
         });
     }

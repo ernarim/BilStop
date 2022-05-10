@@ -136,8 +136,9 @@
 
     <Button
         android:id="@+id/requestButton"
-        android:layout_width="250dp"
+        android:layout_width="280dp"
         android:layout_height="52dp"
+        android:layout_marginStart="10dp"
         android:backgroundTint="@color/orange"
         android:text="Request to join ride"
         android:textAllCaps="false"
@@ -152,8 +153,8 @@
 
     <ImageButton
         android:id="@+id/imbRideInfoSeeProfile"
-        android:layout_width="52dp"
-        android:layout_height="52dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:background="@color/orange"
         android:src="@drawable/ic_look"
         app:layout_constraintBottom_toBottomOf="parent"

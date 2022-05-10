@@ -59,8 +59,8 @@ public class FriendsRVAdapter extends RecyclerView.Adapter<FriendsRVAdapter.View
 
         public ViewHolder(View itemView){
             super(itemView);
-            pp = itemView.findViewById(R.id.friendsItemPP);
-            name = itemView.findViewById(R.id.friendsItemName);
+            pp = itemView.findViewById(R.id.senderItemPP);
+            name = itemView.findViewById(R.id.senderName);
         }
     }
 

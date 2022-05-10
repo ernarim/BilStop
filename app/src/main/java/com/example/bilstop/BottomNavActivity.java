@@ -19,6 +19,7 @@ public class BottomNavActivity extends AppCompatActivity {
         bottomNav = findViewById(R.id.bottomNav);
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         NavigationUI.setupWithNavController(bottomNav,navHostFragment.getNavController());
+
     }
 
 }

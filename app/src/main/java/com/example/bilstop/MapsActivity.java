@@ -63,6 +63,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
     private LatLng startLocation;
     private LatLng finalLocation;
 
+    private String locationName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,6 +76,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
             //Location data coming from Autocomplete Places Fragment
             if(buttonType.equals("from")){
                 finalLocationData = (Location) getIntent().getSerializableExtra("object");
+                locationName = finalLocationData.getLocationName();
                 finalLocation = new LatLng(Double.valueOf(finalLocationData.getLocationLatitude()),
                         Double.valueOf(finalLocationData.getLocationLongitude()));
                 marker1 = new MarkerOptions().position(finalLocation).title("from: " + finalLocationData.getLocationName()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
@@ -81,6 +84,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
             }
             else{
                 startLocationData = (Location) getIntent().getSerializableExtra("object");
+                locationName= startLocationData.getLocationName();
                 startLocation = new LatLng(Double.valueOf(startLocationData.getLocationLatitude()),
                         Double.valueOf(startLocationData.getLocationLongitude()));
                 marker1 = new MarkerOptions().position(startLocation).title("to: " + startLocationData.getLocationName()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
@@ -128,12 +132,12 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
                 Location destination = new Location(String.valueOf(selectedPolyline.getPolyline().getPoints().get(polylinePointsLength-1).latitude),String.valueOf(selectedPolyline.getPolyline().getPoints().get(polylinePointsLength-1).longitude));
                 if(buttonType.equals("from")){
                    origin.setLocationName("Bilkent");
-                   destination.setLocationName(finalLocationData.getLocationName());
+                   destination.setLocationName(locationName);
                    Log.d("finallocation", finalLocationData.getLocationName() + " " +  finalLocationData.getLocationLatitude() + " " + finalLocationData.getLocationLongitude());
                 }
 
                 else{
-                    origin.setLocationName(startLocationData.getLocationName());
+                    origin.setLocationName(locationName);
                     destination.setLocationName("Bilkent");
                     Log.d("startlocation", startLocationData.getLocationName() + " " +  startLocationData.getLocationLatitude() + " " + startLocationData.getLocationLongitude());
                 }
@@ -217,26 +221,18 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
         );
 
         DirectionsApiRequest directions = new DirectionsApiRequest(mGeoApiContext);
+
         directions.alternatives(true);
         directions.origin(origin);
+
         Log.d("demo", "calculateDirections: destination: " + destination.toString());
         directions.destination(destination).setCallback(new PendingResult.Callback<DirectionsResult>() {
             @Override
             public void onResult(DirectionsResult result) {
-//                Log.d(TAG, "calculateDirections: routes: " + result.routes[0].toString());
-//                Log.d(TAG, "calculateDirections: duration: " + result.routes[0].legs[0].duration);
-//                Log.d(TAG, "calculateDirections: distance: " + result.routes[0].legs[0].distance);
-//                Log.d(TAG, "calculateDirections: geocodedWayPoints: " + result.geocodedWaypoints[0].toString());
-
-                Log.d("demo", "onResult: successfully retrieved directions.");
                 addPolylinesToMap(result);
-
             }
-
             @Override
             public void onFailure(Throwable e) {
-                Log.e("demo", "calculateDirections: Failed to get directions: " + e.getMessage() );
-
             }
         });
     }
@@ -253,17 +249,13 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
                     mPolyLinesData.clear();
                     mPolyLinesData = new ArrayList<>();
                 }
-                double duration = 999999999;
+                double duration = Integer.MAX_VALUE;
                 for(DirectionsRoute route: result.routes){
                     Log.d("demo", "run: leg: " + route.legs[0].toString());
                     List<com.google.maps.model.LatLng> decodedPath = PolylineEncoding.decode(route.overviewPolyline.getEncodedPath());
-
                     List<LatLng> newDecodedPath = new ArrayList<>();
 
-                    // This loops through all the LatLng coordinates of ONE polyline.
                     for(com.google.maps.model.LatLng latLng: decodedPath){
-
-//                        Log.d(TAG, "run: latlng: " + latLng.toString());
 
                         newDecodedPath.add(new LatLng(
                                 latLng.lat,
@@ -277,8 +269,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
                     polyline.setWidth(18);
                     mPolyLinesData.add(new PolylineData(polyline,route.legs[0]));
 
-
-                    // highlight the fastest route and adjust camera
                     double tempDuration = route.legs[0].duration.inSeconds;
                     if(tempDuration < duration){
                         duration = tempDuration;
@@ -304,7 +294,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
 
         googleMap.animateCamera(
                 CameraUpdateFactory.newLatLngBounds(latLngBounds, routePadding),
-                600,
+                300,
                 null
         );
     }
@@ -324,8 +314,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
                 selectedPolyline = polylineData;
                 selectedPolylineIndex=index;
                 ride.setPolylineIndex(selectedPolylineIndex);
-                Log.d("polylineindex", String.valueOf(ride.getPolylineIndex()));
 
+                Log.d("polylineindex", String.valueOf(ride.getPolylineIndex()));
                 Log.d("Polyline", selectedPolyline.toString());
 
             }
@@ -338,30 +328,23 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
 
 
     public void onMapClick(LatLng latLng){
-        // Creating a marker
 
-        // Setting the position for the marker
         marker1.position(latLng);
 
-        // Setting the title for the marker.
-        // This will be displayed on taping the marker
         marker1.title(latLng.latitude + " : " + latLng.longitude);
 
-        // Clears the previously touched position
         googleMap.clear();
 
-        // Animating to the touched position
         googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
 
-        // Placing a marker on the touched position
         googleMap.addMarker(marker1);
 
         if(buttonType.equals("from")){
-            finalLocationData = new Location("Name ?????????????", "?", String.valueOf(latLng.latitude), String.valueOf(latLng.longitude));
+            finalLocationData = new Location("", "?", String.valueOf(latLng.latitude), String.valueOf(latLng.longitude));
             finalLocation = latLng;
         }
         else{
-            startLocationData = new Location("Name ?????????????", "?", String.valueOf(latLng.latitude), String.valueOf(latLng.longitude));
+            startLocationData = new Location("", "?", String.valueOf(latLng.latitude), String.valueOf(latLng.longitude));
             startLocation = latLng;
         }
     }
