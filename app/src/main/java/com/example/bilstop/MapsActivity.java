@@ -63,6 +63,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
     private LatLng startLocation;
     private LatLng finalLocation;
 
+    private String finalLocationName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,6 +76,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
             //Location data coming from Autocomplete Places Fragment
             if(buttonType.equals("from")){
                 finalLocationData = (Location) getIntent().getSerializableExtra("object");
+                finalLocationName = finalLocationData.getLocationName();
                 finalLocation = new LatLng(Double.valueOf(finalLocationData.getLocationLatitude()),
                         Double.valueOf(finalLocationData.getLocationLongitude()));
                 marker1 = new MarkerOptions().position(finalLocation).title("from: " + finalLocationData.getLocationName()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
@@ -81,6 +84,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
             }
             else{
                 startLocationData = (Location) getIntent().getSerializableExtra("object");
+                finalLocationName= finalLocationData.getLocationName();
                 startLocation = new LatLng(Double.valueOf(startLocationData.getLocationLatitude()),
                         Double.valueOf(startLocationData.getLocationLongitude()));
                 marker1 = new MarkerOptions().position(startLocation).title("to: " + startLocationData.getLocationName()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
@@ -128,12 +132,12 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
                 Location destination = new Location(String.valueOf(selectedPolyline.getPolyline().getPoints().get(polylinePointsLength-1).latitude),String.valueOf(selectedPolyline.getPolyline().getPoints().get(polylinePointsLength-1).longitude));
                 if(buttonType.equals("from")){
                    origin.setLocationName("Bilkent");
-                   destination.setLocationName(finalLocationData.getLocationName());
+                   destination.setLocationName(finalLocationName);
                    Log.d("finallocation", finalLocationData.getLocationName() + " " +  finalLocationData.getLocationLatitude() + " " + finalLocationData.getLocationLongitude());
                 }
 
                 else{
-                    origin.setLocationName(startLocationData.getLocationName());
+                    origin.setLocationName(finalLocationName);
                     destination.setLocationName("Bilkent");
                     Log.d("startlocation", startLocationData.getLocationName() + " " +  startLocationData.getLocationLatitude() + " " + startLocationData.getLocationLongitude());
                 }
@@ -223,19 +227,12 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
         directions.destination(destination).setCallback(new PendingResult.Callback<DirectionsResult>() {
             @Override
             public void onResult(DirectionsResult result) {
-//                Log.d(TAG, "calculateDirections: routes: " + result.routes[0].toString());
-//                Log.d(TAG, "calculateDirections: duration: " + result.routes[0].legs[0].duration);
-//                Log.d(TAG, "calculateDirections: distance: " + result.routes[0].legs[0].distance);
-//                Log.d(TAG, "calculateDirections: geocodedWayPoints: " + result.geocodedWaypoints[0].toString());
-
-                Log.d("demo", "onResult: successfully retrieved directions.");
                 addPolylinesToMap(result);
 
             }
 
             @Override
             public void onFailure(Throwable e) {
-                Log.e("demo", "calculateDirections: Failed to get directions: " + e.getMessage() );
 
             }
         });
@@ -357,11 +354,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
         googleMap.addMarker(marker1);
 
         if(buttonType.equals("from")){
-            finalLocationData = new Location("Name ?????????????", "?", String.valueOf(latLng.latitude), String.valueOf(latLng.longitude));
+            finalLocationData = new Location("", "?", String.valueOf(latLng.latitude), String.valueOf(latLng.longitude));
             finalLocation = latLng;
         }
         else{
-            startLocationData = new Location("Name ?????????????", "?", String.valueOf(latLng.latitude), String.valueOf(latLng.longitude));
+            startLocationData = new Location("", "?", String.valueOf(latLng.latitude), String.valueOf(latLng.longitude));
             startLocation = latLng;
         }
     }
