@@ -28,13 +28,15 @@ public class AdapterActivity extends AppCompatActivity {
     private final ArrayList<Ride> rideDataFrom=new ArrayList<>();
     private final ArrayList<Ride> rideDataTo=new ArrayList<>();
 
+    private final double distanceLimit = 0.02;
+
     private Intent intent;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_rides);
+        setContentView(R.layout.activity_black_screen);
 
         if(getIntent().getSerializableExtra("object")!=null){
             locationData = (Location) getIntent().getSerializableExtra("object");
@@ -62,7 +64,7 @@ public class AdapterActivity extends AppCompatActivity {
 
                     Log.d("ride",dataRide.toString());
                     if(locationData!=null){
-                        if(dataRide.getDistanceFromLocation()<0.001){
+                        if(dataRide.getDistanceFromLocation()<distanceLimit){
                             rideDataFrom.add(dataRide);
                         }
                     }
@@ -101,7 +103,7 @@ public class AdapterActivity extends AppCompatActivity {
                     Log.d("ride",dataRide.toString());
 
                     if(locationData!=null){
-                        if(dataRide.getDistanceFromLocation()<0.007013218885794777){
+                        if(dataRide.getDistanceFromLocation()<distanceLimit){
                             rideDataTo.add(dataRide);
                         }
                     }

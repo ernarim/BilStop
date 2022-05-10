@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.bilstop.Auth.AuthenticationActivity;
 import com.example.bilstop.BottomNavActivity;
 import com.example.bilstop.Classes.Ride;
+import com.example.bilstop.R;
 import com.example.bilstop.RidesActivity;
 import com.example.bilstop.RidesFragment;
 import com.google.firebase.auth.FirebaseAuth;
@@ -34,6 +35,8 @@ public class AdapterActivityMyRides extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_black_screen);
+
         rideDataMy.clear();
 
         myRef3.addValueEventListener(new ValueEventListener() {
