@@ -9,6 +9,19 @@
     tools:layout_editor_absoluteX="0dp"
     tools:layout_editor_absoluteY="93dp">
 
+    <TextView
+        android:id="@+id/textViewCarPlateInfo"
+        android:layout_width="243dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="16dp"
+        android:text="License Plate:"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/divider4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider5"
+        app:layout_constraintVertical_bias="0.859" />
+
     <View
         android:id="@+id/divider5"
         android:layout_width="409dp"
@@ -113,13 +126,14 @@
         android:id="@+id/textViewCarInfo"
         android:layout_width="245dp"
         android:layout_height="29dp"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="16dp"
         android:text="Car:"
         android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/divider4"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider5" />
+        app:layout_constraintTop_toBottomOf="@+id/divider5"
+        app:layout_constraintVertical_bias="0.321" />
 
     <ImageView
         android:id="@+id/imageViewCarInfo"

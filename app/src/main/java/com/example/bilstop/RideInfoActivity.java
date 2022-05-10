@@ -12,9 +12,12 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 
+import com.example.bilstop.Classes.Car;
 import com.example.bilstop.Classes.Location;
 import com.example.bilstop.Classes.Ride;
 import com.example.bilstop.DataPickers.AdapterActivity;
@@ -30,8 +33,11 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.maps.DirectionsApiRequest;
 import com.google.maps.GeoApiContext;
 import com.google.maps.PendingResult;
@@ -52,6 +58,7 @@ public class RideInfoActivity extends AppCompatActivity implements OnMapReadyCal
     private TextView textViewDateInfo;
     private TextView textViewHourInfo;
     private TextView textViewCarInfo;
+    private TextView textViewCarPlateInfo;
     private ImageView imageViewCarInfo;
     private ImageButton imageButtonSeeProfile;
     private ImageButton imageButtonDeleteProfile;
@@ -87,6 +94,7 @@ public class RideInfoActivity extends AppCompatActivity implements OnMapReadyCal
         textViewDateInfo = findViewById(R.id.textViewDateInfo);
         textViewHourInfo = findViewById(R.id.textViewHourInfo);
         textViewCarInfo = findViewById(R.id.textViewCarInfo);
+        textViewCarPlateInfo = findViewById(R.id.textViewCarPlateInfo);
         imageViewCarInfo = findViewById(R.id.imageViewCarInfo);
         textViewDuration2 = findViewById(R.id.textViewDuration2);
         textViewDistance2 = findViewById(R.id.textViewDistance2);
@@ -108,7 +116,32 @@ public class RideInfoActivity extends AppCompatActivity implements OnMapReadyCal
         textViewNoOfPasInfo.setText(String.valueOf("Number of passengers: " + ride.getNumberOfPassenger()));
         textViewDateInfo.setText("Date: " + ride.getRideDate());
         textViewHourInfo.setText("Time: " + ride.getRideHour());
-        //textViewCarInfo.setText(ride.get());
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRefCar = database.getReference("users").child(ride.getDriverUid()).child("car");
+
+        ArrayList<String> carValues = new ArrayList<>();
+        myRefCar.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    for(DataSnapshot dataSnapshot: snapshot.getChildren()){
+                        String value = dataSnapshot.getValue(String.class);
+                        Log.d("value", value);
+                        carValues.add(value);
+                    }
+                    textViewCarInfo.setText("Car: " + carValues.get(0) + " " + carValues.get(3));
+                    textViewCarPlateInfo.setText("Licence Plate: " +  carValues.get(2));
+                }
+
+            }@Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+
 
         mMapView = findViewById(R.id.mapView);
         initGoogleMap(savedInstanceState);
