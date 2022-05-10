@@ -138,7 +138,6 @@ public class ProfileFragment extends Fragment {
                                             System.out.println(users.getId());
                                         }
                                     }
-
                                     @Override
                                     public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) { }
                                     @Override
