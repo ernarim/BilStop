@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.bilstop.Auth.AuthenticationActivity;
 import com.example.bilstop.BottomNavActivity;
+import com.example.bilstop.Classes.Car;
 import com.example.bilstop.Classes.Ride;
 import com.example.bilstop.R;
 import com.example.bilstop.RidesActivity;
@@ -31,7 +32,7 @@ public class AdapterActivityMyRides extends AppCompatActivity {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
 
     DatabaseReference myRef3 = database.getReference("myRides").child(FirebaseAuth.getInstance().getUid());
-
+    DatabaseReference myRefCar = database.getReference("users").child(FirebaseAuth.getInstance().getUid()).child("car");
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +59,8 @@ public class AdapterActivityMyRides extends AppCompatActivity {
 
             }
         });
+
+
 
         Intent intent = new Intent(AdapterActivityMyRides.this, BottomNavActivity.class);
         startActivity(intent);
