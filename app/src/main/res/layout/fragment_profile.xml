@@ -175,7 +175,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardViewProfile3"
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="20sp"
                 android:layout_marginTop="20sp"
                 android:layout_marginEnd="20sp"
@@ -220,9 +220,10 @@
                         tools:visibility="visible" />
 
                     <androidx.recyclerview.widget.RecyclerView
+
                         android:id="@+id/rcvFriends"
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
+                        android:layout_height="200dp"
                         android:layout_marginTop="10dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -239,7 +240,7 @@
                 app:strokeColor="@color/teal_200"
                 android:id="@+id/cardViewProfile4"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="20sp"
                 android:layout_marginTop="20sp"
                 android:layout_marginEnd="20sp"
@@ -252,7 +253,7 @@
                     android:layout_height="match_parent">
 
                     <ImageButton
-                        android:id="@+id/notificationsImageButton3"
+                        android:id="@+id/add_car_button"
                         android:layout_width="35sp"
                         android:layout_height="35sp"
                         android:layout_marginTop="10dp"
@@ -275,12 +276,100 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="10dp"
-                        android:text="Cars"
+                        android:text="Car"
                         android:textColor="@color/black"
                         android:textSize="16sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/car_card"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:foregroundTint="@color/black"
+
+                        app:strokeColor="@color/black"
+                        app:layout_constraintTop_toBottomOf="@id/add_car_button"
+                        app:layout_constraintBottom_toBottomOf="parent"
+
+                        >
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/orange"
+                            android:padding="10dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent">
+
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                app:civ_border_color="@color/black"
+                                app:civ_border_width="3dp"
+                                android:id="@+id/friendsItemPP"
+                                android:layout_width="60dp"
+                                android:layout_height="60dp"
+                                android:background="@null"
+                                android:src="@drawable/car_iconn"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toStartOf="@id/guideline6"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <ImageButton
+                                android:id="@+id/delete"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"
+                                android:background="@drawable/roundcorner"
+                                android:src="@drawable/ic_baseline_delete_24"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="1"
+                                app:layout_constraintStart_toStartOf="@+id/friendsItemPP"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintVertical_bias="0.52" />
+
+                            <TextView
+                                android:id="@+id/car_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Name"
+                                android:textSize="20sp"
+                                app:layout_constraintBottom_toTopOf="@+id/car_color"
+                                app:layout_constraintStart_toStartOf="@+id/guideline6"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/car_color"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Color"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="@+id/guideline6"
+                                app:layout_constraintTop_toBottomOf="@+id/car_name" />
+
+                            <androidx.constraintlayout.widget.Guideline
+                                android:id="@+id/guideline6"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                app:layout_constraintGuide_percent="0.30" />
+
+                            <ImageButton
+                                android:id="@+id/editCar"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"
+                                android:background="@drawable/roundcorner"
+                                android:src="@drawable/ic_baseline_edit_24"
+                                android:layout_marginEnd="5dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toStartOf="@+id/delete"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
 

@@ -1,5 +1,6 @@
 package com.example.bilstop.DataPickers;
 
+import com.example.bilstop.Classes.Car;
 import com.example.bilstop.Classes.Ride;
 
 import java.util.ArrayList;
@@ -10,11 +11,13 @@ public class RideDataPicker  {
     private static ArrayList<Ride> ridesFromBilkent;
     private static ArrayList<Ride> ridestoBilkent;
     private static ArrayList<Ride> myRides;
+    private static Car car;
 
     public RideDataPicker(){
         ridesFromBilkent = new ArrayList<>();
         ridestoBilkent = new ArrayList<>();
         myRides = new ArrayList<>();
+        car = new Car();
     }
 
     public static void setRidesFromBilkent(ArrayList<Ride> ridesFromBilkent) {
@@ -32,6 +35,10 @@ public class RideDataPicker  {
         RideDataPicker.myRides = myRides;
     }
 
+    public static void setCar(Car car) {
+        RideDataPicker.car = car;
+    }
+
     public static ArrayList<Ride> getRidesFromBilkent() {
         return ridesFromBilkent;
     }
@@ -42,5 +49,9 @@ public class RideDataPicker  {
 
     public static ArrayList<Ride> getMyRides() {
         return myRides;
+    }
+
+    public static Car getCar() {
+        return car;
     }
 }
