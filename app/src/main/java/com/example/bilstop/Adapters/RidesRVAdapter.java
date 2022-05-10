@@ -2,6 +2,7 @@ package com.example.bilstop.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,7 +70,9 @@ public class RidesRVAdapter extends RecyclerView.Adapter<RidesRVAdapter.ObjectsH
                 Intent intent = new Intent(mContex.getApplicationContext(), RideInfoActivity.class);
                 intent.putExtra("ride", ride);
                 intent.putExtra("uid", ride.getDriverUid());
+                
                 mContex.startActivity(intent);
+
             }
         });
 

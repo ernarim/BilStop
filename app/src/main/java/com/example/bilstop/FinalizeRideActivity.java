@@ -204,14 +204,14 @@ public class FinalizeRideActivity extends AppCompatActivity {
                 else
                     myRef = database.getReference("ridesToBilkent");
 
-                myRef.push().setValue(ride);
+                DatabaseReference pushedPostRef = myRef.push();
+                pushedPostRef.setValue(ride);
+                String postId = pushedPostRef.getKey();
 
                 DatabaseReference myRef2 = database.getReference("myRides").child(user.getUid());
-                //Map<String,Object> info = new HashMap<>();
-                // info.put("rides",ride);
-                myRef2.push().setValue(ride);
+                myRef2.child(postId).setValue(ride);
 
-                Intent intent = new Intent(FinalizeRideActivity.this, AdapterActivityMyRides.class);
+                Intent intent = new Intent(FinalizeRideActivity.this, MainActivity.class);
                 startActivity(intent);
 
             }

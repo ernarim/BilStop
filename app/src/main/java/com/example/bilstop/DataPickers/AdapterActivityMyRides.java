@@ -44,6 +44,9 @@ public class AdapterActivityMyRides extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                     Ride dataRide =postSnapshot.getValue(Ride.class);
+                    String key= postSnapshot.getKey();
+                    dataRide.setRideId(key);
+                    Log.d("rideId", dataRide.getRideId());
                     rideDataMy.add(dataRide);
                 }
                 RideDataPicker.setMyRides(rideDataMy);

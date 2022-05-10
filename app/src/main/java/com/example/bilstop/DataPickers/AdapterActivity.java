@@ -56,7 +56,7 @@ public class AdapterActivity extends AppCompatActivity {
                     Ride dataRide =postSnapshot.getValue(Ride.class);
                     String key= postSnapshot.getKey();
                     dataRide.setRideId(key);
-
+                    Log.d("rideId", dataRide.getRideId());
                     if(locationData!=null){
                         dataRide.setDistanceFromLocation(calculateDistance(locationData,dataRide.getDestination()));
                         Log.d("distance", String.valueOf(dataRide.getDistanceFromLocation())) ;

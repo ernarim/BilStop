@@ -56,8 +56,6 @@ public class RidesFragment extends Fragment{
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
 
-        Intent intent = new Intent(getActivity(), AdapterActivityMyRides.class);
-
         return view;
     }
 

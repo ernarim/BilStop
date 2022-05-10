@@ -17,6 +17,7 @@ import androidx.core.content.ContextCompat;
 
 import com.example.bilstop.Classes.Location;
 import com.example.bilstop.Classes.Ride;
+import com.example.bilstop.DataPickers.AdapterActivity;
 import com.example.bilstop.Models.PolylineData;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -28,6 +29,9 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.maps.DirectionsApiRequest;
 import com.google.maps.GeoApiContext;
 import com.google.maps.PendingResult;
@@ -50,6 +54,7 @@ public class RideInfoActivity extends AppCompatActivity implements OnMapReadyCal
     private TextView textViewCarInfo;
     private ImageView imageViewCarInfo;
     private ImageButton imageButtonSeeProfile;
+    private ImageButton imageButtonDeleteProfile;
 
     private GeoApiContext mGeoApiContext =null;
     private GoogleMap googleMap;
@@ -86,8 +91,18 @@ public class RideInfoActivity extends AppCompatActivity implements OnMapReadyCal
         textViewDuration2 = findViewById(R.id.textViewDuration2);
         textViewDistance2 = findViewById(R.id.textViewDistance2);
         imageButtonSeeProfile = findViewById(R.id.imbRideInfoSeeProfile);
+        imageButtonDeleteProfile = findViewById(R.id.deleteRideButton);
 
         ride = (Ride) getIntent().getSerializableExtra("ride");
+        if(ride.getDriverUid().equals(FirebaseAuth.getInstance().getUid())){
+            imageButtonSeeProfile.setVisibility(View.INVISIBLE);
+            imageButtonDeleteProfile.setVisibility(View.VISIBLE);
+        }
+        else{
+            imageButtonSeeProfile.setVisibility(View.VISIBLE);
+            imageButtonDeleteProfile.setVisibility(View.INVISIBLE);
+        }
+
         textViewDriverNameInfo.setText("Driver Name: " + ride.getDriverName());
         textViewRouteInfo.setText(ride.getOrigin().getLocationName() + " - " + ride.getDestination().getLocationName());
         textViewNoOfPasInfo.setText(String.valueOf("Number of passengers: " + ride.getNumberOfPassenger()));
@@ -104,6 +119,22 @@ public class RideInfoActivity extends AppCompatActivity implements OnMapReadyCal
                 String uid = getIntent().getExtras().getString("uid");
                 Intent intent = new Intent(getApplicationContext(),TargetProfileActivity.class);
                 intent.putExtra("uid",uid);
+                startActivity(intent);
+            }
+        });
+
+        imageButtonDeleteProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference myRef = database.getReference().child("ridesFromBilkent");
+                DatabaseReference myRef2 = database.getReference().child("ridesToBilkent");
+                DatabaseReference myRef3 = database.getReference().child("myRides").child(FirebaseAuth.getInstance().getUid());
+
+                myRef.child(ride.getRideId()).removeValue();
+                myRef2.child(ride.getRideId()).removeValue();
+                myRef3.child(ride.getRideId()).removeValue();
+                Intent intent = new Intent(RideInfoActivity.this, MainActivity.class);
                 startActivity(intent);
             }
         });
@@ -219,20 +250,12 @@ public class RideInfoActivity extends AppCompatActivity implements OnMapReadyCal
         directions.destination(destination).setCallback(new PendingResult.Callback<DirectionsResult>() {
             @Override
             public void onResult(DirectionsResult result) {
-                Log.d("direction", "calculateDirections: routes: " + result.routes[0].toString());
-                Log.d("direction", "calculateDirections: duration: " + result.routes[0].legs[0].duration);
-                Log.d("direction", "calculateDirections: distance: " + result.routes[0].legs[0].distance);
-                Log.d("direction", "calculateDirections: geocodedWayPoints: " + result.geocodedWaypoints[0].toString());
-
-                Log.d("demo", "onResult: successfully retrieved directions.");
                 addPolylinesToMap(result);
 
             }
 
             @Override
             public void onFailure(Throwable e) {
-                Log.e("demo", "calculateDirections: Failed to get directions: " + e.getMessage() );
-
             }
         });
     }

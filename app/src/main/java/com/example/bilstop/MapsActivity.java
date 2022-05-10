@@ -171,7 +171,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
 
         googleMap=gMap;
 
-        Location bilkent = new Location("Bilkent University", "id", "39.874721719233264", "32.74754255382555");
+        Location bilkent = new Location("Bilkent University", "id", "39.87012508171328", "32.74890133665072");
         Location locationData = (Location) getIntent().getSerializableExtra("object");
         if(locationData != null){
             //Creating destination point according to data coming from Autocomplete Fragment
