@@ -127,6 +127,7 @@ public class ChatActivity extends AppCompatActivity {
                 Message message = snapshot.getValue(Message.class);
                 messages.add(message);
                 messagesRVAdapter.notifyDataSetChanged();
+                messagesRecyclerView.scrollToPosition(messages.size()-1);//TEST
             }
 
             @Override
