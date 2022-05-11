@@ -33,12 +33,13 @@ public class AdapterActivityNotifications extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_black_screen);
 
-        notifications.clear();
+
         Log.d("adapterActivity","open");
         Log.d("adapterActivity", FirebaseAuth.getInstance().getUid());
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                notifications.clear();
                 for(DataSnapshot dataSnapshot: snapshot.getChildren()){
                         Notifications nf = dataSnapshot.getValue(Notifications.class);
                         String key= dataSnapshot.getKey();

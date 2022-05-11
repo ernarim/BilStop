@@ -1,8 +1,10 @@
 package com.example.bilstop.Adapters;
 
+import android.app.Activity;
 import android.app.Notification;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,9 +16,13 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.bilstop.BottomNavActivity;
 import com.example.bilstop.Classes.Notifications;
 import com.example.bilstop.Classes.Ride;
 import com.example.bilstop.Classes.Users;
+import com.example.bilstop.DataPickers.AdapterActivityNotifications;
+import com.example.bilstop.MainActivity;
+import com.example.bilstop.NotificationsActivity;
 import com.example.bilstop.R;
 import com.example.bilstop.RideInfoActivity;
 import com.google.firebase.auth.FirebaseAuth;
@@ -91,18 +97,82 @@ public class NotificationsRVAdapter extends RecyclerView.Adapter<NotificationsRV
         holder.senderName.setText(notification.getName());
         if(notification.getRide()!=null){
 
-            holder.notificationType.setText("Ride request");
+            if(notification.getCurrentState().equals("accepted")){
+                holder.notificationType.setText("Ride Request Accepted");
+                holder.acceptButton.setVisibility(View.INVISIBLE);
+                holder.declineButton.setVisibility(View.INVISIBLE);
+                holder.senderName.setText("Driver: " + notification.getRide().getDriverName());
+                holder.senderItemPP.setVisibility(View.INVISIBLE);
 
-            holder.imageButtonRide.setVisibility(View.VISIBLE);
-            holder.imageButtonRide.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                   Ride ride = notification.getRide();
-                   Intent intent = new Intent(mContext.getApplicationContext(), RideInfoActivity.class);
-                   intent.putExtra("ride", ride);
-                   mContext.startActivity(intent);
-                }
-            });
+                holder.imageButtonRide.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Ride ride = notification.getRide();
+                        Intent intent = new Intent(mContext.getApplicationContext(), RideInfoActivity.class);
+                        intent.putExtra("ride", ride);
+                        mContext.startActivity(intent);
+                    }
+                });
+            }
+            else if(notification.getCurrentState().equals("declined")){
+                holder.notificationType.setText("Ride Request Declined");
+                holder.acceptButton.setVisibility(View.INVISIBLE);
+                holder.declineButton.setVisibility(View.INVISIBLE);
+                holder.senderName.setText("Driver: " + notification.getRide().getDriverName());
+                holder.senderItemPP.setVisibility(View.INVISIBLE);
+                holder.senderRide.setVisibility(View.INVISIBLE);
+                holder.imageButtonRide.setVisibility(View.INVISIBLE);
+            }
+
+            else{
+                holder.notificationType.setText("Ride request");
+                holder.imageButtonRide.setVisibility(View.VISIBLE);
+                holder.imageButtonRide.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Ride ride = notification.getRide();
+                        Intent intent = new Intent(mContext.getApplicationContext(), RideInfoActivity.class);
+                        intent.putExtra("ride", ride);
+                        mContext.startActivity(intent);
+                    }
+                });
+
+                holder.acceptButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Notifications newNotification = new Notifications(FirebaseAuth.getInstance().getUid(), notification.getSenderUserId(), "accepted" , FirebaseAuth.getInstance().getCurrentUser().getDisplayName()
+                                , null,notification.getRide());
+
+                        FirebaseDatabase database = FirebaseDatabase.getInstance();
+                        DatabaseReference myRef = database.getReference("notifications").child(newNotification.getTargetUid());
+                        DatabaseReference myRef2 = database.getReference("notifications").child(FirebaseAuth.getInstance().getUid()).child(notification.getNotificationId());
+                        myRef2.removeValue();
+                        myRef.push().setValue(newNotification);
+                        Intent intent = new Intent(mContext.getApplicationContext(), BottomNavActivity.class);
+                        mContext.startActivity(intent);
+
+                    }
+                });
+
+                holder.declineButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Notifications newNotification = new Notifications(FirebaseAuth.getInstance().getUid(), notification.getSenderUserId(), "declined" , FirebaseAuth.getInstance().getCurrentUser().getDisplayName()
+                                , null,notification.getRide());
+                        FirebaseDatabase database = FirebaseDatabase.getInstance();
+                        DatabaseReference myRef = database.getReference("notifications").child(newNotification.getTargetUid());
+                        DatabaseReference myRef2 = database.getReference("notifications").child(FirebaseAuth.getInstance().getUid()).child(notification.getNotificationId());
+                        myRef2.removeValue();
+                        Intent intent = new Intent(mContext.getApplicationContext(), BottomNavActivity.class);
+                        myRef.push().setValue(newNotification);
+                        mContext.startActivity(intent);
+                        ((Activity)mContext).finish();
+                    }
+                });
+            }
+
+
+
         }
         else{
             holder.notificationType.setText("Friend request");

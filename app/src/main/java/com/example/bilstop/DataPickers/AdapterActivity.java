@@ -52,6 +52,8 @@ public class AdapterActivity extends AppCompatActivity {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                rideDataFrom.clear();
+                rideDataTo.clear();
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                     Ride dataRide =postSnapshot.getValue(Ride.class);
                     String key= postSnapshot.getKey();

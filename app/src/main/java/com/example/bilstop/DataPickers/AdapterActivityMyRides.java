@@ -38,11 +38,12 @@ public class AdapterActivityMyRides extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_black_screen);
 
-        rideDataMy.clear();
+
 
         myRef3.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                rideDataMy.clear();
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                     Ride dataRide =postSnapshot.getValue(Ride.class);
                     String key= postSnapshot.getKey();

@@ -62,9 +62,11 @@ public class NotificationsActivity extends AppCompatActivity {
         if(notifications!=null){
             notifications = new ArrayList<Notifications>(RideDataPicker.getNotifications());
         }
-        adapter = new NotificationsRVAdapter(NotificationsActivity.this, notifications);
 
+        adapter = new NotificationsRVAdapter(NotificationsActivity.this, notifications);
         Log.d("ridesActivity", notifications.toString());
+
+
 
         recyclerView = (RecyclerView) findViewById(R.id.rvNotifications);
         recyclerView.setHasFixedSize(true);
