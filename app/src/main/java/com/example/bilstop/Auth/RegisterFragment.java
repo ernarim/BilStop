@@ -137,7 +137,12 @@ public class RegisterFragment extends Fragment {
                     }
                 });
 
-            } else {
+            }
+            else if( !isBilkent ){
+                Toast.makeText(context, "Enter a Bilkent-related mail address", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+            else {
                 Toast.makeText(context, "Password is either too short or too long!", Toast.LENGTH_SHORT).show();
                 return false;
             }
