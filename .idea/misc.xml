@@ -13,7 +13,6 @@
         <entry key="..\:/Users/burak/AndroidStudioProjects/BilStop/app/src/main/res/drawable/ic_baseline_calendar_today_24.xml" value="0.1895" />
         <entry key="..\:/Users/burak/AndroidStudioProjects/BilStop/app/src/main/res/drawable/ic_baseline_person_add_24.xml" value="0.1895" />
         <entry key="..\:/Users/burak/AndroidStudioProjects/BilStop/app/src/main/res/layout/activity_chat.xml" value="0.264" />
-        <entry key="..\:/Users/burak/AndroidStudioProjects/BilStop/app/src/main/res/layout/activity_maps.xml" value="0.2552083333333333" />
         <entry key="..\:/Users/burak/AndroidStudioProjects/BilStop/app/src/main/res/layout/activity_personal_info.xml" value="0.14351851851851852" />
         <entry key="..\:/Users/burak/AndroidStudioProjects/BilStop/app/src/main/res/layout/activity_places.xml" value="0.2552083333333333" />
         <entry key="..\:/Users/burak/AndroidStudioProjects/BilStop/app/src/main/res/layout/activity_reset_password.xml" value="0.264" />
@@ -52,7 +51,7 @@
         <entry key="..\:/Users/erena/AndroidStudioProjects/BilStop/app/src/main/res/layout/activity_places.xml" value="0.5" />
         <entry key="..\:/Users/erena/AndroidStudioProjects/BilStop/app/src/main/res/layout/activity_ride_info.xml" value="0.25" />
         <entry key="..\:/Users/erena/AndroidStudioProjects/BilStop/app/src/main/res/layout/activity_rides.xml" value="0.5700245700245701" />
-        <entry key="..\:/Users/erena/AndroidStudioProjects/BilStop/app/src/main/res/layout/card_notifications.xml" value="0.27398119122257053" />
+        <entry key="..\:/Users/erena/AndroidStudioProjects/BilStop/app/src/main/res/layout/card_notifications.xml" value="0.67" />
         <entry key="..\:/Users/erena/AndroidStudioProjects/BilStop/app/src/main/res/layout/fragment_create.xml" value="0.33" />
         <entry key="..\:/Users/erena/AndroidStudioProjects/BilStop/app/src/main/res/layout/fragment_home.xml" value="0.33" />
         <entry key="..\:/Users/erena/AndroidStudioProjects/BilStop/app/src/main/res/layout/fragment_home2.xml" value="0.35833333333333334" />

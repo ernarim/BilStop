@@ -60,6 +60,7 @@ public class NotificationsRVAdapter extends RecyclerView.Adapter<NotificationsRV
         private TextView notificationType;
         private ImageButton imageButtonRide;
         public CardView notificationCardView;
+        private Button addMyList;
 
 
         public CardNotifications(@NonNull View itemView) {
@@ -72,6 +73,7 @@ public class NotificationsRVAdapter extends RecyclerView.Adapter<NotificationsRV
             notificationType = itemView.findViewById(R.id.textViewNotificationType);
             imageButtonRide = itemView.findViewById(R.id.imageButtonRide);
             notificationCardView = itemView.findViewById(R.id.notificationCardView);
+            addMyList = itemView.findViewById(R.id.addMyListButton);
         }
     }
 
@@ -115,6 +117,17 @@ public class NotificationsRVAdapter extends RecyclerView.Adapter<NotificationsRV
                         mContext.startActivity(intent);
                     }
                 });
+
+                holder.addMyList.setVisibility(View.VISIBLE);
+                holder.addMyList.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        FirebaseDatabase database = FirebaseDatabase.getInstance();
+                        DatabaseReference myRefmyRides = database.getReference("myRides").child(FirebaseAuth.getInstance().getUid());
+                        myRefmyRides.push().setValue(notification.getRide());
+                        Intent intent = new Intent(mContext.getApplicationContext(), AdapterActivityMyRides.class);
+                    }
+                });
             }
             else if(notification.getCurrentState().equals("declined")){
                 holder.notificationType.setText("Ride Request Declined");
@@ -148,11 +161,10 @@ public class NotificationsRVAdapter extends RecyclerView.Adapter<NotificationsRV
                         FirebaseDatabase database = FirebaseDatabase.getInstance();
                         DatabaseReference myRef = database.getReference("notifications").child(newNotification.getTargetUid());
                         DatabaseReference myRef2 = database.getReference("notifications").child(FirebaseAuth.getInstance().getUid()).child(notification.getNotificationId());
-                        DatabaseReference myRefmyRides = database.getReference("myRides").child(FirebaseAuth.getInstance().getUid());
-                        myRefmyRides.push().setValue(notification.getRide());
+
                         myRef2.removeValue();
                         myRef.push().setValue(newNotification);
-                        Intent intent = new Intent(mContext.getApplicationContext(), AdapterActivityMyRides.class);
+                        Intent intent = new Intent(mContext.getApplicationContext(), BottomNavActivity.class);
                         mContext.startActivity(intent);
 
                     }

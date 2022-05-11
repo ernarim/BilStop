@@ -84,6 +84,21 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="1.0" />
 
+            <Button
+                android:id="@+id/addMyListButton"
+                android:layout_width="wrap_content"
+                android:layout_height="40sp"
+                android:layout_marginStart="140dp"
+                android:text="Add ride to my list"
+                android:textSize="10sp"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/imageButtonRide"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.966" />
+
             <ImageButton
                 android:id="@+id/imageButtonRide"
                 android:layout_width="35sp"
