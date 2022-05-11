@@ -128,6 +128,7 @@ public class NotificationsRVAdapter extends RecyclerView.Adapter<NotificationsRV
                         DatabaseReference myRef2 = database.getReference("notifications").child(FirebaseAuth.getInstance().getUid()).child(notification.getNotificationId());
                         myRef2.removeValue();
                         Intent intent = new Intent(mContext.getApplicationContext(), AdapterActivityMyRides.class);
+                        mContext.startActivity(intent);
                     }
                 });
             }
