@@ -25,6 +25,7 @@ import com.example.bilstop.MainActivity;
 import com.example.bilstop.NotificationsActivity;
 import com.example.bilstop.R;
 import com.example.bilstop.RideInfoActivity;
+import com.example.bilstop.TargetProfileActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -178,6 +179,74 @@ public class NotificationsRVAdapter extends RecyclerView.Adapter<NotificationsRV
             holder.notificationType.setText("Friend request");
             holder.imageButtonRide.setVisibility(View.INVISIBLE);
             holder.senderRide.setVisibility(View.INVISIBLE);
+
+            if(notification.getCurrentState().equals("accepted")){
+                holder.notificationType.setText("Friend Request Accepted");
+                holder.acceptButton.setVisibility(View.INVISIBLE);
+                holder.declineButton.setVisibility(View.INVISIBLE);
+                holder.senderName.setText("Friend: " + notification.getName());
+                holder.senderItemPP.setVisibility(View.INVISIBLE);
+
+
+            }
+            else if(notification.getCurrentState().equals("declined")){
+                holder.notificationType.setText("Friend Request Declined");
+                holder.acceptButton.setVisibility(View.INVISIBLE);
+                holder.declineButton.setVisibility(View.INVISIBLE);
+                holder.senderName.setText(notification.getName());
+                holder.senderItemPP.setVisibility(View.INVISIBLE);
+                holder.senderRide.setVisibility(View.INVISIBLE);
+                holder.imageButtonRide.setVisibility(View.INVISIBLE);
+            }
+
+            else{
+                holder.notificationType.setText("Friend request");
+                holder.senderName.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+
+                        String uid = notification.getSenderUserId();
+                        Intent intent = new Intent(mContext.getApplicationContext(),TargetProfileActivity.class);
+                        intent.putExtra("uid",uid);
+                        mContext.startActivity(intent);
+                    }
+                });
+
+                holder.acceptButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Notifications newNotification = new Notifications(FirebaseAuth.getInstance().getUid(), notification.getSenderUserId(), "accepted" , FirebaseAuth.getInstance().getCurrentUser().getDisplayName()
+                                , null,null);
+
+                        FirebaseDatabase database = FirebaseDatabase.getInstance();
+                        DatabaseReference myRef = database.getReference("notifications").child(newNotification.getTargetUid());
+                        DatabaseReference myRef2 = database.getReference("notifications").child(FirebaseAuth.getInstance().getUid()).child(notification.getNotificationId());
+                        myRef2.removeValue();
+                        myRef.push().setValue(newNotification);
+                        Intent intent = new Intent(mContext.getApplicationContext(), BottomNavActivity.class);
+                        mContext.startActivity(intent);
+                        ((Activity)mContext).finish();
+
+                    }
+                });
+
+                holder.declineButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Notifications newNotification = new Notifications(FirebaseAuth.getInstance().getUid(), notification.getSenderUserId(), "declined" , FirebaseAuth.getInstance().getCurrentUser().getDisplayName()
+                                , null,null);
+                        FirebaseDatabase database = FirebaseDatabase.getInstance();
+                        DatabaseReference myRef = database.getReference("notifications").child(newNotification.getTargetUid());
+                        DatabaseReference myRef2 = database.getReference("notifications").child(FirebaseAuth.getInstance().getUid()).child(notification.getNotificationId());
+                        myRef2.removeValue();
+                        Intent intent = new Intent(mContext.getApplicationContext(), BottomNavActivity.class);
+                        myRef.push().setValue(newNotification);
+                        mContext.startActivity(intent);
+                        ((Activity)mContext).finish();
+                    }
+                });
+            }
         }
 
     }
