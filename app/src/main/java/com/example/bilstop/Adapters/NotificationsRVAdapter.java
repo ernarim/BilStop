@@ -142,6 +142,19 @@ public class NotificationsRVAdapter extends RecyclerView.Adapter<NotificationsRV
                 holder.senderItemPP.setVisibility(View.INVISIBLE);
                 holder.senderRide.setVisibility(View.INVISIBLE);
                 holder.imageButtonRide.setVisibility(View.INVISIBLE);
+
+                holder.addMyList.setVisibility(View.VISIBLE);
+                holder.addMyList.setText("Delete Notification");
+                holder.addMyList.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        FirebaseDatabase database = FirebaseDatabase.getInstance();
+                        DatabaseReference myRef2 = database.getReference("notifications").child(FirebaseAuth.getInstance().getUid()).child(notification.getNotificationId());
+                        myRef2.removeValue();
+                        Intent intent = new Intent(mContext.getApplicationContext(), AdapterActivityMyRides.class);
+                        mContext.startActivity(intent);
+                    }
+                });
             }
 
             else{

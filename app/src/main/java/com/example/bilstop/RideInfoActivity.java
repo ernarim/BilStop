@@ -196,11 +196,9 @@ public class RideInfoActivity extends AppCompatActivity implements OnMapReadyCal
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
                 DatabaseReference myRef = database.getReference().child("ridesFromBilkent");
                 DatabaseReference myRef2 = database.getReference().child("ridesToBilkent");
-                DatabaseReference myRef3 = database.getReference().child("myRides").child(FirebaseAuth.getInstance().getUid());
 
                 myRef.child(ride.getRideId()).removeValue();
                 myRef2.child(ride.getRideId()).removeValue();
-                myRef3.child(ride.getRideId()).removeValue();
                 Intent intent = new Intent(RideInfoActivity.this, MainActivity.class);
                 startActivity(intent);
             }
