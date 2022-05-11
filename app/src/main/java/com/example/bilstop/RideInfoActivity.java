@@ -48,6 +48,7 @@ import com.google.maps.internal.PolylineEncoding;
 import com.google.maps.model.DirectionsResult;
 import com.google.maps.model.DirectionsRoute;
 import com.google.maps.model.LatLng;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -138,9 +139,11 @@ public class RideInfoActivity extends AppCompatActivity implements OnMapReadyCal
                         Log.d("value", value);
                         carValues.add(value);
                     }
-                    if(carValues.size() == 4){
+                    if(carValues.size() == 5){
                         textViewCarInfo.setText("Car: " + carValues.get(0) + " " + carValues.get(3));
                         textViewCarPlateInfo.setText("Licence Plate: " + carValues.get(2));
+                        Picasso.get().load(carValues.get(4)).into(imageViewCarInfo);
+
                     }
                 }
 
