@@ -208,8 +208,8 @@ public class FinalizeRideActivity extends AppCompatActivity {
                 pushedPostRef.setValue(ride);
                 String postId = pushedPostRef.getKey();
 
-                DatabaseReference myRef2 = database.getReference("myRides").child(user.getUid());
-                myRef2.child(postId).setValue(ride);
+                /*DatabaseReference myRef2 = database.getReference("myRides").child(user.getUid());
+                myRef2.child(postId).setValue(ride);*/
 
                 Intent intent = new Intent(FinalizeRideActivity.this, MainActivity.class);
                 startActivity(intent);

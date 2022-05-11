@@ -20,6 +20,7 @@ import com.example.bilstop.BottomNavActivity;
 import com.example.bilstop.Classes.Notifications;
 import com.example.bilstop.Classes.Ride;
 import com.example.bilstop.Classes.Users;
+import com.example.bilstop.DataPickers.AdapterActivityMyRides;
 import com.example.bilstop.DataPickers.AdapterActivityNotifications;
 import com.example.bilstop.MainActivity;
 import com.example.bilstop.NotificationsActivity;
@@ -147,9 +148,11 @@ public class NotificationsRVAdapter extends RecyclerView.Adapter<NotificationsRV
                         FirebaseDatabase database = FirebaseDatabase.getInstance();
                         DatabaseReference myRef = database.getReference("notifications").child(newNotification.getTargetUid());
                         DatabaseReference myRef2 = database.getReference("notifications").child(FirebaseAuth.getInstance().getUid()).child(notification.getNotificationId());
+                        DatabaseReference myRefmyRides = database.getReference("myRides").child(FirebaseAuth.getInstance().getUid());
+                        myRefmyRides.push().setValue(notification.getRide());
                         myRef2.removeValue();
                         myRef.push().setValue(newNotification);
-                        Intent intent = new Intent(mContext.getApplicationContext(), BottomNavActivity.class);
+                        Intent intent = new Intent(mContext.getApplicationContext(), AdapterActivityMyRides.class);
                         mContext.startActivity(intent);
 
                     }
