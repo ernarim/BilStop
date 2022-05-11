@@ -45,7 +45,7 @@
         android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:backgroundTint="@color/orange"
-        android:text="Show All From Bilkent"
+        android:text="Show All Rides From Bilkent"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
