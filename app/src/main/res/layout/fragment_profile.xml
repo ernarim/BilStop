@@ -289,10 +289,10 @@
                         android:layout_height="wrap_content"
                         android:foregroundTint="@color/black"
 
-                        app:strokeColor="@color/black"
-                        app:layout_constraintTop_toBottomOf="@id/add_car_button"
-                        app:layout_constraintBottom_toBottomOf="parent"
                         android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/add_car_button"
+                        app:strokeColor="@color/black"
 
                         >
 
@@ -306,15 +306,15 @@
                             app:layout_constraintStart_toStartOf="parent">
 
                             <de.hdodenhof.circleimageview.CircleImageView
-                                app:civ_border_color="@color/black"
-                                app:civ_border_width="3dp"
-                                android:id="@+id/friendsItemPP"
+                                android:id="@+id/carItemPP"
                                 android:layout_width="60dp"
                                 android:layout_height="60dp"
+                                android:layout_marginStart="5dp"
                                 android:background="@null"
                                 android:src="@drawable/car_iconn"
+                                app:civ_border_color="@color/black"
+                                app:civ_border_width="3dp"
                                 app:layout_constraintBottom_toBottomOf="parent"
-                                android:layout_marginStart="5dp"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -327,7 +327,7 @@
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintHorizontal_bias="1"
-                                app:layout_constraintStart_toStartOf="@+id/friendsItemPP"
+                                app:layout_constraintStart_toStartOf="@+id/carItemPP"
                                 app:layout_constraintTop_toTopOf="parent"
                                 app:layout_constraintVertical_bias="0.52" />
 
@@ -335,32 +335,33 @@
                                 android:id="@+id/car_name"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Name"
-                                android:textSize="20sp"
                                 android:layout_marginStart="10sp"
+                                android:text="Name"
+                                android:textColor="@color/black"
+                                android:textSize="20sp"
                                 app:layout_constraintBottom_toTopOf="@+id/car_color"
-                                app:layout_constraintStart_toEndOf="@+id/friendsItemPP"
+                                app:layout_constraintStart_toEndOf="@+id/carItemPP"
                                 app:layout_constraintTop_toTopOf="parent" />
 
                             <TextView
                                 android:id="@+id/car_color"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Color"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintStart_toEndOf="@id/friendsItemPP"
                                 android:layout_marginStart="10sp"
+                                android:text="Color"
+                                android:textColor="@color/black"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toEndOf="@id/carItemPP"
                                 app:layout_constraintTop_toBottomOf="@+id/car_name" />
-
 
 
                             <ImageButton
                                 android:id="@+id/editCar"
                                 android:layout_width="35dp"
                                 android:layout_height="35dp"
+                                android:layout_marginEnd="5dp"
                                 android:background="@drawable/roundcorner"
                                 android:src="@drawable/ic_baseline_edit_24"
-                                android:layout_marginEnd="5dp"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toStartOf="@+id/delete"
                                 app:layout_constraintTop_toTopOf="parent" />
@@ -371,11 +372,7 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <Button
-                android:id="@+id/test2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Test2" />
+
 
         </LinearLayout>
     </ScrollView>

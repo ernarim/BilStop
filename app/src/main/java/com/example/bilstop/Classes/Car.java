@@ -6,16 +6,18 @@ public class Car {
     private String licencePlate;
     private String color;
     private String model;
+    private String pp;
 
     public Car(){
 
     }
 
-    public Car(String brand, String licencePlate, String color, String model) {
+    public Car(String brand, String licencePlate, String color, String model, String pp) {
         this.brand = brand;
         this.licencePlate = licencePlate;
         this.color = color;
         this.model = model;
+        this.pp = pp;
     }
 
     public String getBrand() {
@@ -50,6 +52,14 @@ public class Car {
         this.model = model;
     }
 
+    public String getPp() {
+        return pp;
+    }
+
+    public void setPp(String pp) {
+        this.pp = pp;
+    }
+
     @Override
     public String toString() {
         return "Car{" +
@@ -57,6 +67,7 @@ public class Car {
                 ", licencePlate='" + licencePlate + '\'' +
                 ", color='" + color + '\'' +
                 ", model='" + model + '\'' +
+                ", pp='" + pp + '\'' +
                 '}';
     }
 }
