@@ -111,6 +111,22 @@ public class AddCarFragment extends Fragment {
                 reference.child("Model").setValue(model.getText().toString());
                 reference.child("Color").setValue(color.getText().toString());
 
+                reference.orderByKey().equalTo("PP").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists()){
+
+                        }
+                        else{
+                            reference.child("PP").setValue("null");
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
 
                 StorageReference stref = FirebaseStorage.getInstance().getReference().child("carProfilePictures").child(auth.getUid() + ".jpg");
                 if (filePath != null) {
@@ -135,7 +151,6 @@ public class AddCarFragment extends Fragment {
                     });
                 }
                 else {
-                    reference.child("PP").setValue("null");
                     Navigation.findNavController(view).navigate(R.id.action_addCarFragment_to_profileFragment);
                 }
 
