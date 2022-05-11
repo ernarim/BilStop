@@ -138,8 +138,10 @@ public class RideInfoActivity extends AppCompatActivity implements OnMapReadyCal
                         Log.d("value", value);
                         carValues.add(value);
                     }
-                    textViewCarInfo.setText("Car: " + carValues.get(0) + " " + carValues.get(3));
-                    textViewCarPlateInfo.setText("Licence Plate: " +  carValues.get(2));
+                    if(carValues.size() == 4){
+                        textViewCarInfo.setText("Car: " + carValues.get(0) + " " + carValues.get(3));
+                        textViewCarPlateInfo.setText("Licence Plate: " + carValues.get(2));
+                    }
                 }
 
             }@Override
