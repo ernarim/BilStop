@@ -124,7 +124,9 @@ public class NotificationsRVAdapter extends RecyclerView.Adapter<NotificationsRV
                     public void onClick(View view) {
                         FirebaseDatabase database = FirebaseDatabase.getInstance();
                         DatabaseReference myRefmyRides = database.getReference("myRides").child(FirebaseAuth.getInstance().getUid());
-                        myRefmyRides.push().setValue(notification.getRide());
+                        Ride myRide = notification.getRide();
+                        myRide.setMyRide(true);
+                        myRefmyRides.push().setValue(myRide);
                         DatabaseReference myRef2 = database.getReference("notifications").child(FirebaseAuth.getInstance().getUid()).child(notification.getNotificationId());
                         myRef2.removeValue();
                         Intent intent = new Intent(mContext.getApplicationContext(), AdapterActivityMyRides.class);

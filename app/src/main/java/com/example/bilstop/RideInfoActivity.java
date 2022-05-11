@@ -108,6 +108,7 @@ public class RideInfoActivity extends AppCompatActivity implements OnMapReadyCal
         requestButton = findViewById(R.id.requestButton);
 
         ride = (Ride) getIntent().getSerializableExtra("ride");
+
         if(ride.getDriverUid().equals(FirebaseAuth.getInstance().getUid())){
             imageButtonSeeProfile.setVisibility(View.INVISIBLE);
             imageButtonDeleteProfile.setVisibility(View.VISIBLE);
@@ -115,9 +116,18 @@ public class RideInfoActivity extends AppCompatActivity implements OnMapReadyCal
 
         }
         else{
-            imageButtonSeeProfile.setVisibility(View.VISIBLE);
-            imageButtonDeleteProfile.setVisibility(View.INVISIBLE);
-            requestButton.setVisibility(View.VISIBLE);
+
+            if(ride.getMyRide()){
+                requestButton.setVisibility(View.INVISIBLE);
+                imageButtonSeeProfile.setVisibility(View.VISIBLE);
+                imageButtonDeleteProfile.setVisibility(View.INVISIBLE);
+
+            }
+            else{
+                imageButtonSeeProfile.setVisibility(View.VISIBLE);
+                imageButtonDeleteProfile.setVisibility(View.INVISIBLE);
+                requestButton.setVisibility(View.VISIBLE);
+            }
         }
 
         textViewDriverNameInfo.setText("Driver Name: " + ride.getDriverName());

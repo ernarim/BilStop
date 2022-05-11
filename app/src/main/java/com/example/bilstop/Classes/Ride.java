@@ -16,6 +16,7 @@ public class Ride implements Serializable, Comparable<Ride> {
     private int polylineIndex;
     private double distanceFromLocation;
     private String driverUid;
+    private boolean myRide;
 
     public Ride(){
 
@@ -86,6 +87,11 @@ public class Ride implements Serializable, Comparable<Ride> {
         this.distanceFromLocation = distanceFromLocation;
     }
 
+    public void setMyRide(boolean myRide) {
+        this.myRide = myRide;
+    }
+
+
     public String getRideId() {
         return rideId;
     }
@@ -125,6 +131,10 @@ public class Ride implements Serializable, Comparable<Ride> {
     public double getDistanceFromLocation() {
         return distanceFromLocation;
     }
+    public boolean getMyRide() {
+        return myRide;
+    }
+
 
     @Override
     public String toString() {
