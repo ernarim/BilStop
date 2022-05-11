@@ -50,7 +50,7 @@ public class ProfileFragment extends Fragment {
     private FriendsRVAdapter friendsRVAdapter;
     private boolean getInfoDone;
 
-    private CircleImageView profilePicture;
+    private CircleImageView profilePicture, carPP;
     private ImageButton edit, signOut, notifications, friendsAdd, carAdd, addCarButton, delete, editCar;
     private RecyclerView friends, cars;
     private TextView name, email, about;
@@ -88,6 +88,7 @@ public class ProfileFragment extends Fragment {
         delete = view.findViewById(R.id.delete);
         editCar = view.findViewById(R.id.editCar);
         notifications = view.findViewById(R.id.notificationsImageButton);
+        carPP = view.findViewById(R.id.carItemPP);
 
         BadgeDrawable badgeDrawable =  BadgeDrawable.create(getContext());
         badgeDrawable.setNumber(3);
@@ -196,12 +197,13 @@ public class ProfileFragment extends Fragment {
                             carValues.add(value);
                         }
 
-                    if(carValues.size() == 4){
-                        car = new Car(carValues.get(0), carValues.get(1), carValues.get(2), carValues.get(3));
+                    if(carValues.size() == 5){
+                        car = new Car(carValues.get(0), carValues.get(1), carValues.get(2), carValues.get(3), carValues.get(4));
                         textView1.setText(car.getBrand() + " " + car.getModel());
                         textView2.setText(car.getLicencePlate());
                         cardView.setVisibility(View.VISIBLE);
                         addCarButton.setVisibility(View.INVISIBLE);
+                        Picasso.get().load(car.getPp()).into(carPP);
                     }
                 }
                 else{
@@ -267,20 +269,6 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        //TEST
-        Button btn2 = view.findViewById(R.id.test2);
-        btn2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String burakdemirel49 = "mK0hIFaN7pWvvNH2T3fTM8BNLOs1";
-                String mehmet = "r0eRpd3A5YMb3F2MkffIxfXUen83";
-                String mikail = "WoPIDUuVVobtNiR3xp1qg7xnGM82";
-                String eren = "nftPJmvxrhbEMXasK349KvvehoS2";
 
-                Intent intent = new Intent(getActivity(), TargetProfileActivity.class);
-                intent.putExtra("uid", "YtIfrmmlJlVkX3Q8tiXaGHfIRJ23");
-                startActivity(intent);
-            }
-        });
     }
 }
