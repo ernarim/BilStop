@@ -39,7 +39,6 @@
         <activity
             android:name=".FinalizeRideActivity"
             android:exported="false" />
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/api_key" />
