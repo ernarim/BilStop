@@ -11,7 +11,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="760sp"
+        android:layout_height="620sp"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -36,6 +36,7 @@
         android:id="@+id/divider"
         android:layout_width="match_parent"
         android:layout_height="3sp"
+        android:layout_marginTop="12dp"
         android:background="@color/grew"
         android:backgroundTintMode="add"
         app:layout_constraintBottom_toTopOf="@+id/recyclerView"
