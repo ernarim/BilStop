@@ -1,5 +1,6 @@
 package com.example.bilstop;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.ContactsContract;
@@ -26,6 +27,8 @@ import com.example.bilstop.Classes.Friends;
 import com.example.bilstop.Classes.Users;
 import com.example.bilstop.DataPickers.AdapterActivityNotifications;
 import com.example.bilstop.DataPickers.RideDataPicker;
+import com.google.android.material.badge.BadgeDrawable;
+import com.google.android.material.badge.BadgeUtils;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -71,6 +74,7 @@ public class ProfileFragment extends Fragment {
         return view;
     }
 
+    @SuppressLint("UnsafeOptInUsageError")
     private void init() {
         //Views
         profilePicture = view.findViewById(R.id.civCurrentPP);
@@ -84,6 +88,11 @@ public class ProfileFragment extends Fragment {
         delete = view.findViewById(R.id.delete);
         editCar = view.findViewById(R.id.editCar);
         notifications = view.findViewById(R.id.notificationsImageButton);
+
+        BadgeDrawable badgeDrawable =  BadgeDrawable.create(getContext());
+        badgeDrawable.setNumber(3);
+        badgeDrawable.setVisible(true);
+        BadgeUtils.attachBadgeDrawable(badgeDrawable, notifications);
 
         //Firebase
         auth = FirebaseAuth.getInstance();
