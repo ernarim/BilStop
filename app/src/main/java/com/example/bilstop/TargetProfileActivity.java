@@ -81,6 +81,7 @@ public class TargetProfileActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 addFriend.setEnabled(false);
+                addFriend.setVisibility(View.INVISIBLE);
                 sendFriendRequestToSomeone();
 
             }

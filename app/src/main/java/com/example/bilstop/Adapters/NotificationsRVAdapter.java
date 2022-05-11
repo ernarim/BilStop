@@ -181,6 +181,10 @@ public class NotificationsRVAdapter extends RecyclerView.Adapter<NotificationsRV
                         DatabaseReference myRef2 = database.getReference("notifications").child(FirebaseAuth.getInstance().getUid()).child(notification.getNotificationId());
                         myRef2.removeValue();
                         myRef.push().setValue(newNotification);
+
+                        FirebaseDatabase.getInstance().getReference().child("users").child(notification.getSenderUserId()).child("friends").push().child("id").setValue(notification.getTargetUid());
+                        FirebaseDatabase.getInstance().getReference().child("users").child(notification.getTargetUid()).child("friends").push().child("id").setValue(notification.getSenderUserId());
+
                         Intent intent = new Intent(mContext.getApplicationContext(), MainActivity.class);
                         mContext.startActivity(intent);
 
@@ -220,6 +224,8 @@ public class NotificationsRVAdapter extends RecyclerView.Adapter<NotificationsRV
                 holder.senderItemPP.setVisibility(View.INVISIBLE);
 
 
+
+
             }
             else if(notification.getCurrentState().equals("declined")){
                 holder.notificationType.setText("Friend Request Declined");
@@ -256,6 +262,10 @@ public class NotificationsRVAdapter extends RecyclerView.Adapter<NotificationsRV
                         DatabaseReference myRef2 = database.getReference("notifications").child(FirebaseAuth.getInstance().getUid()).child(notification.getNotificationId());
                         myRef2.removeValue();
                         myRef.push().setValue(newNotification);
+
+                        FirebaseDatabase.getInstance().getReference().child("users").child(notification.getSenderUserId()).child("friends").push().child("id").setValue(notification.getTargetUid());
+                        FirebaseDatabase.getInstance().getReference().child("users").child(notification.getTargetUid()).child("friends").push().child("id").setValue(notification.getSenderUserId());
+
                         Intent intent = new Intent(mContext.getApplicationContext(), BottomNavActivity.class);
                         mContext.startActivity(intent);
                         ((Activity)mContext).finish();
