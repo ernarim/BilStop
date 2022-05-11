@@ -1,16 +1,20 @@
 package com.example.bilstop.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.bilstop.ChatActivity;
 import com.example.bilstop.Classes.Users;
 import com.example.bilstop.R;
+import com.example.bilstop.TargetProfileActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -41,6 +45,25 @@ public class FriendsRVAdapter extends RecyclerView.Adapter<FriendsRVAdapter.View
             Picasso.get().load(user.getProfilePicture()).into(holder.pp);
         }
         holder.name.setText( user.getName() + " " + user.getSurname() );
+
+        holder.sendMessage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, ChatActivity.class);
+                intent.putExtra("uid",user.getId());
+                context.startActivity(intent);
+
+            }
+        });
+
+        holder.seeProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, TargetProfileActivity.class);
+                intent.putExtra("uid",user.getId());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -56,11 +79,14 @@ public class FriendsRVAdapter extends RecyclerView.Adapter<FriendsRVAdapter.View
     public class ViewHolder extends RecyclerView.ViewHolder{
         CircleImageView pp;
         TextView name;
+        ImageButton seeProfile, sendMessage;
 
         public ViewHolder(View itemView){
             super(itemView);
             pp = itemView.findViewById(R.id.senderItemPP);
             name = itemView.findViewById(R.id.senderName);
+            seeProfile = itemView.findViewById(R.id.friendsItemLook);
+            sendMessage = itemView.findViewById(R.id.friendsItemMessage);
         }
     }
 

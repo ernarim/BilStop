@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/burak/AndroidStudioProjects/BilStop/app/src/main/res/drawable-anydpi/ic_look.xml" value="0.1915" />
+        <entry key="..\:/Users/burak/AndroidStudioProjects/BilStop/app/src/main/res/drawable-anydpi/ic_look_black.xml" value="0.1715" />
         <entry key="..\:/Users/burak/AndroidStudioProjects/BilStop/app/src/main/res/drawable-anydpi/ic_send_message.xml" value="0.1895" />
         <entry key="..\:/Users/burak/AndroidStudioProjects/BilStop/app/src/main/res/drawable-anydpi/ic_sign_out.xml" value="0.1915" />
         <entry key="..\:/Users/burak/AndroidStudioProjects/BilStop/app/src/main/res/drawable-v24/ic_baseline_chat_24.xml" value="0.1895" />
@@ -46,7 +47,7 @@
         <entry key="..\:/Users/erena/AndroidStudioProjects/BilStop/app/src/main/res/layout/activity_bottom_nav.xml" value="0.25" />
         <entry key="..\:/Users/erena/AndroidStudioProjects/BilStop/app/src/main/res/layout/activity_finalize_ride.xml" value="0.5" />
         <entry key="..\:/Users/erena/AndroidStudioProjects/BilStop/app/src/main/res/layout/activity_main.xml" value="0.33" />
-        <entry key="..\:/Users/erena/AndroidStudioProjects/BilStop/app/src/main/res/layout/activity_maps.xml" value="0.17777777777777778" />
+        <entry key="..\:/Users/erena/AndroidStudioProjects/BilStop/app/src/main/res/layout/activity_maps.xml" value="0.5" />
         <entry key="..\:/Users/erena/AndroidStudioProjects/BilStop/app/src/main/res/layout/activity_notifications.xml" value="0.5" />
         <entry key="..\:/Users/erena/AndroidStudioProjects/BilStop/app/src/main/res/layout/activity_places.xml" value="0.5" />
         <entry key="..\:/Users/erena/AndroidStudioProjects/BilStop/app/src/main/res/layout/activity_ride_info.xml" value="0.25" />
