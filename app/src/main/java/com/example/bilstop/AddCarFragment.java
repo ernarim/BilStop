@@ -52,20 +52,24 @@ public class AddCarFragment extends Fragment {
         color = (EditText) view.findViewById(R.id.color);
 
         ArrayList<String> carValues = new ArrayList<>();
-        reference.child("car").addValueEventListener(new ValueEventListener() {
+        reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()){
-                    for(DataSnapshot dataSnapshot: snapshot.getChildren()){
+
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                         String value = dataSnapshot.getValue(String.class);
-                        Log.d("value", value);
+                        System.out.println(value);
                         carValues.add(value);
                     }
-                    car = new Car(carValues.get(0),carValues.get(1),carValues.get(2),carValues.get(3));
-                    licencePlate.setText(car.getLicencePlate());
-                    brand.setText(car.getBrand());
-                    model.setText(car.getModel());
-                    color.setText(car.getColor());
+
+                    if(carValues.size() == 4){
+                        car = new Car(carValues.get(0), carValues.get(1), carValues.get(2), carValues.get(3));
+                        licencePlate.setText(car.getColor());
+                        brand.setText(car.getBrand());
+                        model.setText(car.getModel());
+                        color.setText(car.getLicencePlate());
+                    }
                 }
             }
 

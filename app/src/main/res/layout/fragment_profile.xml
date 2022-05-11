@@ -292,6 +292,7 @@
                         app:strokeColor="@color/black"
                         app:layout_constraintTop_toBottomOf="@id/add_car_button"
                         app:layout_constraintBottom_toBottomOf="parent"
+                        android:visibility="gone"
 
                         >
 
@@ -313,7 +314,7 @@
                                 android:background="@null"
                                 android:src="@drawable/car_iconn"
                                 app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toStartOf="@id/guideline6"
+                                android:layout_marginStart="5dp"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -336,8 +337,9 @@
                                 android:layout_height="wrap_content"
                                 android:text="Name"
                                 android:textSize="20sp"
+                                android:layout_marginStart="10sp"
                                 app:layout_constraintBottom_toTopOf="@+id/car_color"
-                                app:layout_constraintStart_toStartOf="@+id/guideline6"
+                                app:layout_constraintStart_toEndOf="@+id/friendsItemPP"
                                 app:layout_constraintTop_toTopOf="parent" />
 
                             <TextView
@@ -346,15 +348,11 @@
                                 android:layout_height="wrap_content"
                                 android:text="Color"
                                 app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintStart_toStartOf="@+id/guideline6"
+                                app:layout_constraintStart_toEndOf="@id/friendsItemPP"
+                                android:layout_marginStart="10sp"
                                 app:layout_constraintTop_toBottomOf="@+id/car_name" />
 
-                            <androidx.constraintlayout.widget.Guideline
-                                android:id="@+id/guideline6"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical"
-                                app:layout_constraintGuide_percent="0.30" />
+
 
                             <ImageButton
                                 android:id="@+id/editCar"

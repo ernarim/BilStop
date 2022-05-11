@@ -68,7 +68,6 @@ public class ProfileFragment extends Fragment {
         init();
         getInfo();
         action();
-
         return view;
     }
 
@@ -173,7 +172,7 @@ public class ProfileFragment extends Fragment {
 
             }
         });
-
+        CardView cardView = view.findViewById(R.id.car_card);
         ArrayList<String> carValues = new ArrayList<>();
         reference.child("car").addValueEventListener(new ValueEventListener() {
             @Override
@@ -181,18 +180,23 @@ public class ProfileFragment extends Fragment {
                 TextView textView1 = view.findViewById(R.id.car_name);
                 TextView textView2 = view.findViewById(R.id.car_color);
                 if(snapshot.exists()){
-                    for(DataSnapshot dataSnapshot: snapshot.getChildren()){
-                        String value = dataSnapshot.getValue(String.class);
-                        Log.d("value", value);
-                        carValues.add(value);
+
+                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                            String value = dataSnapshot.getValue(String.class);
+                            System.out.println(value);
+                            carValues.add(value);
+                        }
+
+                    if(carValues.size() == 4){
+                        car = new Car(carValues.get(0), carValues.get(1), carValues.get(2), carValues.get(3));
+                        textView1.setText(car.getBrand() + " " + car.getModel());
+                        textView2.setText(car.getLicencePlate());
+                        cardView.setVisibility(View.VISIBLE);
+                        addCarButton.setVisibility(View.INVISIBLE);
                     }
-                    car = new Car(carValues.get(0),carValues.get(1),carValues.get(2),carValues.get(3));
-                    textView1.setText(car.getBrand() + " " + car.getModel());
-                    textView2.setText(car.getColor());
-                    addCarButton.setVisibility(View.INVISIBLE);
                 }
                 else{
-                    CardView cardView = view.findViewById(R.id.car_card);
+
                     cardView.setVisibility(View.GONE);
                     addCarButton.setVisibility(View.VISIBLE);
                 }
