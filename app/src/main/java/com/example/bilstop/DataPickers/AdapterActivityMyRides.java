@@ -32,7 +32,7 @@ public class AdapterActivityMyRides extends AppCompatActivity {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
 
     DatabaseReference myRef3 = database.getReference("myRides").child(FirebaseAuth.getInstance().getUid());
-    DatabaseReference myRefCar = database.getReference("users").child(FirebaseAuth.getInstance().getUid()).child("car");
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +51,9 @@ public class AdapterActivityMyRides extends AppCompatActivity {
                     rideDataMy.add(dataRide);
                 }
                 RideDataPicker.setMyRides(rideDataMy);
-
+                Intent intent = new Intent(AdapterActivityMyRides.this, BottomNavActivity.class);
+                startActivity(intent);
+                finish();
             }
 
             @Override
@@ -62,9 +64,7 @@ public class AdapterActivityMyRides extends AppCompatActivity {
 
 
 
-        Intent intent = new Intent(AdapterActivityMyRides.this, BottomNavActivity.class);
-        startActivity(intent);
-        finish();
+
 
     }
 }

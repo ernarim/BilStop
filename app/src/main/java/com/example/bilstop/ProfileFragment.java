@@ -24,6 +24,7 @@ import com.example.bilstop.Adapters.FriendsRVAdapter;
 import com.example.bilstop.Classes.Car;
 import com.example.bilstop.Classes.Friends;
 import com.example.bilstop.Classes.Users;
+import com.example.bilstop.DataPickers.AdapterActivityNotifications;
 import com.example.bilstop.DataPickers.RideDataPicker;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
@@ -83,6 +84,7 @@ public class ProfileFragment extends Fragment {
         addCarButton = view.findViewById(R.id.add_car_button);
         delete = view.findViewById(R.id.delete);
         editCar = view.findViewById(R.id.editCar);
+        notifications = view.findViewById(R.id.notificationsImageButton);
 
         //Firebase
         auth = FirebaseAuth.getInstance();
@@ -237,6 +239,14 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 reference.child("car").removeValue();
+            }
+        });
+
+        notifications.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), AdapterActivityNotifications.class);
+                startActivity(intent);
             }
         });
     }

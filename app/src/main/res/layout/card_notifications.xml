@@ -11,6 +11,7 @@
         android:id="@+id/notificationCardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="5sp"
         android:foregroundTint="@color/black"
         app:cardCornerRadius="25dp"
         app:cardElevation="1dp"
@@ -19,9 +20,22 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="100sp"
             android:background="@color/orange"
             android:padding="10dp">
+
+            <TextView
+                android:id="@+id/senderRide"
+                android:layout_width="51dp"
+                android:layout_height="26dp"
+                android:layout_marginStart="12dp"
+                android:text="Ride: "
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/senderItemPP"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.824" />
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/senderItemPP"
@@ -34,34 +48,69 @@
 
             <TextView
                 android:id="@+id/senderName"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="32dp"
+                android:layout_width="116dp"
+                android:layout_height="23dp"
+                android:layout_marginStart="12dp"
                 android:text="NAME"
+                android:textColor="@color/black"
+                android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/senderItemPP"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.508" />
+                app:layout_constraintVertical_bias="0.207" />
 
             <Button
                 android:id="@+id/declineButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="4dp"
+                android:layout_width="78sp"
+                android:layout_height="40sp"
+                android:layout_marginEnd="15dp"
                 android:text="Declıne"
+                android:textSize="10sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0" />
 
             <Button
                 android:id="@+id/acceptButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
+                android:layout_width="78sp"
+                android:layout_height="40sp"
+                android:layout_marginEnd="4dp"
                 android:text="accept"
+                android:textSize="10sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/declineButton"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <ImageButton
+                android:id="@+id/imageButtonRide"
+                android:layout_width="35sp"
+                android:layout_height="35sp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="47dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/acceptButton"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/senderRide"
+                app:layout_constraintTop_toBottomOf="@+id/senderName"
+                app:layout_constraintVertical_bias="0.0"
+                app:srcCompat="@drawable/ic_baseline_directions_car_24" />
+
+            <TextView
+                android:id="@+id/textViewNotificationType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Notification Type"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.512"
+                app:layout_constraintStart_toEndOf="@+id/senderName"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.205" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -84,7 +84,6 @@ public class RidesRVAdapter extends RecyclerView.Adapter<RidesRVAdapter.ObjectsH
         View itemView= LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.rides_cardview, parent, false);
 
-
         return new ObjectsHolder(itemView);
     }
 }

@@ -1,6 +1,7 @@
 package com.example.bilstop;
 
 import android.annotation.SuppressLint;
+import android.app.Notification;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -19,6 +21,7 @@ import androidx.core.content.ContextCompat;
 
 import com.example.bilstop.Classes.Car;
 import com.example.bilstop.Classes.Location;
+import com.example.bilstop.Classes.Notifications;
 import com.example.bilstop.Classes.Ride;
 import com.example.bilstop.DataPickers.AdapterActivity;
 import com.example.bilstop.Models.PolylineData;
@@ -62,6 +65,7 @@ public class RideInfoActivity extends AppCompatActivity implements OnMapReadyCal
     private ImageView imageViewCarInfo;
     private ImageButton imageButtonSeeProfile;
     private ImageButton imageButtonDeleteProfile;
+    private Button requestButton;
 
     private GeoApiContext mGeoApiContext =null;
     private GoogleMap googleMap;
@@ -100,15 +104,19 @@ public class RideInfoActivity extends AppCompatActivity implements OnMapReadyCal
         textViewDistance2 = findViewById(R.id.textViewDistance2);
         imageButtonSeeProfile = findViewById(R.id.imbRideInfoSeeProfile);
         imageButtonDeleteProfile = findViewById(R.id.deleteRideButton);
+        requestButton = findViewById(R.id.requestButton);
 
         ride = (Ride) getIntent().getSerializableExtra("ride");
         if(ride.getDriverUid().equals(FirebaseAuth.getInstance().getUid())){
             imageButtonSeeProfile.setVisibility(View.INVISIBLE);
             imageButtonDeleteProfile.setVisibility(View.VISIBLE);
+            requestButton.setVisibility(View.INVISIBLE);
+
         }
         else{
             imageButtonSeeProfile.setVisibility(View.VISIBLE);
             imageButtonDeleteProfile.setVisibility(View.INVISIBLE);
+            requestButton.setVisibility(View.VISIBLE);
         }
 
         textViewDriverNameInfo.setText("Driver Name: " + ride.getDriverName());
@@ -141,10 +149,21 @@ public class RideInfoActivity extends AppCompatActivity implements OnMapReadyCal
         });
 
 
-
-
         mMapView = findViewById(R.id.mapView);
         initGoogleMap(savedInstanceState);
+
+        requestButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Notifications notification = new Notifications(FirebaseAuth.getInstance().getUid(), ride.getDriverUid(), "currentState" , FirebaseAuth.getInstance().getCurrentUser().getDisplayName()
+                        , null,ride);
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference myRef = database.getReference("notifications").child(ride.getDriverUid());
+                myRef.push().setValue(notification);
+                Intent intent = new Intent(RideInfoActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
         imageButtonSeeProfile.setOnClickListener(new View.OnClickListener() {
             @Override
