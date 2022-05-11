@@ -11,6 +11,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.bilstop.Classes.Notifications;
 import com.example.bilstop.Classes.Users;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -30,7 +31,7 @@ public class TargetProfileActivity extends AppCompatActivity {
     private CircleImageView profilePicture;
     private ImageButton addFriend, sendMessage;
     private TextView name, email, about;
-    private String senderUserId, targetUid, currentState;
+    private String senderUserId, targetUid;
     private FirebaseDatabase database;
     private DatabaseReference databaseReference, friendRequestReference;
     private FirebaseAuth mAuth;
@@ -61,7 +62,7 @@ public class TargetProfileActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         senderUserId = mAuth.getCurrentUser().getUid();
-        this.currentState = "not_friends";
+        //this.currentState = "not_friends";
     }
 
     private void action(){
@@ -80,75 +81,24 @@ public class TargetProfileActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 addFriend.setEnabled(false);
-                if (currentState.equals("not_friends"))
-                {
-                    sendFriendRequestToSomeone();
-                }
-                if (currentState.equals("request_sent"))
-                {
-                    cancelFriendRequest();
-                }
+                sendFriendRequestToSomeone();
+
             }
         });
     }
 
     private void sendFriendRequestToSomeone() {
-        friendRequestReference.child(senderUserId).child(targetUid)
-                .child("request_type").setValue("sent")
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful())
-                        {
-                            friendRequestReference.child(targetUid).child(senderUserId)
-                                    .child("request_type").setValue("received")
-                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            if (task.isSuccessful())
-                                            {
-                                                addFriend.setEnabled(true);
-                                                currentState = "request_sent";
-                                                addFriend.setBackgroundResource(R.drawable.ic_baseline_cancel_24);
-                                                //arkaplanın siyah olması gerek
-                                                Toast.makeText(getApplicationContext(), "Friend request sent", Toast.LENGTH_SHORT).show();
-                                            }
-                                        }
-                                    });
-                        }
-                    }
-                });
+        Notifications notification = new Notifications(FirebaseAuth.getInstance().getUid(), targetUid, "currentState" , FirebaseAuth.getInstance().getCurrentUser().getDisplayName()
+                , null,null);
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference reference = database.getReference("notifications").child(targetUid);
+        reference.push().setValue(notification);
+
+
+        //this.currentState = "request_sent";
     }
 
-    private void cancelFriendRequest() {
 
-        friendRequestReference.child(senderUserId).child(targetUid)
-                .removeValue()
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful())
-                        {
-                            friendRequestReference.child(targetUid).child(senderUserId)
-                                    .removeValue()
-                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            if (task.isSuccessful())
-                                            {
-                                                addFriend.setEnabled(true);
-                                                currentState = "not_friends";
-                                                addFriend.setBackgroundResource(R.drawable.ic_baseline_person_add_24);
-                                                //arkaplanın siyah olması gerek
-                                                Toast.makeText(getApplicationContext(), "Friend request cancelled", Toast.LENGTH_SHORT).show();
-                                            }
-                                        }
-                                    });
-                        }
-                    }
-                });
-
-    }
 
     private void getInfo(){
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -162,7 +112,7 @@ public class TargetProfileActivity extends AppCompatActivity {
                     Picasso.get().load(targetUser.getProfilePicture()).into(profilePicture);
                 }
 
-                maintananceOfButtons();
+                //maintananceOfButtons();
             }
 
             @Override
@@ -172,29 +122,6 @@ public class TargetProfileActivity extends AppCompatActivity {
         });
     }
 
-    private void maintananceOfButtons() {
-        friendRequestReference.child(senderUserId)
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if (snapshot.hasChild(targetUid))
-                        {
-                            String request_type = snapshot.child(targetUid).child("request_type").getValue().toString();
 
-                            if (request_type.equals("sent"))
-                            {
-                                currentState = "request_sent";
-                                addFriend.setBackgroundResource(R.drawable.ic_baseline_cancel_24);
-                                //arkaplanın siyah olması gerek
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-    }
 
 }
