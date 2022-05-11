@@ -125,6 +125,8 @@ public class NotificationsRVAdapter extends RecyclerView.Adapter<NotificationsRV
                         FirebaseDatabase database = FirebaseDatabase.getInstance();
                         DatabaseReference myRefmyRides = database.getReference("myRides").child(FirebaseAuth.getInstance().getUid());
                         myRefmyRides.push().setValue(notification.getRide());
+                        DatabaseReference myRef2 = database.getReference("notifications").child(FirebaseAuth.getInstance().getUid()).child(notification.getNotificationId());
+                        myRef2.removeValue();
                         Intent intent = new Intent(mContext.getApplicationContext(), AdapterActivityMyRides.class);
                     }
                 });
@@ -161,10 +163,9 @@ public class NotificationsRVAdapter extends RecyclerView.Adapter<NotificationsRV
                         FirebaseDatabase database = FirebaseDatabase.getInstance();
                         DatabaseReference myRef = database.getReference("notifications").child(newNotification.getTargetUid());
                         DatabaseReference myRef2 = database.getReference("notifications").child(FirebaseAuth.getInstance().getUid()).child(notification.getNotificationId());
-
                         myRef2.removeValue();
                         myRef.push().setValue(newNotification);
-                        Intent intent = new Intent(mContext.getApplicationContext(), BottomNavActivity.class);
+                        Intent intent = new Intent(mContext.getApplicationContext(), MainActivity.class);
                         mContext.startActivity(intent);
 
                     }
@@ -179,7 +180,7 @@ public class NotificationsRVAdapter extends RecyclerView.Adapter<NotificationsRV
                         DatabaseReference myRef = database.getReference("notifications").child(newNotification.getTargetUid());
                         DatabaseReference myRef2 = database.getReference("notifications").child(FirebaseAuth.getInstance().getUid()).child(notification.getNotificationId());
                         myRef2.removeValue();
-                        Intent intent = new Intent(mContext.getApplicationContext(), BottomNavActivity.class);
+                        Intent intent = new Intent(mContext.getApplicationContext(), MainActivity.class);
                         myRef.push().setValue(newNotification);
                         mContext.startActivity(intent);
                         ((Activity)mContext).finish();
