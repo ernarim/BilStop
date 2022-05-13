@@ -15,8 +15,4 @@ BilStop is a ride-sharing app that will be used only for coming to Bilkent Unive
 ---
 ### How to execute software
 
-### Personal Logs
-:spiral_notepad: Mehmet Burak Demirel<br />
-:spiral_notepad: Mehmet Bahattin Dulkadiroğlu<br />
-:spiral_notepad: Eren Hayrettin Arım<br />
-:spiral_notepad: Begüm Kunaç<br />
+For the app to work you need to add your Google Maps API key to the "api_key" in the strings.xml file. Your key must be connected to a payment account.<br />
