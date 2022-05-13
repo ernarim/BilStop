@@ -1,0 +1,20 @@
+Week 1: Creating a group
+Week 2: Discussing project ideas
+Week 3: Discussed project ideas and chose to make a carpooling app for Bilkent students.
+Week 4: Searched for android tutorials and started learning the basic concepts
+Week 5: Worked on our groups requirements presentation and report. 
+Week 6: Learning about different layouts such as constraint layout
+Week 7: Midterm Week
+Week 8: Continuing to learn about android and learned about the firebase database
+Week 9: Created the UI design presentation and report
+Week 10: Learning how to integrate map features to the app
+Week 11: Learning about the Directions and Maps API
+Week 12: Discussing the plan with the group and starting the implementation
+Week 13: Added auto selecting the shortest route and zooming to polylines to project
+Week 14: Arranged the create part to work for both going somewhere from Bilkent and going to Bilkent
+	 Added picking date, time and number of passenger in create ride
+	 Added get current location
+Week 15: Added add car feature in profile.
+	 Finalized code
+	 Worked on the presentation of the project
+	 Worked on the final detailed design report of the project
