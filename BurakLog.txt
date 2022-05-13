@@ -1,0 +1,15 @@
+Week 1 - Meeting with the group.
+Week 2 - Trying to decide what we do. Creating github repository.
+Week 3 - Deciding the name of the group and project - BilStop.
+Week 4 - Searching the tools we can use for our project and examining similar applications.
+Week 5 - Writing the Requirements Report
+Week 6 - Designing the application's user interface
+Week 7 - Midterms.
+Week 8 - Writing UI Design Report with the group - Continuing to design.
+Week 9 - Searching for videos about android.
+Week 10 - Studying android studio.
+Week 11 - Continuing to study. 
+Week 12 - Starting to code.
+Week 13 - Continuing to coding. Detailed design report.
+Week 14 - Continuing to coding.
+Week 15 - Continuing to coding. Finalizing reports.
