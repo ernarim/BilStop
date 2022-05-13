@@ -5,7 +5,7 @@ BilStop is a ride-sharing app that will be used only for coming to Bilkent Unive
 
 ---
 ### Technologies
-```markdown
+```
 * Google Maps SDK
 * Google Places API
 * Google Directions API
