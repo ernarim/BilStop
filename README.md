@@ -19,9 +19,13 @@ For the app to work you need to add your Google Maps API key to the "api_key" in
 
 ---
 ### Personal Log Files
-:spiral_notepad: Mehmet Burak Demirel<br />
-:spiral_notepad: Mehmet Bahattin Dulkadiroğlu<br />
-:spiral_notepad: Eren Hayrettin Arım<br />
-:spiral_notepad: Begüm Kunaç<br />
+:spiral_notepad:  <a href="https://markdownmonster.west-wind.com" style="font-style: italic">
+    Mehmet Burak Demirel</a><br />
+:spiral_notepad:  <a href="https://markdownmonster.west-wind.com" style="font-style: italic">
+    Mehmet Bahattin Dulkadiroğlu</a><br />
+:spiral_notepad:  <a href="https://markdownmonster.west-wind.com" style="font-style: italic">
+    Eren Hayrettin Arım</a><br />
+:spiral_notepad:  <a href="https://markdownmonster.west-wind.com" style="font-style: italic">
+    Begüm Kunaç</a><br />
 
 
