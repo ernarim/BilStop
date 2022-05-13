@@ -44,6 +44,6 @@ Another way to make the app work is by sending us your SHA1 key. This way we can
     Meeting</a><br />
 ---
 ### :x: The Hero of Our Nightmares
-![NullPointerException](http://static.giga.de/wp-content/uploads/2014/11/java-lang-NullPointerException.jpg)
+![NullPointerException](https://cdn.discordapp.com/attachments/958464320444964927/974743153162747934/memechat-temp-3fcd958f55586168.jpg)
 
 ---
