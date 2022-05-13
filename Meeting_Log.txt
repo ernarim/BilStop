@@ -1,0 +1,7 @@
+Week 2 - Meeting for deciding the project.
+Week 3 - Meeting for specifying the details of BilStop.
+Week 5 - Meeting for requirements report.
+Week 8 - Meeting for UI Report.
+Week 13 - Meeting for Detailed Design Report.
+Week 14 - Meeting for coding.
+Week 15 - Meeting for Detailed Design Report.
