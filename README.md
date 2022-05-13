@@ -37,5 +37,7 @@ Another way to make the app work is by sending us your SHA1 key. This way we can
     Eren Hayrettin Arım</a><br />
 :spiral_notepad:  <a href="https://markdownmonster.west-wind.com" style="font-style: italic">
     Begüm Kunaç</a><br />
-
+<br />
+:spiral_notepad:  <a href="https://markdownmonster.west-wind.com" style="font-style: italic">
+    Begüm Kunaç</a><br />
 
