@@ -20,7 +20,7 @@ Another way to make the app work is by sending us your SHA1 key. This way we can
 
 ---
 ### Personal Log Files
-:spiral_notepad:  <a href="https://markdownmonster.west-wind.com" style="font-style: italic">
+:spiral_notepad:  <a href="https://github.com/ernarim/BilStop/blob/master/ErenLog.txt" style="font-style: italic">
     Mehmet Burak Demirel</a><br />
 :spiral_notepad:  <a href="https://markdownmonster.west-wind.com" style="font-style: italic">
     Mehmet Bahattin Dulkadiroğlu</a><br />
