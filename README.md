@@ -5,12 +5,20 @@ BilStop is a ride-sharing app that will be used only for coming to Bilkent Unive
 
 ---
 ### Technologies
+#### :gear: Software Language
+- Java
 
-:gear: Google Maps SDK<br />
-:gear: Google Places API<br />
-:gear: Google Directions API<br />
-:gear: Firebase Realtime Database<br />
-:gear: Firebase Authentication<br />
+#### :gear: IDE
+- Android Studio
+
+#### :gear: APIs
+- Google Maps SDK<br />
+- Google Places API<br />
+- Google Directions API<br />
+- 
+#### :gear: Database and Authentication
+- Firebase Realtime Database<br />
+- Firebase Authentication<br />
 
 ---
 ### How to execute software
