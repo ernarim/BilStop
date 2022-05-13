@@ -28,7 +28,7 @@ For the app to work you need to get an API key and enable the necessary APIs `Ma
 Another way to make the app work is by sending us your SHA1 key. This way we can connect your computer to our api key and the app will work.<br />
 
 ---
-### Personal Log Files
+### Personal and Meeting Log Files
 :spiral_notepad:  <a href="" style="font-style: italic">
     Mehmet Burak Demirel</a><br />
 :spiral_notepad:  <a href="https://markdownmonster.west-wind.com" style="font-style: italic">
@@ -39,5 +39,5 @@ Another way to make the app work is by sending us your SHA1 key. This way we can
     Begüm Kunaç</a><br />
 <br />
 :spiral_notepad:  <a href="https://markdownmonster.west-wind.com" style="font-style: italic">
-    Begüm Kunaç</a><br />
+    Meeting</a><br />
 
