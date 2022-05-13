@@ -38,6 +38,7 @@ Another way to make the app work is by sending us your SHA1 key. This way we can
 - <a href="https://markdownmonster.west-wind.com" style="font-style: italic">
     Begüm Kunaç</a><br />
 <br />
+
 ### :spiral_notepad: Meeting Log File
 - <a href="https://markdownmonster.west-wind.com" style="font-style: italic">
     Meeting</a><br />
