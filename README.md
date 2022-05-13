@@ -12,3 +12,5 @@ BilStop is a ride-sharing app that will be used only for coming to Bilkent Unive
 * Firebase Realtime Database
 * Firebase Authentication
 ```
+---
+### How to execute software
