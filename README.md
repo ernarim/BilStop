@@ -35,7 +35,7 @@ Another way to make the app work is by sending us your SHA1 key. This way we can
     Mehmet Bahattin Dulkadiroğlu</a><br />
 - <a href="https://github.com/ernarim/BilStop/blob/master/ErenLog.txt" style="font-style: italic">
     Eren Hayrettin Arım</a><br />
-- <a href="https://markdownmonster.west-wind.com" style="font-style: italic">
+- <a href="https://github.com/ernarim/BilStop/blob/master/BurakLog.txt" style="font-style: italic">
     Begüm Kunaç</a><br />
 <br />
 
