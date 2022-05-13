@@ -16,7 +16,7 @@ BilStop is a ride-sharing app that will be used only for coming to Bilkent Unive
 ### How to execute software
 
 ### Personal Logs
-:spiral_notepad: Mehmet Burak Demirel
-:spiral_notepad: Mehmet Bahattin Dulkadiroğlu
-:spiral_notepad: Eren Hayrettin Arım
-:spiral_notepad: Begüm Kunaç
+:spiral_notepad: Mehmet Burak Demirel<br />
+:spiral_notepad: Mehmet Bahattin Dulkadiroğlu<br />
+:spiral_notepad: Eren Hayrettin Arım<br />
+:spiral_notepad: Begüm Kunaç<br />
