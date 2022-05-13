@@ -23,7 +23,7 @@ BilStop is a ride-sharing app that will be used only for coming to Bilkent Unive
 ---
 ### How to Execute the Software?
 
-For the app to work you need to get an API key and enable the necessary APIs `Maps SDK for Android`, `Places API`, `Directions API` and add your API key to the "api_key" in the strings.xml file and enable. Your key must be connected to a payment account.<br />
+For the app to work you need to get an API key and enable the necessary APIs `Maps SDK for Android`, `Places API`, `Directions API` and add your API key to the "api_key" in the strings.xml file. Your key must be connected to a payment account.<br />
 <br />
 Another way to make the app work is by sending us your SHA1 key. This way we can connect your computer to our api key and the app will work.<br />
 
