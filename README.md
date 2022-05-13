@@ -43,6 +43,6 @@ Another way to make the app work is by sending us your SHA1 key. This way we can
 - <a href="https://markdownmonster.west-wind.com" style="font-style: italic">
     Meeting</a><br />
 ---
-### Null Pointer Exception
+### :x: Null Pointer Exception
 ![NullPointerException](http://static.giga.de/wp-content/uploads/2014/11/java-lang-NullPointerException.jpg)
 
