@@ -14,3 +14,9 @@ BilStop is a ride-sharing app that will be used only for coming to Bilkent Unive
 ```
 ---
 ### How to execute software
+
+### Personal Logs
+:spiral_notepad: 
+:spiral_notepad:
+:spiral_notepad:
+:spiral_notepad:
