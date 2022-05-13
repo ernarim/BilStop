@@ -44,5 +44,5 @@ Another way to make the app work is by sending us your SHA1 key. This way we can
     Meeting</a><br />
 ---
 
-![Markdown Monster](http://static.giga.de/wp-content/uploads/2014/11/java-lang-NullPointerException.jpg)
+![NullPointerException](http://static.giga.de/wp-content/uploads/2014/11/java-lang-NullPointerException.jpg)
 
