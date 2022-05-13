@@ -43,7 +43,7 @@ Another way to make the app work is by sending us your SHA1 key. This way we can
 - <a href="https://markdownmonster.west-wind.com" style="font-style: italic">
     Meeting</a><br />
 ---
-### :x: Brief Summary of The Project
+### Brief Summary of The Project
 ![NullPointerException](https://cdn.discordapp.com/attachments/958464320444964927/974743153162747934/memechat-temp-3fcd958f55586168.jpg)
 
 ---
