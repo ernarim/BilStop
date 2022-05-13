@@ -5,14 +5,23 @@ BilStop is a ride-sharing app that will be used only for coming to Bilkent Unive
 
 ---
 ### Technologies
-```
-* Google Maps SDK
-* Google Places API
-* Google Directions API
-* Firebase Realtime Database
-* Firebase Authentication
-```
+
+:gear: Google Maps SDK<br />
+:gear: Google Places API<br />
+:gear: Google Directions API<br />
+:gear: Firebase Realtime Database<br />
+:gear: Firebase Authentication<br />
+
 ---
 ### How to execute software
 
 For the app to work you need to add your Google Maps API key to the "api_key" in the strings.xml file. Your key must be connected to a payment account.<br />
+
+---
+### Personal Log Files
+:spiral_notepad: Mehmet Burak Demirel<br />
+:spiral_notepad: Mehmet Bahattin Dulkadiroğlu<br />
+:spiral_notepad: Eren Hayrettin Arım<br />
+:spiral_notepad: Begüm Kunaç<br />
+
+
