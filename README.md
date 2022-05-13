@@ -40,7 +40,7 @@ Another way to make the app work is by sending us your SHA1 key. This way we can
     Begüm Kunaç</a><br />
 
 #### :spiral_notepad: Meeting
-- <a href="https://markdownmonster.west-wind.com" style="font-style: italic">
+- <a href="https://github.com/ernarim/BilStop/blob/master/Meeting_Log.txt" style="font-style: italic">
     Meeting</a><br />
 ---
 ### Brief Summary of The Project :cry: 
