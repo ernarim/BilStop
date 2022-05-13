@@ -28,16 +28,17 @@ For the app to work you need to get an API key and enable the necessary APIs `Ma
 Another way to make the app work is by sending us your SHA1 key. This way we can connect your computer to our api key and the app will work.<br />
 
 ---
-### Personal and Meeting Log Files
-:spiral_notepad:  <a href="" style="font-style: italic">
+### :spiral_notepad: Personal Log Files
+- <a href="" style="font-style: italic">
     Mehmet Burak Demirel</a><br />
-:spiral_notepad:  <a href="https://markdownmonster.west-wind.com" style="font-style: italic">
+- <a href="https://markdownmonster.west-wind.com" style="font-style: italic">
     Mehmet Bahattin Dulkadiroğlu</a><br />
-:spiral_notepad:  <a href="https://github.com/ernarim/BilStop/blob/master/ErenLog.txt" style="font-style: italic">
+- <a href="https://github.com/ernarim/BilStop/blob/master/ErenLog.txt" style="font-style: italic">
     Eren Hayrettin Arım</a><br />
-:spiral_notepad:  <a href="https://markdownmonster.west-wind.com" style="font-style: italic">
+- <a href="https://markdownmonster.west-wind.com" style="font-style: italic">
     Begüm Kunaç</a><br />
 <br />
-:spiral_notepad:  <a href="https://markdownmonster.west-wind.com" style="font-style: italic">
+### :spiral_notepad: Meeting Log File
+- <a href="https://markdownmonster.west-wind.com" style="font-style: italic">
     Meeting</a><br />
 
