@@ -5,8 +5,8 @@ Week 4 - Searching the tools we can use for our project and examining similar ap
 Week 5 - Writing the Requirements Report
 Week 6 - Designing the application's user interface
 Week 7 - Midterms.
-Week 8 - Writing UI Design Report with the group - Continuing to design.
-Week 9 - Searching for videos about android.
+Week 8 - Continuing to design.
+Week 9 - Searching for videos about android. UI Report
 Week 10 - Studying android studio.
 Week 11 - Continuing to study. 
 Week 12 - Starting to code.
