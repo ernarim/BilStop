@@ -1,0 +1,16 @@
+Week 1 - Meeting with the group.
+Week 2 - Discussing project ideas with the group and with our TA - Participation Git and GitHub tutorial.
+Week 3 - Deciding on the project and the name of the group and project - BilStop.
+Week 4 - Searching for resources to study to work on Android Studio.
+Week 5 - Requirements Report: Selecting car ride, adding friends
+Week 6 - Requirements Report: Selecting car ride, adding friends, thinking about how the UI design of the project will be.
+Week 7 - Midterm week.
+Week 8 - Deciding on resources to learn Android and other technologies we will use.
+Week 9 - UI Design: Deciding our application screens appearance and how the application will work.
+Week 10 - UI Design Report - Selecting a ride (Search screen)
+Week 11 - Studying android app development on Android Studio
+Week 12 - Detailed Design Report, studying android app development on Android Studio
+Week 13 - Studying android app development on Android Studio
+Week 14 - Implementation: Sending request: Notifications
+Week 15 - Implementation: NotificationsRVAdapter, listing notifications on both profiles, accepting/declining requests, adding friends to friends lists
+	    Detailed Design Report
