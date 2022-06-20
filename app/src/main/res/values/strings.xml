@@ -5,6 +5,6 @@
     <string name="register"><u>Register</u></string>
     <string name="login"><u>Login</u></string>
     <string name="reset_password"><u>Reset Password</u></string>
-    <string name="api_key">AIzaSyBJfW0T6RwjB1KsMjyLSTibv_Z58TaWLeE</string>
-    <string name="map_id">d6cc97e03d457dcb</string>
+    <string name="api_key">"Add your Api Key here"</string>
+    <string name="map_id">"Your Api Key"</string>
 </resources>
