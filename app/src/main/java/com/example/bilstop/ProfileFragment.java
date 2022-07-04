@@ -193,7 +193,6 @@ public class ProfileFragment extends Fragment {
 
                         for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                             String value = dataSnapshot.getValue(String.class);
-                            System.out.println(value);
                             carValues.add(value);
                         }
 

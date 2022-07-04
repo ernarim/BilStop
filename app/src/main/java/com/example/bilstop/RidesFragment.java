@@ -35,7 +35,7 @@ public class RidesFragment extends Fragment{
 
 
     private RecyclerView recyclerView;
-    private ArrayList<Ride> myRides = new ArrayList<Ride>();
+    private ArrayList<Ride> myRides = new ArrayList<>();
     private RidesRVAdapter adapter;
 
     @Override
@@ -44,8 +44,8 @@ public class RidesFragment extends Fragment{
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_rides, container, false);
 
-        if(myRides!=null){
-            myRides = new ArrayList<Ride>(RideDataPicker.getMyRides());
+        if(myRides != null){
+            myRides = new ArrayList<>(RideDataPicker.getMyRides());
         }
         adapter = new RidesRVAdapter(getContext(), myRides);
 

@@ -30,9 +30,6 @@ public class AdapterActivity extends AppCompatActivity {
 
     private final double distanceLimit = 0.02;
 
-    private Intent intent;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,13 +85,12 @@ public class AdapterActivity extends AppCompatActivity {
             }
         });
 
-        Query orderByDistance2 = myRef2.orderByChild("distanceFromLocation");
         myRef2.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
-                    Ride dataRide =postSnapshot.getValue(Ride.class);
-                    String key= postSnapshot.getKey();
+                    Ride dataRide = postSnapshot.getValue(Ride.class);
+                    String key = postSnapshot.getKey();
                     dataRide.setRideId(key);
 
                     if(locationData!=null){
@@ -105,7 +101,7 @@ public class AdapterActivity extends AppCompatActivity {
                     Log.d("ride",dataRide.toString());
 
                     if(locationData!=null){
-                        if(dataRide.getDistanceFromLocation()<distanceLimit){
+                        if(dataRide.getDistanceFromLocation() < distanceLimit){
                             rideDataTo.add(dataRide);
                         }
                     }
@@ -136,8 +132,8 @@ public class AdapterActivity extends AppCompatActivity {
 
     private double calculateDistance(Location firstLocation, Location secondLocation){
         double distance = 0;
-        distance =Math.sqrt(Math.pow( Double.valueOf(firstLocation.getLocationLatitude()) - Double.valueOf(secondLocation.getLocationLatitude()),2)
-                + Math.pow( Double.valueOf(firstLocation.getLocationLongitude()) - Double.valueOf(secondLocation.getLocationLongitude()),2));
+        distance = Math.sqrt(Math.pow(firstLocation.getLocationLatitude() - secondLocation.getLocationLatitude(),2)
+                + Math.pow(firstLocation.getLocationLongitude() - secondLocation.getLocationLongitude(),2));
 
         return distance;
     }

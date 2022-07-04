@@ -55,6 +55,9 @@ import java.util.List;
 
 
 public class RideInfoActivity extends AppCompatActivity implements OnMapReadyCallback{
+
+    private static final String TAG = "RideInfoActivity";
+
     private MapView mMapView;
     private TextView textViewDriverNameInfo;
     private TextView textViewRouteInfo;
@@ -116,7 +119,6 @@ public class RideInfoActivity extends AppCompatActivity implements OnMapReadyCal
 
         }
         else{
-
             if(ride.getMyRide()){
                 requestButton.setVisibility(View.INVISIBLE);
                 imageButtonSeeProfile.setVisibility(View.VISIBLE);
@@ -222,11 +224,11 @@ public class RideInfoActivity extends AppCompatActivity implements OnMapReadyCal
         startLocationData = ride.getOrigin();
         finalLocationData = ride.getDestination();
 
-        startLocation = new com.google.android.gms.maps.model.LatLng(Double.valueOf(startLocationData.getLocationLatitude())
-                ,Double.valueOf(startLocationData.getLocationLongitude()));
+        startLocation = new com.google.android.gms.maps.model.LatLng(startLocationData.getLocationLatitude(),
+                startLocationData.getLocationLongitude());
 
-        finalLocation = new com.google.android.gms.maps.model.LatLng(Double.valueOf(finalLocationData.getLocationLatitude())
-                ,Double.valueOf(finalLocationData.getLocationLongitude()));
+        finalLocation = new com.google.android.gms.maps.model.LatLng(finalLocationData.getLocationLatitude(),
+                finalLocationData.getLocationLongitude());
 
         calculateDirections();
     }
@@ -259,7 +261,7 @@ public class RideInfoActivity extends AppCompatActivity implements OnMapReadyCal
 
     public void onMapReady(GoogleMap map) {
 
-        googleMap=map;
+        googleMap = map;
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(startLocation,10));
 
         originMarker = new MarkerOptions().position(startLocation)
@@ -270,10 +272,7 @@ public class RideInfoActivity extends AppCompatActivity implements OnMapReadyCal
         googleMap.addMarker(originMarker);
         googleMap.addMarker(destinationMarker);
 
-
         googleMap.getUiSettings().setZoomControlsEnabled(true);
-
-
     }
     @Override
     public void onPause() {
@@ -299,12 +298,12 @@ public class RideInfoActivity extends AppCompatActivity implements OnMapReadyCal
         Log.d("demo", "calculateDirections: calculating directions.");
 
         com.google.maps.model.LatLng origin = new com.google.maps.model.LatLng(
-                Double.valueOf(startLocationData.getLocationLatitude()),
-                Double.valueOf(startLocationData.getLocationLongitude()));
+                startLocationData.getLocationLatitude(),
+                startLocationData.getLocationLongitude());
 
         com.google.maps.model.LatLng destination = new com.google.maps.model.LatLng(
-                Double.valueOf(finalLocationData.getLocationLatitude()),
-                Double.valueOf(finalLocationData.getLocationLongitude())
+                finalLocationData.getLocationLatitude(),
+                finalLocationData.getLocationLongitude()
         );
 
 
@@ -339,7 +338,6 @@ public class RideInfoActivity extends AppCompatActivity implements OnMapReadyCal
                 }
                 double duration = 999999999;
 
-
                 DirectionsRoute route = result.routes[ride.getPolylineIndex()-1];
                 Log.d("demo", "run: leg: " + route.legs[0].toString());
                 List<LatLng> decodedPath = PolylineEncoding.decode(route.overviewPolyline.getEncodedPath());
@@ -349,21 +347,19 @@ public class RideInfoActivity extends AppCompatActivity implements OnMapReadyCal
                 // This loops through all the LatLng coordinates of ONE polyline.
                 for(com.google.maps.model.LatLng latLng: decodedPath) {
 
-//              Log.d(TAG, "run: latlng: " + latLng.toString());
+                Log.d(TAG, "run: latlng: " + latLng.toString());
                     newDecodedPath.add(new com.google.android.gms.maps.model.LatLng(
                             latLng.lat,
                             latLng.lng
                     ));
                 }
-
+                if(googleMap == null) Log.d(TAG, "run: GoogleMAp is null");
                 Polyline polyline = googleMap.addPolyline(new PolylineOptions().addAll(newDecodedPath));
                 polyline.setColor(ContextCompat.getColor(getApplicationContext(), R.color.orange));
                 polyline.setClickable(true);
                 polyline.setWidth(18);
                 PolylineData polylineData = new PolylineData(polyline,route.legs[0]);
 
-                textViewDuration2.setTextColor(Color.WHITE);
-                textViewDistance2.setTextColor(Color.WHITE);
                 textViewDuration2.setText("Duration: " + polylineData.getLeg().duration);
                 textViewDistance2.setText("Distance: " + polylineData.getLeg().distance);
 

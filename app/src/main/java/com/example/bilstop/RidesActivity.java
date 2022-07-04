@@ -41,8 +41,8 @@ public class RidesActivity extends AppCompatActivity {
 
         textViewRides = findViewById(R.id.textViewRides);
 
-        ridesFromBilkent = new ArrayList<Ride>(RideDataPicker.getRidesFromBilkent());
-        ridestoBilkent = new ArrayList<Ride>(RideDataPicker.getRidestoBilkent());
+        ridesFromBilkent = new ArrayList<>(RideDataPicker.getRidesFromBilkent());
+        ridestoBilkent = new ArrayList<>(RideDataPicker.getRidestoBilkent());
 
         if(getIntent().getSerializableExtra("allList").equals("true")){
             if(getIntent().getSerializableExtra("buttonType").equals("from")){

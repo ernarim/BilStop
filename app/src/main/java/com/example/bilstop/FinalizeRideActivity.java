@@ -112,10 +112,8 @@ public class FinalizeRideActivity extends AppCompatActivity {
                         android.R.style.Theme_Holo_Light_Dialog_MinWidth,
                         mDateSetListener,
                         year, month, day);
-
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.show();
-
             }
         });
 
@@ -135,7 +133,6 @@ public class FinalizeRideActivity extends AppCompatActivity {
                         mDisplayTime2.setText(timeString);
                         timeSelected = true;
                         if(dateSelected) createRide.setVisibility(View.VISIBLE);
-
                         rideDate.set(Calendar.HOUR_OF_DAY, hour);
                         rideDate.set(Calendar.MINUTE, minute);
                     }
@@ -165,7 +162,7 @@ public class FinalizeRideActivity extends AppCompatActivity {
                 if (passengers < MAX_NO_PASSENGERS) {
                     passengers++;
                     passengerNoText.setText("" + passengers);
-                    numberOfPassengers=passengers;
+                    numberOfPassengers = passengers;
                 }
             }
         });
@@ -180,11 +177,11 @@ public class FinalizeRideActivity extends AppCompatActivity {
                 SimpleDateFormat simpleDateFormatDate = new SimpleDateFormat("dd.MM.yyyy");
                 SimpleDateFormat simpleDateFormatHour = new SimpleDateFormat("HH:mm");
 
-                String dateTime = simpleDateFormatDate.format(rideDate.getTime()).toString();
-                String hourTime = simpleDateFormatHour.format(rideDate.getTime()).toString();
+                String dateTime = simpleDateFormatDate.format(rideDate.getTime());
+                String hourTime = simpleDateFormatHour.format(rideDate.getTime());
 
-                Log.d("date",dateTime);
-                Log.d("hour",hourTime);
+                Log.d("date", dateTime);
+                Log.d("hour", hourTime);
 
                 ride.setRideDate(dateTime);
                 ride.setRideHour(hourTime);
@@ -199,10 +196,8 @@ public class FinalizeRideActivity extends AppCompatActivity {
 
 
                 DatabaseReference myRef;
-                if (getIntent().getSerializableExtra("buttonType").equals("from"))
-                    myRef = database.getReference("ridesFromBilkent");
-                else
-                    myRef = database.getReference("ridesToBilkent");
+                if (getIntent().getSerializableExtra("buttonType").equals("from")) myRef = database.getReference("ridesFromBilkent");
+                else myRef = database.getReference("ridesToBilkent");
 
                 DatabaseReference pushedPostRef = myRef.push();
                 pushedPostRef.setValue(ride);

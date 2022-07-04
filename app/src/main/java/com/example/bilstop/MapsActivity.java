@@ -8,6 +8,8 @@ import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
@@ -42,6 +44,8 @@ import java.util.List;
 
 public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitializedCallback,  OnMapReadyCallback, GoogleMap.OnPolylineClickListener {
 
+    private static final String TAG = "MapsActivity";
+
     private GeoApiContext mGeoApiContext = null;
     private GoogleMap googleMap;
     private ArrayList<PolylineData> mPolyLinesData = new ArrayList<>();
@@ -72,26 +76,26 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
         MapsInitializer.initialize(getApplicationContext(), Renderer.LATEST, this);
 
         buttonType = (String) getIntent().getSerializableExtra("buttonType");
+
         if((Location) getIntent().getSerializableExtra("object") != null){
             //Location data coming from Autocomplete Places Fragment
             if(buttonType.equals("from")){
                 finalLocationData = (Location) getIntent().getSerializableExtra("object");
                 locationName = finalLocationData.getLocationName();
-                finalLocation = new LatLng(Double.valueOf(finalLocationData.getLocationLatitude()),
-                        Double.valueOf(finalLocationData.getLocationLongitude()));
+                finalLocation = new LatLng(finalLocationData.getLocationLatitude(),
+                        finalLocationData.getLocationLongitude());
                 marker1 = new MarkerOptions().position(finalLocation).title("from: " + finalLocationData.getLocationName()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
                 Log.d("location", finalLocationData.getLocationName() + " " +  finalLocationData.getLocationLatitude() + " " + finalLocationData.getLocationLongitude());
             }
             else{
                 startLocationData = (Location) getIntent().getSerializableExtra("object");
                 locationName= startLocationData.getLocationName();
-                startLocation = new LatLng(Double.valueOf(startLocationData.getLocationLatitude()),
-                        Double.valueOf(startLocationData.getLocationLongitude()));
+                startLocation = new LatLng(startLocationData.getLocationLatitude(),
+                        startLocationData.getLocationLongitude());
                 marker1 = new MarkerOptions().position(startLocation).title("to: " + startLocationData.getLocationName()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
                 Log.d("location", startLocationData.getLocationName() + " " +  startLocationData.getLocationLatitude() + " " + startLocationData.getLocationLongitude());
             }
         }
-
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -128,8 +132,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
             public void onClick(View view) {
                 Intent intent = new Intent(MapsActivity.this, FinalizeRideActivity.class);
                 int polylinePointsLength = selectedPolyline.getPolyline().getPoints().size();
-                Location origin = new Location(String.valueOf(selectedPolyline.getPolyline().getPoints().get(0).latitude),String.valueOf(selectedPolyline.getPolyline().getPoints().get(0).longitude));
-                Location destination = new Location(String.valueOf(selectedPolyline.getPolyline().getPoints().get(polylinePointsLength-1).latitude),String.valueOf(selectedPolyline.getPolyline().getPoints().get(polylinePointsLength-1).longitude));
+                Location origin = new Location(selectedPolyline.getPolyline().getPoints().get(0).latitude,selectedPolyline.getPolyline().getPoints().get(0).longitude);
+                Location destination = new Location(selectedPolyline.getPolyline().getPoints().get(polylinePointsLength-1).latitude, selectedPolyline.getPolyline().getPoints().get(polylinePointsLength-1).longitude);
                 if(buttonType.equals("from")){
                    origin.setLocationName("Bilkent");
                    destination.setLocationName(locationName);
@@ -167,24 +171,24 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
     }
 
     @Override
-    public void onMapReady(GoogleMap gMap) {
+    public void onMapReady(@NonNull GoogleMap gMap) {
 
         googleMap=gMap;
 
-        Location bilkent = new Location("Bilkent University", "id", "39.87012508171328", "32.74890133665072");
+        Location bilkent = new Location("Bilkent University", "id", 39.87012508171328, 32.74890133665072);
         Location locationData = (Location) getIntent().getSerializableExtra("object");
         if(locationData != null){
             //Creating destination point according to data coming from Autocomplete Fragment
             if(buttonType.equals("from")){
                 startLocationData = bilkent;
-                startLocation = new LatLng(Double.valueOf(startLocationData.getLocationLatitude()), Double.valueOf(startLocationData.getLocationLongitude()));
+                startLocation = new LatLng(startLocationData.getLocationLatitude(), startLocationData.getLocationLongitude());
                 finalLocationData = locationData;
                 googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(finalLocation,15));
             }
             else{
                 startLocationData = locationData;
                 finalLocationData = bilkent;
-                finalLocation = new LatLng(Double.valueOf(finalLocationData.getLocationLatitude()), Double.valueOf(finalLocationData.getLocationLongitude()));
+                finalLocation = new LatLng(finalLocationData.getLocationLatitude(), finalLocationData.getLocationLongitude());
                 googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(startLocation,15));
             }
         }
@@ -212,12 +216,12 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
         Log.d("demo", "calculateDirections: calculating directions.");
 
         com.google.maps.model.LatLng origin = new com.google.maps.model.LatLng(
-                Double.valueOf(startLocationData.getLocationLatitude()),
-                Double.valueOf(startLocationData.getLocationLongitude()));
+                startLocationData.getLocationLatitude(),
+                startLocationData.getLocationLongitude());
 
         com.google.maps.model.LatLng destination = new com.google.maps.model.LatLng(
-                Double.valueOf(finalLocationData.getLocationLatitude()),
-                Double.valueOf(finalLocationData.getLocationLongitude())
+                finalLocationData.getLocationLatitude(),
+                finalLocationData.getLocationLongitude()
         );
 
         DirectionsApiRequest directions = new DirectionsApiRequest(mGeoApiContext);
@@ -340,11 +344,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapsSdkInitiali
         googleMap.addMarker(marker1);
 
         if(buttonType.equals("from")){
-            finalLocationData = new Location("", "?", String.valueOf(latLng.latitude), String.valueOf(latLng.longitude));
+            finalLocationData = new Location("", "?", latLng.latitude, latLng.longitude);
             finalLocation = latLng;
         }
         else{
-            startLocationData = new Location("", "?", String.valueOf(latLng.latitude), String.valueOf(latLng.longitude));
+            startLocationData = new Location("", "?", latLng.latitude, latLng.longitude);
             startLocation = latLng;
         }
     }

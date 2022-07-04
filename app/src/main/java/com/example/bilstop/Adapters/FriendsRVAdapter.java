@@ -44,7 +44,7 @@ public class FriendsRVAdapter extends RecyclerView.Adapter<FriendsRVAdapter.View
         if(!user.getProfilePicture().equals("null")){
             Picasso.get().load(user.getProfilePicture()).into(holder.pp);
         }
-        holder.name.setText( user.getName() + " " + user.getSurname() );
+        holder.name.setText(user.getName() + " " + user.getSurname());
 
         holder.sendMessage.setOnClickListener(new View.OnClickListener() {
             @Override

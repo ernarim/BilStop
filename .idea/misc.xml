@@ -3,6 +3,44 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Bilstop/app/src/main/res/drawable-xxhdpi/search_background.xml" value="0.1" />
+        <entry key="..\:/Bilstop/app/src/main/res/drawable/badge_notification.xml" value="0.1735" />
+        <entry key="..\:/Bilstop/app/src/main/res/drawable/custom_edit_text.xml" value="0.1375" />
+        <entry key="..\:/Bilstop/app/src/main/res/drawable/gradient.xml" value="0.1735" />
+        <entry key="..\:/Bilstop/app/src/main/res/drawable/ic_baseline_calendar_today_24.xml" value="0.2405" />
+        <entry key="..\:/Bilstop/app/src/main/res/font/font.xml" value="0.284375" />
+        <entry key="..\:/Bilstop/app/src/main/res/layout/activity_authentication.xml" value="0.25416666666666665" />
+        <entry key="..\:/Bilstop/app/src/main/res/layout/activity_black_screen.xml" value="0.25416666666666665" />
+        <entry key="..\:/Bilstop/app/src/main/res/layout/activity_bottom_nav.xml" value="0.25416666666666665" />
+        <entry key="..\:/Bilstop/app/src/main/res/layout/activity_chat.xml" value="0.264" />
+        <entry key="..\:/Bilstop/app/src/main/res/layout/activity_finalize_ride.xml" value="0.25416666666666665" />
+        <entry key="..\:/Bilstop/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
+        <entry key="..\:/Bilstop/app/src/main/res/layout/activity_maps.xml" value="0.25416666666666665" />
+        <entry key="..\:/Bilstop/app/src/main/res/layout/activity_notifications.xml" value="0.25416666666666665" />
+        <entry key="..\:/Bilstop/app/src/main/res/layout/activity_places.xml" value="0.264" />
+        <entry key="..\:/Bilstop/app/src/main/res/layout/activity_reset_password.xml" value="0.25416666666666665" />
+        <entry key="..\:/Bilstop/app/src/main/res/layout/activity_ride_info.xml" value="0.25416666666666665" />
+        <entry key="..\:/Bilstop/app/src/main/res/layout/activity_rides.xml" value="0.25416666666666665" />
+        <entry key="..\:/Bilstop/app/src/main/res/layout/activity_target_profile.xml" value="0.25416666666666665" />
+        <entry key="..\:/Bilstop/app/src/main/res/layout/card_notifications.xml" value="0.25416666666666665" />
+        <entry key="..\:/Bilstop/app/src/main/res/layout/chat_list_item.xml" value="0.25416666666666665" />
+        <entry key="..\:/Bilstop/app/src/main/res/layout/cl_and_past_card.xml" value="0.25416666666666665" />
+        <entry key="..\:/Bilstop/app/src/main/res/layout/fragment_create.xml" value="0.25" />
+        <entry key="..\:/Bilstop/app/src/main/res/layout/fragment_home.xml" value="0.25416666666666665" />
+        <entry key="..\:/Bilstop/app/src/main/res/layout/fragment_login.xml" value="0.25416666666666665" />
+        <entry key="..\:/Bilstop/app/src/main/res/layout/fragment_messages.xml" value="0.25416666666666665" />
+        <entry key="..\:/Bilstop/app/src/main/res/layout/fragment_new_car.xml" value="0.25416666666666665" />
+        <entry key="..\:/Bilstop/app/src/main/res/layout/fragment_profile.xml" value="0.25416666666666665" />
+        <entry key="..\:/Bilstop/app/src/main/res/layout/fragment_profile_edit.xml" value="0.25416666666666665" />
+        <entry key="..\:/Bilstop/app/src/main/res/layout/fragment_register.xml" value="0.25416666666666665" />
+        <entry key="..\:/Bilstop/app/src/main/res/layout/fragment_rides.xml" value="0.25416666666666665" />
+        <entry key="..\:/Bilstop/app/src/main/res/layout/friends_list_item.xml" value="0.25416666666666665" />
+        <entry key="..\:/Bilstop/app/src/main/res/layout/message_recieved.xml" value="0.25416666666666665" />
+        <entry key="..\:/Bilstop/app/src/main/res/layout/message_sent.xml" value="0.25416666666666665" />
+        <entry key="..\:/Bilstop/app/src/main/res/layout/place_card.xml" value="0.25416666666666665" />
+        <entry key="..\:/Bilstop/app/src/main/res/layout/rides_cardview.xml" value="0.25416666666666665" />
+        <entry key="..\:/Bilstop/app/src/main/res/menu/bottom_bar_menu.xml" value="0.25416666666666665" />
+        <entry key="..\:/Bilstop/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1715" />
         <entry key="..\:/Users/burak/AndroidStudioProjects/BilStop/app/src/main/res/drawable-anydpi/ic_look.xml" value="0.1915" />
         <entry key="..\:/Users/burak/AndroidStudioProjects/BilStop/app/src/main/res/drawable-anydpi/ic_look_black.xml" value="0.1715" />
         <entry key="..\:/Users/burak/AndroidStudioProjects/BilStop/app/src/main/res/drawable-anydpi/ic_send_message.xml" value="0.1895" />
@@ -98,6 +136,15 @@
         <entry key="..\:/Users/mehme/AndroidStudioProjects/BilStop2/app/src/main/res/layout/fragment_profile.xml" value="0.264" />
         <entry key="..\:/Users/mehme/AndroidStudioProjects/BilStop2/app/src/main/res/layout/fragment_register.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/mehme/AndroidStudioProjects/BilStop2/app/src/main/res/layout/fragment_ride.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/mehme/AndroidStudioProjects/Bilstop/app/src/main/res/layout/activity_finalize_ride.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/mehme/AndroidStudioProjects/Bilstop/app/src/main/res/layout/activity_finalize_ride_2.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/mehme/AndroidStudioProjects/Bilstop/app/src/main/res/layout/cl_and_past_card.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/mehme/AndroidStudioProjects/Bilstop/app/src/main/res/layout/fragment_profile_edit.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/mehme/AndroidStudioProjects/Bilstop/app/src/main/res/layout/fragment_rides.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/mehme/AndroidStudioProjects/Bilstop/app/src/main/res/layout/fragment_select_date.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/mehme/AndroidStudioProjects/Bilstop/app/src/main/res/layout/fragment_select_no_of_passengers.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/mehme/AndroidStudioProjects/Bilstop/app/src/main/res/layout/fragment_select_time.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/mehme/AndroidStudioProjects/Bilstop/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
       </map>
     </option>
   </component>

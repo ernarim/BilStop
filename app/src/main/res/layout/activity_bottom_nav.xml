@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000"
     tools:context=".BottomNavActivity">
 
     <androidx.fragment.app.FragmentContainerView
@@ -27,5 +26,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_bar_menu" />
+        app:menu="@menu/bottom_bar_menu"
+        app:labelVisibilityMode="labeled"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

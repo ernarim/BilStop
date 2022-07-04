@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,12 +28,14 @@ import com.google.firebase.auth.FirebaseAuth;
 
 
 public class LoginFragment extends Fragment {
-    private Context context;
+    private static final String TAG = "LoginFragment";
+
+    private Context mContext;
     private TextView register, reset;
     private NavController navController;
     private Button login;
-    private EditText email, pass;
-    private FirebaseAuth auth;
+    private EditText mEmail, mPassword;
+    private FirebaseAuth mAuth;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,16 +53,16 @@ public class LoginFragment extends Fragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        this.context = context;
+        this.mContext = context;
     }
 
     private void init(View view) {
         this.login = view.findViewById(R.id.btnAuthLogin);
-        this.email = view.findViewById(R.id.edtAuthLoginEmail);
-        this.pass = view.findViewById(R.id.edtAuthLoginPassword);
+        this.mEmail = view.findViewById(R.id.edtAuthLoginEmail);
+        this.mPassword = view.findViewById(R.id.edtAuthLoginPassword);
         this.reset = view.findViewById(R.id.txtAuthReset);
         this.register = view.findViewById(R.id.txtAuthRegister);
-        this.auth = FirebaseAuth.getInstance();
+        this.mAuth = FirebaseAuth.getInstance();
         this.navController = Navigation.findNavController(view);
     }
 
@@ -74,8 +77,8 @@ public class LoginFragment extends Fragment {
         this.login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String username = LoginFragment.this.email.getText().toString();
-                String password = LoginFragment.this.pass.getText().toString();
+                String username = mEmail.getText().toString().trim();
+                String password = mPassword.getText().toString().trim();
                 login(username,password);
             }
         });
@@ -90,24 +93,25 @@ public class LoginFragment extends Fragment {
 
     private void login(String username , String password){
         if( !username.equals("") && !password.equals("") ){
-            this.auth.signInWithEmailAndPassword(username,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            mAuth.signInWithEmailAndPassword(username,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
-                    if( task.isSuccessful() ){
-                        Intent intent = new Intent(context , MainActivity.class);
+                    if(task.isSuccessful()){
+                        Log.d(TAG, "onComplete:success");
+                        Intent intent = new Intent(mContext, MainActivity.class);
                         startActivity(intent);
                         getActivity().finish();
                     }
                     else{
-                        Toast.makeText(context, "Invalid username or password!", Toast.LENGTH_SHORT).show();
-                        LoginFragment.this.email.setText("");
-                        LoginFragment.this.pass.setText("");
+                        Log.w(TAG, "onComplete:failed", task.getException());
+                        Toast.makeText(mContext, "Invalid username or password!", Toast.LENGTH_SHORT).show();
+                        mPassword.setText("");
                     }
                 }
             });
         }
         else{
-            Toast.makeText(context, "Invalid username or password!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, "Invalid username or password!", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -116,7 +120,7 @@ public class LoginFragment extends Fragment {
     }
 
     private void toReset(){
-        Intent intent = new Intent(context, ResetPasswordActivity.class);
+        Intent intent = new Intent(mContext, ResetPasswordActivity.class);
         startActivity(intent);
     }
 }

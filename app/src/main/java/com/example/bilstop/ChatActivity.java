@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -52,7 +54,6 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     private void init(){
-        messageText = findViewById(R.id.edtChatSendMessage);
         send = findViewById(R.id.fabChatSendMessage);
         back = findViewById(R.id.imbChatBack);
         name = findViewById(R.id.txtChatName);
@@ -71,6 +72,19 @@ public class ChatActivity extends AppCompatActivity {
         messagesRVAdapter = new MessagesRVAdapter();
         messagesRVAdapter.setList(messages);
         messagesRecyclerView.setAdapter(messagesRVAdapter);
+        messageText = findViewById(R.id.edtChatSendMessage);
+        messageText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                messagesRecyclerView.scrollToPosition(messages.size() - 1);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        messagesRecyclerView.smoothScrollToPosition(messages.size() - 1);
+                    }
+                }, 50);
+            }
+        });
     }
 
     private void getInfo(){

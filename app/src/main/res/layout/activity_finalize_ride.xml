@@ -4,16 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
     android:orientation="vertical">
-
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Date"
-        android:textColor="@color/white"
         android:textSize="20dp"
         app:layout_constraintBottom_toTopOf="@+id/date_card"
         app:layout_constraintEnd_toStartOf="@+id/guideline8"
@@ -22,9 +19,9 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/date_card"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="80dp"
         app:cardBackgroundColor="@color/orange"
-        app:cardCornerRadius="50dp"
+        app:cardCornerRadius="40dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline3"
         app:layout_constraintEnd_toStartOf="@+id/guideline8"
         app:layout_constraintStart_toStartOf="@+id/guideline7"
@@ -95,9 +92,9 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/time_card"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="80dp"
         app:cardBackgroundColor="@color/orange"
-        app:cardCornerRadius="50dp"
+        app:cardCornerRadius="40dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline5"
         app:layout_constraintEnd_toEndOf="@id/guideline8"
         app:layout_constraintHorizontal_bias="0.5"
@@ -160,7 +157,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Time"
-        android:textColor="@color/white"
         android:textSize="20dp"
         app:layout_constraintBottom_toTopOf="@+id/time_card"
         app:layout_constraintEnd_toEndOf="parent"
@@ -220,7 +216,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Number of Passengers"
-        android:textColor="#FFFFFF"
+
         android:textSize="20dp"
         app:layout_constraintBottom_toTopOf="@+id/fabInc"
         app:layout_constraintEnd_toEndOf="parent"
@@ -230,9 +226,7 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         android:text="3"
-        android:textColor="#FFFFFF"
         android:textSize="24dp"
         app:layout_constraintEnd_toStartOf="@+id/fabInc"
         app:layout_constraintStart_toEndOf="@+id/fabDec"

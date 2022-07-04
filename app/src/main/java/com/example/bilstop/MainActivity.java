@@ -36,22 +36,20 @@ public class MainActivity extends AppCompatActivity {
         if( user == null ){
             Intent intent = new Intent(this , AuthenticationActivity.class);
             startActivity(intent);
-            finish();
         }
         else{
             if( user.isEmailVerified() ){
                 Intent intent = new Intent(this , AdapterActivityMyRides.class);
                 startActivity(intent);
-                finish();
             }
             else{
                 Toast.makeText(this, "Email is not verified!", Toast.LENGTH_SHORT).show();
                 auth.signOut();
                 Intent intent = new Intent(this , AuthenticationActivity.class);
                 startActivity(intent);
-                finish();
             }
         }
+        finish();
 
     }
 

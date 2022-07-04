@@ -63,10 +63,10 @@ public class AddCarFragment extends Fragment {
         database = FirebaseDatabase.getInstance();
         reference = database.getReference("users").child(auth.getUid()).child("car");
 
-        licencePlate = (EditText) view.findViewById(R.id.licence_plate);
-        brand = (EditText) view.findViewById(R.id.brand);
-        model = (EditText) view.findViewById(R.id.model);
-        color = (EditText) view.findViewById(R.id.color);
+        licencePlate = view.findViewById(R.id.licence_plate);
+        brand = view.findViewById(R.id.brand);
+        model = view.findViewById(R.id.model);
+        color = view.findViewById(R.id.color);
         carPP = view.findViewById(R.id.imvCarPP);
 
         ArrayList<String> carValues = new ArrayList<>();

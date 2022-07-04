@@ -5,6 +5,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
 import android.app.Activity;
@@ -16,14 +19,22 @@ import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Looper;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.bilstop.Adapters.CustomRecommendationsAdapter;
+import com.example.bilstop.Adapters.PlaceAutocompleteAdapter;
 import com.example.bilstop.Classes.Location;
 import com.example.bilstop.DataPickers.AdapterActivity;
+import com.example.bilstop.Models.PlacesAPI.PlacesInfo;
+import com.example.bilstop.Models.PlacesAPI.Prediction;
+import com.example.bilstop.Models.Root;
+import com.example.bilstop.Retrofit.JsonPlaceholder;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.common.api.Status;
@@ -45,120 +56,127 @@ import com.google.android.libraries.places.widget.listener.PlaceSelectionListene
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class PlacesActivity extends AppCompatActivity implements Serializable {
 
-
-    private PlacesClient placesClient;
-    private Location location;
-    private Button allRidesButton;
-    private Intent intent;
-    private String buttonType;
-    private CardView useCurrentLocationButton;
-    private FusedLocationProviderClient mFusedLocationClient;
+    private static final String TAG = "PlacesActivity";
+    private static final String MAPS_API_URL = "https://maps.googleapis.com/";
+    private ArrayList<Prediction> placePredictions;
+    private Call<PlacesInfo> placesInfoCall;
+    private RecyclerView recyclerView;
+    private DividerItemDecoration dividerItemDecoration;
     private LocationRequest locationRequest;
-    private double longitude;
-    private double latitude;
+    private Retrofit retrofit;
+    private String intentPage;
+    private String buttonType;
+    private String apiKey;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_places);
 
-        useCurrentLocationButton = findViewById(R.id.use_current_location);
-
-        allRidesButton = findViewById(R.id.allRidesButton);
-        allRidesButton.setVisibility(View.INVISIBLE);
-
-        if(getIntent().getSerializableExtra("intentPage").equals("home")){
-            allRidesButton.setVisibility(View.VISIBLE);
-            useCurrentLocationButton.setVisibility(View.INVISIBLE);
-        }
-
+        apiKey = getString(R.string.api_key);
+        SearchView searchView = findViewById(R.id.search_bar);
+        searchView.setIconified(false);
         buttonType = (String) getIntent().getSerializableExtra("buttonType");
-
-        allRidesButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(PlacesActivity.this, AdapterActivity.class);
-                intent.putExtra("allList","true");
-                intent.putExtra("buttonType",buttonType);
-                startActivity(intent);
-            }
-        });
-        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-
-        if(buttonType.equals("to")){
-
-            allRidesButton.setText("Show All Rides To Bilkent");
-            String toQuestion = "What is your starting location?";
-            TextView question = (TextView) findViewById(R.id.question);
-            question.setText(toQuestion);
+        if (buttonType.equals("from")){
+            searchView.setQueryHint("Where are you going from Bilkent?");
+        }
+        else{
+            searchView.setQueryHint("Where is your starting location?");
         }
 
-        if(!Places.isInitialized()){
-            // Initialize the SDK
-            Places.initialize(getApplicationContext(),getString(R.string.api_key));
-        }
-        // Create a new PlacesClient instance
-        placesClient = Places.createClient(this);
-
-        // Initialize the AutocompleteSupportFragment.
-        AutocompleteSupportFragment autocompleteFragment = (AutocompleteSupportFragment)
-                getSupportFragmentManager().findFragmentById(R.id.autocomplete_fragment);
-
-        // Specify the types of place data to return.
-        autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG));
-        autocompleteFragment.setCountries("TR");
-        autocompleteFragment.setActivityMode(AutocompleteActivityMode.FULLSCREEN);
-
-        // Set up a PlaceSelectionListener to handle the response.
-        autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
-            @Override
-            public void onPlaceSelected(@NonNull Place place) {
-                // TODO: Get info about the selected place.
-                Log.i("demo", "Place: " + place.getName() + ", " + place.getId() + ", " + place.getLatLng());
-
-                //Location data to send Maps Activity
-                location = new Location(place.getName(), place.getId(), String.valueOf(place.getLatLng().latitude),String.valueOf(place.getLatLng().longitude) );
-
-                Log.i("demo", "Location: " + location.getLocationName());
-
-                if(getIntent().getSerializableExtra("intentPage").equals("home")){
-                    intent = new Intent(PlacesActivity.this, AdapterActivity.class);
-                }
-                else{
-                    intent = new Intent(PlacesActivity.this, MapsActivity.class);
-                }
-                intent.putExtras(getIntent().getExtras());
-                intent.putExtra("allList","false");
-                intent.putExtra("buttonType",buttonType);
-                intent.putExtra("object", location);
-                startActivity(intent);
-            }
-
-            @Override
-            public void onError(@NonNull Status status) {
-                // TODO: Handle the error.
-                Log.i("demo", "An error occurred: " + status);
-            }
-
-
-        });
+        recyclerView = findViewById(R.id.recyclerView);
+        intentPage = (String) getIntent().getSerializableExtra("intentPage");
 
         locationRequest = LocationRequest.create();
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         locationRequest.setInterval(5000);
         locationRequest.setFastestInterval(2000);
 
-        useCurrentLocationButton.setOnClickListener(new View.OnClickListener() {
+        recyclerView.setLayoutManager(new LinearLayoutManager(PlacesActivity.this));
+        dividerItemDecoration = new DividerItemDecoration(PlacesActivity.this, DividerItemDecoration.VERTICAL);
+        recyclerView.addItemDecoration(dividerItemDecoration);
+        createCustomRecommendationsAdapter();
+
+        retrofit = new Retrofit.Builder()
+                .baseUrl(MAPS_API_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        JsonPlaceholder jsonPlaceholder = retrofit.create(JsonPlaceholder.class);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public void onClick(View view) {
-                getCurrentLocation();
+            public boolean onQueryTextSubmit(String input) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String input) {
+                input = input.trim();
+                if(input.isEmpty()){
+                    Log.d(TAG, "onQueryTextChange: empty string");
+                    createCustomRecommendationsAdapter();
+                }
+                else{
+                    placesInfoCall = jsonPlaceholder.getPlaces(input, apiKey);
+
+                    placesInfoCall.enqueue(new Callback<PlacesInfo>() {
+                        @Override
+                        public void onResponse(Call<PlacesInfo> call, Response<PlacesInfo> response) {
+                            if (!response.isSuccessful()) {
+                                Log.d("retrofit", "Code: " + response.code());
+                                return;
+                            }
+
+                            PlacesInfo placesInfo = response.body();
+                            placePredictions = placesInfo.getPredictions();
+
+                            if (!searchView.getQuery().toString().isEmpty()) {
+                                PlaceAutocompleteAdapter adapter = new PlaceAutocompleteAdapter(placePredictions, PlacesActivity.this);
+                                if (intentPage.equals("create")) adapter.setToMaps(true);
+                                adapter.setExtras(getIntent().getExtras());
+                                recyclerView.setAdapter(adapter);
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<PlacesInfo> call, Throwable t) {
+                            Log.d("retrofit", t.getMessage());
+                        }
+                    });
+                }
+                return false;
             }
         });
+
+    }
+
+    public void goToAdapterActivity(){
+        Intent intent = new Intent(PlacesActivity.this, AdapterActivity.class);
+        intent.putExtras(getIntent().getExtras());
+        intent.putExtra("allList","true");
+        startActivity(intent);
+    }
+
+    public String getButtonType() {
+        return buttonType;
+    }
+
+    private void createCustomRecommendationsAdapter(){
+        CustomRecommendationsAdapter customRecommendationsAdapter = new CustomRecommendationsAdapter(PlacesActivity.this, intentPage);
+        recyclerView.setAdapter(customRecommendationsAdapter);
     }
 
     @Override
@@ -167,41 +185,20 @@ public class PlacesActivity extends AppCompatActivity implements Serializable {
 
         if (requestCode == 1){
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED){
-
                 if (isGPSEnabled()) {
-
                     getCurrentLocation();
-
                 }else {
-
                     turnOnGPS();
                 }
             }
         }
-
-
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == 2) {
-            if (resultCode == Activity.RESULT_OK) {
-
-                getCurrentLocation();
-            }
-        }
-    }
-
-    private void getCurrentLocation() {
-
+    public void getCurrentLocation() {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ActivityCompat.checkSelfPermission(PlacesActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-
                 if (isGPSEnabled()) {
-
                     LocationServices.getFusedLocationProviderClient(PlacesActivity.this)
                             .requestLocationUpdates(locationRequest, new LocationCallback() {
                                 @Override
@@ -211,28 +208,47 @@ public class PlacesActivity extends AppCompatActivity implements Serializable {
                                     LocationServices.getFusedLocationProviderClient(PlacesActivity.this)
                                             .removeLocationUpdates(this);
 
-                                    if (locationResult != null && locationResult.getLocations().size() >0){
-
+                                    if (locationResult.getLocations().size() > 0){
                                         int index = locationResult.getLocations().size() - 1;
-                                        latitude = locationResult.getLocations().get(index).getLatitude();
-                                        longitude = locationResult.getLocations().get(index).getLongitude();
+                                        double latitude = locationResult.getLocations().get(index).getLatitude();
+                                        double longitude = locationResult.getLocations().get(index).getLongitude();
 
-                                        location = new Location("???", "????", String.valueOf(latitude),String.valueOf(longitude) );
-                                        intent = new Intent(PlacesActivity.this, MapsActivity.class);
-                                        intent.putExtras(getIntent().getExtras());
-                                        intent.putExtra("allList","false");
-                                        intent.putExtra("buttonType", buttonType);
-                                        intent.putExtra("object", location);
-                                        startActivity(intent);
+                                        JsonPlaceholder jsonPlaceholder = retrofit.create(JsonPlaceholder.class);
+                                        Call<Root> rootCall = jsonPlaceholder.getPlaceNameFromLatLng(latitude + "," + longitude, apiKey);
+                                        rootCall.enqueue(new Callback<Root>() {
+                                            @Override
+                                            public void onResponse(Call<Root> call, Response<Root> response) {
+                                                if (!response.isSuccessful()) {
+                                                    Log.d("retrofit", "Code: " + response.code());
+                                                    return;
+                                                }
+                                                Root root = response.body();
 
+                                                String locationName = root.getResults().get(0).getAddress_components().get(1).getShort_name() + " " +
+                                                        root.getResults().get(0).getAddress_components().get(2).getShort_name();
+                                                String locationID = root.getResults().get(0).getPlace_id();
+                                                Location location = new Location(locationName, locationID, latitude, longitude);
+                                                Intent intent;
+                                                if(intentPage.equals("home")) intent = new Intent(PlacesActivity.this, AdapterActivity.class);
+                                                else intent = new Intent(PlacesActivity.this, MapsActivity.class);
+                                                intent.putExtras(getIntent().getExtras());
+                                                intent.putExtra("allList","false");
+                                                intent.putExtra("object", location);
+                                                startActivity(intent);
+
+                                            }
+
+                                            @Override
+                                            public void onFailure(Call<Root> call, Throwable t) {
+
+                                            }
+                                        });
                                     }
                                 }
                             }, Looper.getMainLooper());
-
                 } else {
                     turnOnGPS();
                 }
-
             } else {
                 requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
             }
@@ -259,7 +275,6 @@ public class PlacesActivity extends AppCompatActivity implements Serializable {
 
                     switch (e.getStatusCode()) {
                         case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
-
                             try {
                                 ResolvableApiException resolvableApiException = (ResolvableApiException) e;
                                 resolvableApiException.startResolutionForResult(PlacesActivity.this, 2);
@@ -279,16 +294,8 @@ public class PlacesActivity extends AppCompatActivity implements Serializable {
     }
 
     private boolean isGPSEnabled() {
-        LocationManager locationManager = null;
-        boolean isEnabled = false;
-
-        if (locationManager == null) {
-            locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        }
-
-        isEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-        return isEnabled;
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
     }
-
 
 }

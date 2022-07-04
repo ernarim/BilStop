@@ -4,99 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
-    tools:context=".PlacesActivity">
+    tools:context=".MainActivity">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView4"
-        android:layout_width="300sp"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="10sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <fragment
-            android:id="@+id/autocomplete_fragment"
-            android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
-            android:layout_width="match_parent"
-            android:layout_height="50sp"
-            tools:layout="@layout/places_autocomplete_fragment" />
-    </androidx.cardview.widget.CardView>
-
-    <TextView
-        android:id="@+id/question"
-        android:layout_width="330dp"
-        android:layout_height="wrap_content"
-        android:text="Where are you going?"
-        android:textColor="@color/white"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/cardView4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.615"
-        app:layout_constraintStart_toStartOf="parent"
+    <SearchView
+        android:id="@+id/search_bar"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:theme="@style/AppSearchView"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.948" />
+        app:layout_constraintBottom_toTopOf="@id/recyclerView"
+        android:background="@drawable/search_background"
+        android:queryHint="Enter Location"
+        android:iconifiedByDefault="false"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="7dp"
+        android:queryBackground="@android:color/transparent"
+        android:focusable="true"
+        android:focusableInTouchMode="true"/>
 
-    <Button
-        android:id="@+id/allRidesButton"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:backgroundTint="@color/orange"
-        android:text="Show All Rides From Bilkent"
-        android:textColor="@color/black"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView4"
-        app:layout_constraintVertical_bias="0.051" />
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/use_current_location"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView4"
-        android:backgroundTint="@color/black"
-
-        >
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-
-            <ImageView
-                android:id="@+id/imageView5"
-                android:layout_width="40dp"
-                android:layout_height="36dp"
-                android:layout_marginStart="28dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0"
-                app:srcCompat="@drawable/ic_baseline_my_location_24"
-                app:tint="@color/orange" />
-
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Use current location"
-                android:textColor="@color/quantum_grey"
-                android:textSize="22dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.2"
-                app:layout_constraintStart_toEndOf="@+id/imageView5"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
+        app:layout_constraintTop_toBottomOf="@+id/search_bar"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

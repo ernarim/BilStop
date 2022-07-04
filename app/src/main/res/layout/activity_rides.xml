@@ -4,45 +4,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
-    android:backgroundTint="@color/black"
     tools:context=".RidesActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="620sp"
+        android:layout_height="0dp"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider" />
+        app:layout_constraintTop_toBottomOf="@+id/view" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@color/grew"
+        app:layout_constraintTop_toBottomOf="@+id/textViewRides" />
 
     <TextView
         android:id="@+id/textViewRides"
-        android:layout_width="391dp"
-        android:layout_height="wrap_content"
-        android:text="All Rides: "
-        android:textColor="@color/white"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.074" />
-
-    <View
-        android:id="@+id/divider"
         android:layout_width="match_parent"
-        android:layout_height="3sp"
-        android:layout_marginTop="12dp"
-        android:background="@color/grew"
-        android:backgroundTintMode="add"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+        android:layout_height="wrap_content"
+        android:text="All Rides"
+        android:textAlignment="center"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewRides"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent"/>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

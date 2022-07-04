@@ -8,67 +8,59 @@ import java.sql.Timestamp;
 public class Location implements Serializable {
     private String locationName;
     private String locationID;
-    private String locationLatitude;
-    private String locationLongitude;
+    private double locationLatitude;
+    private double locationLongitude;
 
-    public Location(String locationName, String locationID, String locationLatitude, String locationLongitude){
-        this.locationName=locationName;
-        this.locationID=locationID;
-        this.locationLatitude=locationLatitude;
-        this.locationLongitude=locationLongitude;
-    }
-    public Location(String locationName, String locationLatitude, String locationLongitude){
-        this.locationName=locationName;
-        this.locationLatitude=locationLatitude;
-        this.locationLongitude=locationLongitude;
-    }
-
-    public Location(String locationLatitude, String locationLongitude){
-        this.locationLatitude=locationLatitude;
-        this.locationLongitude=locationLongitude;
-    }
-    public Location(){}
-
-    public void setLocationName(String locationName) {
+    public Location(String locationName, String locationID, double locationLatitude, double locationLongitude) {
         this.locationName = locationName;
-    }
-
-    public void setLocationID(String locationID) {
         this.locationID = locationID;
-    }
-
-    public void setLocationLatitude(String locationLatitude) {
         this.locationLatitude = locationLatitude;
-    }
-
-    public void setLocationLongitude(String locationLongitude) {
         this.locationLongitude = locationLongitude;
     }
 
+    public Location(String locationID, double locationLatitude, double locationLongitude) {
+        this.locationID = locationID;
+        this.locationLatitude = locationLatitude;
+        this.locationLongitude = locationLongitude;
+    }
+
+    public Location(double locationLatitude, double locationLongitude) {
+        this.locationLatitude = locationLatitude;
+        this.locationLongitude = locationLongitude;
+    }
+
+    public Location(){}
+
     public String getLocationName() {
         return locationName;
+    }
+
+    public void setLocationName(String locationName) {
+        this.locationName = locationName;
     }
 
     public String getLocationID() {
         return locationID;
     }
 
-    public String getLocationLatitude() {
+    public void setLocationID(String locationID) {
+        this.locationID = locationID;
+    }
+
+    public double getLocationLatitude() {
         return locationLatitude;
     }
 
-    public String getLocationLongitude() {
+    public void setLocationLatitude(double locationLatitude) {
+        this.locationLatitude = locationLatitude;
+    }
+
+    public double getLocationLongitude() {
         return locationLongitude;
     }
 
-    @Override
-    public String toString() {
-        return "Location{" +
-                "locationName='" + locationName + '\'' +
-                ", locationID='" + locationID + '\'' +
-                ", locationLatitude='" + locationLatitude + '\'' +
-                ", locationLongitude='" + locationLongitude + '\'' +
-                '}';
+    public void setLocationLongitude(double locationLongitude) {
+        this.locationLongitude = locationLongitude;
     }
 }
 

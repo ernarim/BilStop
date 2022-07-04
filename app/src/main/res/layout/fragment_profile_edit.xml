@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
     tools:context=".ProfileEditFragment">
 
     <ScrollView
@@ -191,7 +190,6 @@
                 android:layout_height="wrap_content"
 
                 android:layout_marginTop="48dp"
-                app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="10sp"
                 app:contentPadding="3sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -214,11 +212,8 @@
                         android:layout_height="100sp"
                         android:background="@drawable/roundcorner"
                         android:hint="About Me"
-
                         android:textAlignment="center"
                         android:textAllCaps="false"
-                        android:textColor="#FFFFFF"
-                        android:textColorHint="@color/white"
                         android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
