@@ -17,10 +17,15 @@ BilStop is a ride-sharing app that will be used only for coming to Bilkent Unive
 - Google Maps SDK<br />
 - Google Places API<br />
 - Google Directions API<br />
+- Google Geocoding API<br />
 
 #### :gear: Database and Authentication
 - Firebase Realtime Database<br />
 - Firebase Authentication<br />
+
+
+#### :gear: HTTP Requests
+- Retrofit<br />
 
 ---
 ### How to Execute the Software?
